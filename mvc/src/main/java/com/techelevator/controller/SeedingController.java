@@ -23,18 +23,25 @@ public class SeedingController {
 	private SeedingTimesDAO seedingTimeDao;
 	
 	@GetMapping
-	public List<SeedingTime> seedinglist(){
+	public List<SeedingTime> seedinglist() {
 		return seedingTimeDao.getAllSeedingTimes();
 	}
-	
+
 	@PostMapping()
 	public void saveSeedingTimes(@RequestBody List<SeedingTime> seedingTimes) {
-		  for(SeedingTime st: seedingTimes) {
-			  if(st.getDirectSeedToHarvestInDays() == 0) {
-				  seedingTimeDao.save(st.getCropName(), st.getDirectSeedToTransplantInDays(), st.getTransplantToHarvestInDays());
-			  }else {
-			  seedingTimeDao.save(st.getCropName(), st.getDirectSeedToHarvestInDays());
-		  }
+		System.out.println(seedingTimes.size());
+		
+		for (SeedingTime st : seedingTimes) {
+			if (st.getDirectSeedToHarvestInDays() == 0) {
+				seedingTimeDao.save(st.getCropName(), st.getDirectSeedToTransplantInDays(),
+						st.getTransplantToHarvestInDays());
+			} else if (st.getDirectSeedToTransplantInDays() == 0 && st.getTransplantToHarvestInDays() == 0) {
+				seedingTimeDao.save(st.getCropName(), st.getDirectSeedToHarvestInDays());
+			} else {
+				seedingTimeDao.save(st.getCropName(), st.getDirectSeedToTransplantInDays(),
+						st.getTransplantToHarvestInDays());
+				seedingTimeDao.save(st.getCropName(), st.getDirectSeedToHarvestInDays());
+			}
+		}
 	}
-}
 }

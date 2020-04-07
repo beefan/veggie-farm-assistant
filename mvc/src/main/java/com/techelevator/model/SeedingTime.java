@@ -1,6 +1,8 @@
 package com.techelevator.model;
 
 public class SeedingTime {
+	
+	private String cropName;
 
 	private int directSeedToHarvestInDays;
 	
@@ -8,7 +10,6 @@ public class SeedingTime {
 	
 	private int transplantToHarvestInDays;
 	
-	private String cropName;
 
 	public int getDirectSeedToHarvestInDays() {
 		return directSeedToHarvestInDays;

@@ -1,0 +1,5 @@
+cropName, directSeedToHarvestInDays, directSeedToTransplantInDays, transplantToHarvestInDays
+grapes, 45, 0, 0
+apples, 34, 0, 0
+french fries, 0, 56, 60
+hamburgers, 34, 12, 34

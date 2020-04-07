@@ -2,7 +2,7 @@
   <div class="home">
     <h1>HOME</h1>
     <p>You must be authenticated to see this</p>
-    <harvest-times></harvest-times>
+    <harvest-times v-bind:apiUrl="apiUrl"></harvest-times>
   </div>
 </template>
 
@@ -10,7 +10,12 @@
 import HarvestTimes from './UploadHarvestTimes.vue'
 export default {
   name: 'home',
-  components: {'HarvestTimes':HarvestTimes}
+  components: {'HarvestTimes':HarvestTimes},
+  data () {
+    return {
+      apiUrl: process.env.VUE_APP_REMOTE_API
+    }
+  }
 }
 
 
