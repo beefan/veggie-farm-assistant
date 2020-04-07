@@ -4,6 +4,8 @@ import auth from './auth'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import UploadHarvestTimes from './views/UploadHarvestTimes.vue'
+
 
 Vue.use(Router)
 
@@ -25,7 +27,7 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -44,6 +46,11 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/harvesttimes",
+      name: "harvesttimes",
+      component: UploadHarvestTimes,
+    }
   ]
 })
 
