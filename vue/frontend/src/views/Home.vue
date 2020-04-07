@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <h1>HOME</h1>
-    <p>You must be authenticated to see this</p>
+    <h1>Harvest Assist</h1>
     <harvest-times v-bind:apiUrl="apiUrl"></harvest-times>
   </div>
 </template>

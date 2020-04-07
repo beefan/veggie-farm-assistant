@@ -2,7 +2,7 @@
   <div class="container">
     <div class="panel panel-sm">
       <div class="panel-heading">
-        <h4>CSV Import</h4>
+        <h4>Harvest Times File Import</h4>
       </div>
       <div class="panel-body">
         <div class="form-group">
@@ -17,28 +17,22 @@
             />
           </div>
         </div>
-        <p v-if="parse_csv">{{parse_csv}}</p>
-        <p v-for="item in seedingTimes" v-bind:key="item.crop_name">{{item}}</p>
-        <!-- <table v-if="parse_csv">
+        <table v-if="seedingTimes">
           <thead>
             <tr>
-              <th v-for="key in parse_header"
-                  v-bind:key="key"
-                  @click="sortBy(key)"
-                  :class="{ active: sortKey == key }">
-                {{ key | capitalize }}
-                <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-                </span>
-              </th>
+              <th>Crop Name</th>
+              <th>Direct Seed to Harvest</th> 
+              <th>Direct Seed to Transplant</th>
+              <th>Transplant to Harvest</th>
             </tr>
           </thead> 
-          <tr v-for="csv in parse_csv" v-bind:key="csv">
-            <td v-for="key in parse_header" v-bind:key="key" >
-              {{csv[key]}}
-            </td>
+          <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
+            <td>{{ st["cropName"] }}</td>
+            <td>{{ st["directSeedToHarvestInDays"] }}</td>
+            <td>{{ st["directSeedToTransplantInDays"] }} </td>
+            <td>{{ st["transplantToHarvestInDays"] }}</td>
           </tr>
-          
-        </table>-->
+        </table>
       </div>
     </div>
   </div>
@@ -68,44 +62,44 @@ export default {
   },
   methods: {
     sortBy: function(key) {
-      var vm = this;
+      let vm = this;
       vm.sortKey = key;
       vm.sortOrders[key] = vm.sortOrders[key] * -1;
     },
     csvJSON(csv) {
-      var vm = this;
-      var lines = csv.split("\n");
-      var result = [];
-      var headers = lines[0].split(",");
+      let vm = this;
+      let lines = csv.split("\n");
+      let result = [];
+      let headers = lines[0].split(",");
       vm.parse_header = lines[0].split(",");
-      lines[0].split(",").forEach(function(key) {
+      lines[0].split(",").forEach((key) => {
         vm.sortOrders[key] = 1;
       });
 
-      lines.map(function(line, indexLine) {
+      lines.map((line, indexLine) => {
         if (indexLine < 1) return; // Jump header line
 
-        var obj = {};
-        var currentline = line.split(",");
-        headers = headers.map( x => {
-          if (x.includes('\r')){
-            return x.substring(0, x.length-1);
+        let obj = {};
+        let currentline = line.split(",");
+        headers = headers.map(x => {
+          if (x.includes("\r")) {
+            return x.substring(0, x.length - 1).trim();
           } else {
-            return x;
+            return x.trim();
           }
         });
-        headers.map(function(header, indexHeader) {
-          if (currentline[indexHeader].includes('\r')){
-            currentline[indexHeader] = currentline[indexHeader].substring(0, currentline[indexHeader].length-1);
+        headers.map((header, indexHeader) => {
+          if (currentline[indexHeader].includes("\r")) {
+            currentline[indexHeader] = currentline[indexHeader]
+              .substring(0, currentline[indexHeader].length - 1)
+              .trim();
           }
-          obj[header] = currentline[indexHeader];
+          obj[header] = currentline[indexHeader].trim();
         });
-
         result.push(obj);
       });
 
-      result.pop(); // remove the last item because undefined values
-
+      vm.parse_header = headers;
       return result; // JavaScript object
     },
     loadCSV(e) {
@@ -117,43 +111,47 @@ export default {
         reader.onload = function(event) {
           var csv = event.target.result;
           vm.parse_csv = vm.csvJSON(csv);
+          if (vm.verifyUploadFormat()) {
+            vm.uploadSeedingTimes();
+          } else {
+            alert("Incorrect file format");
+          }
         };
         reader.onerror = function(evt) {
           if (evt.target.error.name == "NotReadableError") {
             alert("Can't read file!");
           }
         };
-
-        if (vm.verifyUploadFormat()) {
-          vm.uploadSeedingTimes()
-        }else {
-          alert('Incorrect file format');
-        }
- 
       } else {
         alert("FileReader are not supported in this browser.");
       }
     },
     verifyUploadFormat() {
-      let isGood = true;
-      
-      if (this.parse_header[0] != 'cropName' ||
-          this.parse_header[1] != 'directSeedToHarvestInDays' ||
-          this.parse_header[2] != 'directSeedToTransplantInDays' ||
-          this.parse_header[3] != 'transplantToHarvestInDays') {
-            isGood = false;
-          }
-          
-      this.parse_csv.forEach( item => {
-        if (!(item[0].match(/[a-z]/i) ||
-            !(item[1].match(/[0-9]/) ||
-            !(item[2].match(/[0-9]/) ||
-            !(item[3].match(/[0-9]/) ){
-              isGood = false;
-            }
-      });
+      let vm = this;
+      if (
+        vm.parse_header[0] != "cropName" ||
+        vm.parse_header[1] != "directSeedToHarvestInDays" ||
+        vm.parse_header[2] != "directSeedToTransplantInDays" ||
+        vm.parse_header[3] != "transplantToHarvestInDays"
+      ) {
+        return false;
+      }
 
-      return isGood;
+     
+      for (let item of this.parse_csv){
+        console.log(item["cropName"])
+        console.log(isNaN(item["transplantToHarvestInDays"]))
+        if (
+          !item["cropName"].match(/[a-z]/i) ||
+          isNaN(item["directSeedToHarvestInDays"]) ||
+          isNaN(item["directSeedToTransplantInDays"]) ||
+          isNaN(item["transplantToHarvestInDays"])
+        ) {
+          return false;
+        }
+      }
+
+      return true;
     },
     uploadSeedingTimes() {
       fetch(this.apiUrl, {
@@ -166,14 +164,13 @@ export default {
         .then(response => {
           if (response.ok) {
             //this.$emit("showReviews");
-            alert('Your upload was successful.');
+            alert("Your upload was successful.");
+            this.getSeedingTimes();
           }
         })
         .catch(err => {
-          console.error(err)
-        }
-        );
-        
+          console.error(err);
+        });
     },
     getSeedingTimes() {
       fetch(this.apiUrl)

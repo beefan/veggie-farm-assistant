@@ -1,5 +1,6 @@
 cropName, directSeedToHarvestInDays, directSeedToTransplantInDays, transplantToHarvestInDays
-grapes, 45, 0, 0
-apples, 34, 0, 0
-french fries, 0, 56, 60
+Palm trees, 45, 0, 0
+dong trees, 34, 0, 0
+french fries, 60, 56, 7
 hamburgers, 34, 12, 34
+Peach, 45, 23, 1

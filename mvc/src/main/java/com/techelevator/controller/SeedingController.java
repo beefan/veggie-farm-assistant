@@ -29,7 +29,6 @@ public class SeedingController {
 
 	@PostMapping()
 	public void saveSeedingTimes(@RequestBody List<SeedingTime> seedingTimes) {
-		System.out.println(seedingTimes.size());
 		
 		for (SeedingTime st : seedingTimes) {
 			if (st.getDirectSeedToHarvestInDays() == 0) {
