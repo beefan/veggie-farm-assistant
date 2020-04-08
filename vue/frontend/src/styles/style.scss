@@ -56,8 +56,9 @@ a.spacing1 {
 }
 
 th {
-    text-align: center;
-    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.5rem;
     background-color: #f7b254;
     color: #ffffff;
 }
@@ -85,6 +86,14 @@ th {
 tr {
     font-family: 'Amatic SC', cursive;
     text-align: center;
+    font-size: 1.3rem;
+}
+
+.harvestTable {
+    font-size: 2rem;
+    width: 100%;
+    border: none;
+    background-color: transparent;
 }
 
 input {

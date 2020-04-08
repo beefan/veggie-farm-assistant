@@ -27,10 +27,10 @@
             </tr>
           </thead> 
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
-            <td><input id="col1" class="dong" type="text" :value="st['cropName']" @change="updateDatabase($event, st)"/></td>
-            <td><input id="col2" class="dong" type="text" :value="st['directSeedToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
-            <td><input id="col3" class="dong" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
-            <td><input id="col4" class="dong" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colName" type="text" :value="st['cropName']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
           </tr>
         </table>
       </div>
@@ -120,14 +120,14 @@ export default {
 
     updateDatabase(e, st) {
      let cropName = st['cropName'];
-      if (e.target.id === 'col1') {
+      if (e.target.classList[1] === 'colName') {
         st['cropName'] = e.target.value;
         this.deleteEntry(cropName);
-      } else if (e.target.id === 'col2') {
+      } else if (e.target.classList[1] === 'colDSTH') {
         st['directSeedToHarvestInDays'] = e.target.value;
-      } else if (e.target.id === 'col3') {
+      } else if (e.target.classList[1] === 'colDSTT') {
         st['directSeedToTransplantInDays'] = e.target.value;
-      } else if (e.target.id === 'col4') {
+      } else if (e.target.classList[1] === 'colTTH') {
         st['transplantToHarvestInDays'] = e.target.value;
       }
       let jasonsArray = [st]
@@ -282,20 +282,15 @@ table {
 
 td,
 th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+  border: 1px solid #ffffff;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 0;
 }
 
 tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-.dong {
-  width: 100%;
-  border: none;
-  background-color: transparent;
-  font-size: 1rem;
-}
 </style>
 
