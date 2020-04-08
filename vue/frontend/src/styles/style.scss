@@ -15,7 +15,7 @@ html {
     background: #e1faff
 }
 
-img {
+#app>img {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -119,6 +119,84 @@ h4 {
     flex-wrap: nowrap;
     justify-content: space-around;
     align-items: center;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 32px auto;
+}
+
+.panel {
+    border: 2px solid #dfdfdf;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0 0;
+    margin: 10px;
+}
+
+.panel.panel-sm {
+    max-width: 90%;
+    margin: 10px auto;
+}
+
+.panel-heading {
+    border-bottom: 2px solid #dfdfdf;
+}
+
+.panel-heading h1,
+.panel-heading h2,
+.panel-heading h3,
+.panel-heading h4,
+.panel-heading h5,
+.panel-heading h6,
+.panel-heading h7 {
+    margin: 0;
+    padding: 0;
+}
+
+.panel-body .checkbox-inline {
+    padding: 15px 20px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #ffffff;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+td.trash>a>img {
+    width: 30%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+td.trash {
+    border: 1px solid #ffffff;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0;
+    width: 10%;
+}
+
+td.trash>a>img:hover {
+    opacity: 70%;
+    width: 35%;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');

@@ -24,6 +24,7 @@
               <th>Direct Seed to Harvest</th> 
               <th>Direct Seed to Transplant</th>
               <th>Transplant to Harvest</th>
+              <th>Delete Crop</th>
             </tr>
           </thead> 
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
@@ -31,6 +32,7 @@
             <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
             <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
             <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td class="trash"><a href="harvesttimes"><img :src= "trashUrl" @click="deleteEntry(st['cropName']);"/></a></td>
           </tr>
         </table>
       </div>
@@ -53,7 +55,8 @@ export default {
       sortOrders: {},
       sortKey: "",
       seedingTimes: [],
-      apiUrl: process.env.VUE_APP_REMOTE_API
+      apiUrl: process.env.VUE_APP_REMOTE_API,
+      trashUrl: require('../images/trash.png')
     };
   },
   filters: {
@@ -239,58 +242,11 @@ export default {
     this.getSeedingTimes();
   }
 };
+
+
 </script>
 
 <style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-body {
-  margin: 32px auto;
-}
-.panel {
-  border: 2px solid #dfdfdf;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0 0;
-  margin: 10px;
-}
-.panel.panel-sm {
-  max-width: 700px;
-  margin: 10px auto;
-}
-.panel-heading {
-  border-bottom: 2px solid #dfdfdf;
-}
-.panel-heading h1,
-.panel-heading h2,
-.panel-heading h3,
-.panel-heading h4,
-.panel-heading h5,
-.panel-heading h6 {
-  margin: 0;
-  padding: 0;
-}
-.panel-body .checkbox-inline {
-  padding: 15px 20px;
-}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #ffffff;
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 0;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 
 </style>
 

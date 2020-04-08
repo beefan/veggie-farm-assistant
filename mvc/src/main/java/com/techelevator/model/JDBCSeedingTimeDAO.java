@@ -98,6 +98,9 @@ public class JDBCSeedingTimeDAO implements SeedingTimesDAO{
 		String sql = "delete from seeding_times where crop_id in (select id from crop where crop_name = ?);";
 		jdbcTemplate.update(sql, cropName);
 		
+		sql= "delete from crop where crop_name= ?";
+		jdbcTemplate.update(sql, cropName);
+		
 	}
 
 }
