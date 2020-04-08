@@ -62,7 +62,7 @@ public class JDBCSeedingTimeDAO implements SeedingTimesDAO{
 	@Override
 	public List<SeedingTime> getAllSeedingTimes() {
 		List<SeedingTime> seedingTimes = new ArrayList<SeedingTime>();
-		String sql = "select crop_name, direct_seed_to_harvest, direct_seed_to_transplant, transplant_to_harvest FROM seeding_times JOIN crop ON seeding_times.crop_id = crop.id";
+		String sql = "select crop_name, direct_seed_to_harvest, direct_seed_to_transplant, transplant_to_harvest FROM seeding_times JOIN crop ON seeding_times.crop_id = crop.id order by crop_name";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		
 		while(results.next()) {
@@ -90,6 +90,14 @@ public class JDBCSeedingTimeDAO implements SeedingTimesDAO{
 			seedingTimes.add(st);
 		}
 		return seedingTimes;
+	}
+
+	@Override
+	public void delete(String cropName) {
+
+		String sql = "delete from seeding_times where crop_id in (select id from crop where crop_name = ?);";
+		jdbcTemplate.update(sql, cropName);
+		
 	}
 
 }

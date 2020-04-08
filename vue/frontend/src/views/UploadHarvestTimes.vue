@@ -27,10 +27,10 @@
             </tr>
           </thead> 
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
-            <td>{{ st["cropName"] }}</td>
-            <td>{{ st["directSeedToHarvestInDays"] }}</td>
-            <td>{{ st["directSeedToTransplantInDays"] }} </td>
-            <td>{{ st["transplantToHarvestInDays"] }}</td>
+            <td><input id="col1" class="dong" type="text" :value="st['cropName']" @change="updateDatabase($event, st)"/></td>
+            <td><input id="col2" class="dong" type="text" :value="st['directSeedToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input id="col3" class="dong" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input id="col4" class="dong" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
           </tr>
         </table>
       </div>
@@ -101,6 +101,55 @@ export default {
 
       vm.parse_header = headers;
       return result; // JavaScript object
+    },
+
+    deleteEntry(cropName) {
+      fetch(this.apiUrl + '/' + cropName, {
+        method: "delete"
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+
+    updateDatabase(e, st) {
+     let cropName = st['cropName'];
+      if (e.target.id === 'col1') {
+        st['cropName'] = e.target.value;
+        this.deleteEntry(cropName);
+      } else if (e.target.id === 'col2') {
+        st['directSeedToHarvestInDays'] = e.target.value;
+      } else if (e.target.id === 'col3') {
+        st['directSeedToTransplantInDays'] = e.target.value;
+      } else if (e.target.id === 'col4') {
+        st['transplantToHarvestInDays'] = e.target.value;
+      }
+      let jasonsArray = [st]
+      console.log(JSON.stringify(jasonsArray));
+      fetch(this.apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(jasonsArray)
+      })
+        .then(response => {
+          if (response.ok) {
+          
+
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+
     },
     loadCSV(e) {
       var vm = this;
@@ -239,6 +288,13 @@ th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.dong {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
 }
 </style>
 

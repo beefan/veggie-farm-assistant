@@ -85,6 +85,12 @@ public class SeedingTimeDAOTest extends DAOIntegrationTest{
 		Assert.assertEquals(1, dao.getAllSeedingTimes().size());
 	}
 
+	@Test
+	public void does_this_actually_delete() {
+		dao.save("Cheetos",  69);
+		dao.delete("Cheetos");
+		Assert.assertTrue(0 == dao.getAllSeedingTimes().size());
+	}
 	
 	
 	
