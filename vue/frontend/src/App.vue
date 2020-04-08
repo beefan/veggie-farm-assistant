@@ -19,7 +19,6 @@
 //import HarvestTimes from './UploadHarvestTimes.vue'
 export default {
   name: 'home',
-  //components: {'HarvestTimes':HarvestTimes},
   data () {
     return {
       apiUrl: process.env.VUE_APP_REMOTE_API,

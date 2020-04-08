@@ -9,8 +9,6 @@ h1 {
     align-self: center;
 }
 
-a {}
-
 html {
     background: #e1faff
 }
@@ -58,7 +56,7 @@ a.spacing1 {
 th {
     margin-left: auto;
     margin-right: auto;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background-color: #f7b254;
     color: #ffffff;
 }
@@ -83,12 +81,6 @@ th {
     justify-content: baseline;
 }
 
-tr {
-    font-family: 'Amatic SC', cursive;
-    text-align: center;
-    font-size: 1.3rem;
-}
-
 .harvestTable {
     font-size: 2rem;
     width: 100%;
@@ -104,7 +96,7 @@ input {
 h4 {
     font-size: 50px;
     background-color: #f7b254;
-    color: #ffffff;
+    color: #4d4d4d;
 }
 
 #login>form>a {
@@ -132,8 +124,8 @@ body {
 }
 
 .panel {
-    border: 2px solid #dfdfdf;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0 0;
+    border: 2px solid #4d4d4d;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 5px 0 0;
     margin: 10px;
 }
 
@@ -143,7 +135,7 @@ body {
 }
 
 .panel-heading {
-    border-bottom: 2px solid #dfdfdf;
+    border-bottom: 2px solid #4d4d4d;
 }
 
 .panel-heading h1,
@@ -158,36 +150,52 @@ body {
 }
 
 .panel-body .checkbox-inline {
-    padding: 15px 20px;
+    padding: 0;
 }
 
 table {
-    font-family: arial, sans-serif;
+    font-family: 'Amatic SC', cursive;
     border-collapse: collapse;
     width: 100%;
+    border: .3px solid #4d4d4d;
+    font-size: .5rem;
+    color: #4d4d4d;
+}
+
+th {
+    height: 50px;
+}
+
+tr {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
 }
 
 td,
 th {
-    border: 1px solid #ffffff;
+    border: .3px solid #4d4d4d;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     padding: 0;
+    color: #FFFFFF;
+}
+
+tr:nth-child(odd) {
+    background-color: #f7b254;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #ffffff;
 }
 
 td.trash>a>img {
-    width: 30%;
-    padding: 0;
+    width: 20%;
+    padding: 8px 0 0 0;
     margin: 0;
     border: 0;
 }
 
 td.trash {
-    border: 1px solid #ffffff;
     text-align: center;
     font-size: 1.5rem;
     padding: 0;
@@ -195,6 +203,23 @@ td.trash {
 }
 
 td.trash>a>img:hover {
+    opacity: 70%;
+    width: 25%;
+}
+
+tr.newCrop {
+    width: 10%;
+    background-color: #ffffff;
+}
+
+td.submit>a>img {
+    width: 30%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+td.submit>a>img:hover {
     opacity: 70%;
     width: 35%;
 }

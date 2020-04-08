@@ -15,25 +15,43 @@
               class="form-control"
               @change="loadCSV($event)"
             />
+            
           </div>
         </div>
         <table v-if="seedingTimes">
           <thead>
             <tr>
-              <th>Crop Name</th>
-              <th>Direct Seed to Harvest</th> 
-              <th>Direct Seed to Transplant</th>
-              <th>Transplant to Harvest</th>
-              <th>Delete Crop</th>
+              <th>Add New Crop</th>
+              <th>Direct Seed to Harvest Time</th> 
+              <th>Direct Seed to Transplant Time</th>
+              <th>Transplant to Harvest Time</th>
+              <th>Submit</th>
             </tr>
           </thead> 
+          <tr class="newCrop" >
+            <td><input  class="harvestTable colName" type="text" value="Crop Name" /></td>
+            <td><input  class="harvestTable colDSTH" type="text" /> </td>
+            <td><input  class="harvestTable colDSTT" type="text" /></td>
+            <td><input  class="harvestTable colTTH" type="text" /></td>
+            <td class="submit"><a href="harvesttimes"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
+            </tr>
+            <thead>
+            <tr>
+              <th>Crop Name</th>
+              <th>Direct Seed to Harvest Time</th> 
+              <th>Direct Seed to Transplant Time</th>
+              <th>Transplant to Harvest Time</th>
+              <th>Delete Entry</th>
+            </tr>
+          </thead>
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
             <td><input  class="harvestTable colName" type="text" :value="st['cropName']" @change="updateDatabase($event, st)"/></td>
-            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays'] " @change="updateDatabase($event, st)"/></td>
             <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
             <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
             <td class="trash"><a href="harvesttimes"><img :src= "trashUrl" @click="deleteEntry(st['cropName']);"/></a></td>
           </tr>
+          
         </table>
       </div>
     </div>
@@ -56,7 +74,8 @@ export default {
       sortKey: "",
       seedingTimes: [],
       apiUrl: process.env.VUE_APP_REMOTE_API,
-      trashUrl: require('../images/trash.png')
+      trashUrl: require('../images/trash.png'),
+      submitUrl: require('../images/submit.png')
     };
   },
   filters: {
@@ -106,6 +125,20 @@ export default {
       vm.parse_header = headers;
       return result; // JavaScript object
     },
+    
+    
+    addNewEntry(e) {
+      let newEntry = {};
+      let x = Array.from(
+      e.target.parentNode.parentNode.parentNode.children);
+      newEntry["cropName"] = x[0].firstChild.value;
+      newEntry["directSeedToHarvestInDays"] = x[1].firstChild.value;
+      newEntry["directSeedToTransplantInDays"] = x[2].firstChild.value;
+      newEntry["transplantToHarvestInDays"] = x[3].firstChild.value;
+      this.updateDatabase(e, newEntry);
+},
+
+
 
     deleteEntry(cropName) {
       fetch(this.apiUrl + '/' + cropName, {
