@@ -2,11 +2,11 @@
   <div class="container">
     <div class="panel panel-sm">
       <div class="panel-heading">
-        <h4>Harvest Times File Import</h4>
+        <h4>Upload and Edit Harvest Times</h4>
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <label for="csv_file" class="control-label col-sm-3 text-right">CSV file to import</label>
+          <label for="csv_file" class="control-label col-sm-3 text-right">Import Your CSV File</label>
           <div class="col-sm-9">
             <input
               type="file"
@@ -41,7 +41,7 @@
 <script>
 export default {
   props: {
-    apiUrl: String
+    //apiUrl: String
   },
   data() {
     return {
@@ -52,7 +52,8 @@ export default {
       parse_csv: [],
       sortOrders: {},
       sortKey: "",
-      seedingTimes: []
+      seedingTimes: [],
+      apiUrl: process.env.VUE_APP_REMOTE_API
     };
   },
   filters: {

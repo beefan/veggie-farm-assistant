@@ -5,12 +5,111 @@ h1 {
     padding: 0;
     margin: 0;
     margin-left: 10px;
-    color: #b98700;
+    color: #f7b254;
     align-self: center;
 }
 
+a {}
+
 html {
     background: #e1faff
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    align-items: center;
+}
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f7b254;
+}
+
+a.spacing {
+    text-decoration: none;
+    margin-right: 25px;
+    font-family: 'Amatic SC', cursive;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+a.spacing1 {
+    text-decoration: none;
+    font-family: 'Amatic SC', cursive;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+#app>div.container {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+
+th {
+    text-align: center;
+    font-size: 25px;
+    background-color: #f7b254;
+    color: #ffffff;
+}
+
+#app>div.container>div>div.panel-body>div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30px;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px;
+    justify-content: baseline;
+}
+
+tr {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+
+input {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+
+h4 {
+    font-size: 50px;
+    background-color: #f7b254;
+    color: #ffffff;
+}
+
+#login>form>a {
+    text-decoration: none;
+    font-family: 'Amatic SC', cursive;
+}
+
+#login>form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
