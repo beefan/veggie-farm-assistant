@@ -82,8 +82,9 @@ th {
 }
 
 .harvestTable {
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 100%;
+    color: #4d4d4d;
     border: none;
     background-color: transparent;
 }
@@ -156,10 +157,12 @@ body {
 table {
     font-family: 'Amatic SC', cursive;
     border-collapse: collapse;
-    width: 100%;
+    width: 99.4789%;
     border: .3px solid #4d4d4d;
     font-size: .5rem;
     color: #4d4d4d;
+    margin: auto;
+    margin-bottom: 5px;
 }
 
 th {
