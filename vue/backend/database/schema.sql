@@ -1,6 +1,11 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS seeding_times;
+DROP TABLE IF EXISTS expiration;
+DROP TABLE IF EXISTS crop;
+
+
 
 CREATE TABLE users (
   id serial PRIMARY KEY,
@@ -21,5 +26,12 @@ create table seeding_times (
   transplant_to_harvest int,
   constraint fk_crop_id foreign key (crop_id) references crop (id)
 );
+
+create table expiration(
+ id serial primary key,
+ crop_id int not null,
+ days_until_expire int not null,
+ constraint fk_crop_id foreign key (crop_id) references crop (id)
+ );
 
 COMMIT TRANSACTION;

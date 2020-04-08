@@ -45,10 +45,10 @@
             </tr>
           </thead>
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
-            <td><input  class="harvestTable colName" type="text" :value="st['cropName']" @change="updateDatabase($event, st)"/></td>
-            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays'] " @change="updateDatabase($event, st)"/></td>
-            <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)"/></td>
-            <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)"/></td>
+            <td><input  class="harvestTable colName" type="text" :value="st['cropName']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)" /></td>
+            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays'] " @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
+            <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
+            <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
             <td class="trash"><a href="harvesttimes"><img :src= "trashUrl" @click="deleteEntry(st['cropName']);"/></a></td>
           </tr>
           
@@ -125,7 +125,19 @@ export default {
       vm.parse_header = headers;
       return result; // JavaScript object
     },
+
+    highLightRow(e){
+      
+      e.target.parentNode.classList.add("highlight");
+      
+      // setTimeout(() => {
+      //   e.target.parentNode.classList.remove("highlight")
+      // }, 1000);
+    },
     
+    unhighlight(e){
+      e.target.parentNode.classList.remove("highlight");
+    },
     
     addNewEntry(e) {
       let newEntry = {};
