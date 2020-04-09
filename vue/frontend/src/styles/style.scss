@@ -88,7 +88,7 @@ input {
 }
 
 h4 {
-    font-size: 50px;
+    font-size: 5vw;
     background-color: #f7b254;
     color: #4d4d4d;
 }
@@ -176,6 +176,14 @@ table {
     margin: auto;
     margin-bottom: 5px;
 }
+.fieldTable {
+    font-size: 1vw;
+    width: 80%;
+    color: #4d4d4d;
+    border: none;
+    background-color: transparent;
+    font-family: 'Muli', sans-serif;
+}
 
 .harvestTable {
     font-size: 1.1rem;
@@ -238,6 +246,13 @@ tr.newCrop {
 }
 
 #app>div.container>div>div>table:nth-child(2)>tr>td.submit>a>img {
+    width: 25%;
+    padding: 8px 0 0 0;
+    margin: 0;
+    border: 0;
+}
+
+#app > div.container > div.field > table > tr > td.submit > a > img {
     width: 25%;
     padding: 8px 0 0 0;
     margin: 0;

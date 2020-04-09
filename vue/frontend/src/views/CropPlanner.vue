@@ -6,18 +6,19 @@
         </div>
   <div class="field" v-for="field in fields" v-bind:key="field['id']">
       <input type="text" :value="field['name']"/>
-        <table>
+        <table class="fieldTable">
         <thead>
             <tr>
               <th>Add New Bed</th> 
               <th>Transplant Date</th>
               <th>Planting Date</th>
+              <th>Submit</th>
             </tr>
           </thead> 
           <tr class="newCrop" >
-            <td><input  class="harvestTable colName" type="text" value="Crop Name" /></td>
-            <td><input  class="harvestTable td" type="text" value="Transplant Date"/> </td>
-            <td><input  class="harvestTable pd" type="text" value="Planting Date" /></td>
+            <td><input  class="fieldTable colName" type="text" value="Crop Name" /></td>
+            <td><input  class="fieldTable td" type="text" value="Transplant Date"/> </td>
+            <td><input  class="fieldTable pd" type="text" value="Planting Date" /></td>
             <td class="submit"><a href="cropplanner"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
             </tr>
             <thead> 
@@ -25,12 +26,13 @@
               <th>Crop Name</th>
               <th>Transplant Date</th> 
               <th>Planting Date</th>
+              <th>Delete</th>
             </tr>
             </thead>
             <tr v-for="st in getBedsByField(field['id'])" v-bind:key="st['id']">
                 <td>
           <input
-            class="harvestTable colName"
+            class="fieldTable colName"
             type="text"
             :value="st['cropName']"
             @change="updateDatabase($event, st)"
@@ -40,7 +42,7 @@
         </td>
         <td>
           <input
-            class="harvestTable td"
+            class="fieldTable td"
             type="text"
             :value="st['transplantDate'] "
             @change="updateDatabase($event, st)"
@@ -50,7 +52,7 @@
         </td>
         <td>
         <input
-            class="harvestTable pd"
+            class="fieldTable pd"
             type="text"
             :value="st['plantingDate'] "
             @change="updateDatabase($event, st)"
@@ -69,7 +71,7 @@
       <upload
       :verifyUploadFormat="uploadVerify"
       :uploadDocument="uploadExpirationTimes"
-      title="Upload Expiration Times"
+      title=""
       @uploadSuccess="onUploadSuccess($event)"
       ></upload>
   </div>
@@ -216,8 +218,9 @@ export default {
 
 <style>
 .field{
-   width: 30%;
-   
-    
+   border: 2px solid black;
+}
+.field > img {
+  width: 10%;
 }
 </style>
