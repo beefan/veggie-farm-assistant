@@ -2,46 +2,99 @@
   <div class="container">
     <div class="panel panel-sm">
       <div class="panel-body">
-         <upload
-        :verifyUploadFormat="uploadVerify"
-        :uploadDocument="uploadSeedingTimes"
-        title="Upload and Edit Harvest Times"
-        @uploadSuccess="onUploadSuccess($event)"
-    ></upload>
+        <upload
+          :verifyUploadFormat="uploadVerify"
+          :uploadDocument="uploadSeedingTimes"
+          title="Upload Your Harvest Times" 
+          @uploadSuccess="onUploadSuccess($event)"
+        ></upload>
         <table v-if="seedingTimes">
           <thead>
             <tr>
               <th>Add New Crop</th>
-              <th>Direct Seed to Harvest Time</th> 
+              <th>Direct Seed to Harvest Time</th>
               <th>Direct Seed to Transplant Time</th>
               <th>Transplant to Harvest Time</th>
               <th>Submit</th>
             </tr>
-          </thead> 
-          <tr class="newCrop" >
-            <td><input  class="harvestTable colName" type="text" value="Crop Name" /></td>
-            <td><input  class="harvestTable colDSTH" type="text" /> </td>
-            <td><input  class="harvestTable colDSTT" type="text" /></td>
-            <td><input  class="harvestTable colTTH" type="text" /></td>
-            <td class="submit"><a href="harvesttimes"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
-            </tr>
-            <thead>
+          </thead>
+          <tr class="newCrop">
+            <td>
+              <input class="harvestTable colName" type="text" value="Crop Name" />
+            </td>
+            <td>
+              <input class="harvestTable colDSTH" type="text" />
+            </td>
+            <td>
+              <input class="harvestTable colDSTT" type="text" />
+            </td>
+            <td>
+              <input class="harvestTable colTTH" type="text" />
+            </td>
+            <td class="submit">
+              <a href="harvesttimes">
+                <img :src="submitUrl" @click="addNewEntry($event);" />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <thead>
             <tr>
               <th>Crop Name</th>
-              <th>Direct Seed to Harvest Time</th> 
+              <th>Direct Seed to Harvest Time</th>
               <th>Direct Seed to Transplant Time</th>
               <th>Transplant to Harvest Time</th>
               <th>Delete Entry</th>
             </tr>
           </thead>
           <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
-            <td><input  class="harvestTable colName" type="text" :value="st['cropName']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)" /></td>
-            <td><input  class="harvestTable colDSTH" type="text" :value="st['directSeedToHarvestInDays'] " @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
-            <td><input  class="harvestTable colDSTT" type="text" :value="st['directSeedToTransplantInDays']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
-            <td><input  class="harvestTable colTTH" type="text" :value="st['transplantToHarvestInDays']" @change="updateDatabase($event, st)" @click="highLightRow($event)" @blur="unhighlight($event)"/></td>
-            <td class="trash"><a href="harvesttimes"><img :src= "trashUrl" @click="deleteEntry(st['cropName']);"/></a></td>
+            <td>
+              <input
+                class="harvestTable colName"
+                type="text"
+                :value="st['cropName']"
+                @change="updateDatabase($event, st)"
+                @click="highLightRow($event)"
+                @blur="unhighlight($event)"
+              />
+            </td>
+            <td>
+              <input
+                class="harvestTable colDSTH"
+                type="text"
+                :value="st['directSeedToHarvestInDays'] "
+                @change="updateDatabase($event, st)"
+                @click="highLightRow($event)"
+                @blur="unhighlight($event)"
+              />
+            </td>
+            <td>
+              <input
+                class="harvestTable colDSTT"
+                type="text"
+                :value="st['directSeedToTransplantInDays']"
+                @change="updateDatabase($event, st)"
+                @click="highLightRow($event)"
+                @blur="unhighlight($event)"
+              />
+            </td>
+            <td>
+              <input
+                class="harvestTable colTTH"
+                type="text"
+                :value="st['transplantToHarvestInDays']"
+                @change="updateDatabase($event, st)"
+                @click="highLightRow($event)"
+                @blur="unhighlight($event)"
+              />
+            </td>
+            <td class="trash">
+              <a href="harvesttimes">
+                <img :src="trashUrl" @click="deleteEntry(st['cropName']);" />
+              </a>
+            </td>
           </tr>
-          
         </table>
       </div>
     </div>
@@ -61,40 +114,35 @@ export default {
       parse_csv: [],
       seedingTimes: [],
       apiUrl: process.env.VUE_APP_REMOTE_API,
-      trashUrl: require('../images/trash.png'),
-      submitUrl: require('../images/submit.png')
+      trashUrl: require("../images/trash.png"),
+      submitUrl: require("../images/submit.png")
     };
   },
   methods: {
-    highLightRow(e){
-      
+    highLightRow(e) {
       e.target.parentNode.classList.add("highlight");
     },
-    
-    unhighlight(e){
+
+    unhighlight(e) {
       e.target.parentNode.classList.remove("highlight");
     },
     onUploadSuccess(on) {
-      
       this.parse_header = on.header;
       this.parse_csv = on.csv;
     },
-    
+
     addNewEntry(e) {
       let newEntry = {};
-      let x = Array.from(
-      e.target.parentNode.parentNode.parentNode.children);
+      let x = Array.from(e.target.parentNode.parentNode.parentNode.children);
       newEntry["cropName"] = x[0].firstChild.value;
       newEntry["directSeedToHarvestInDays"] = x[1].firstChild.value;
       newEntry["directSeedToTransplantInDays"] = x[2].firstChild.value;
       newEntry["transplantToHarvestInDays"] = x[3].firstChild.value;
       this.updateDatabase(e, newEntry);
-},
-
-
+    },
 
     deleteEntry(cropName) {
-      fetch(this.apiUrl + '/' + cropName, {
+      fetch(this.apiUrl + "/" + cropName, {
         method: "delete"
       })
         .then(response => {
@@ -108,18 +156,18 @@ export default {
     },
 
     updateDatabase(e, st) {
-     let cropName = st['cropName'];
-      if (e.target.classList[1] === 'colName') {
-        st['cropName'] = e.target.value;
+      let cropName = st["cropName"];
+      if (e.target.classList[1] === "colName") {
+        st["cropName"] = e.target.value;
         this.deleteEntry(cropName);
-      } else if (e.target.classList[1] === 'colDSTH') {
-        st['directSeedToHarvestInDays'] = e.target.value;
-      } else if (e.target.classList[1] === 'colDSTT') {
-        st['directSeedToTransplantInDays'] = e.target.value;
-      } else if (e.target.classList[1] === 'colTTH') {
-        st['transplantToHarvestInDays'] = e.target.value;
+      } else if (e.target.classList[1] === "colDSTH") {
+        st["directSeedToHarvestInDays"] = e.target.value;
+      } else if (e.target.classList[1] === "colDSTT") {
+        st["directSeedToTransplantInDays"] = e.target.value;
+      } else if (e.target.classList[1] === "colTTH") {
+        st["transplantToHarvestInDays"] = e.target.value;
       }
-      let jasonsArray = [st]
+      let jasonsArray = [st];
       console.log(JSON.stringify(jasonsArray));
       fetch(this.apiUrl, {
         method: "POST",
@@ -131,15 +179,12 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-          
-
             //this.$emit("showReviews");
           }
         })
         .catch(err => {
           console.error(err);
         });
-
     },
     uploadVerify() {
       let vm = this;
@@ -152,10 +197,9 @@ export default {
         return false;
       }
 
-     
-      for (let item of this.parse_csv){
-        console.log(item["cropName"])
-        console.log(isNaN(item["transplantToHarvestInDays"]))
+      for (let item of this.parse_csv) {
+        console.log(item["cropName"]);
+        console.log(isNaN(item["transplantToHarvestInDays"]));
         if (
           !item["cropName"].match(/[a-z]/i) ||
           isNaN(item["directSeedToHarvestInDays"]) ||
@@ -204,11 +248,8 @@ export default {
     this.getSeedingTimes();
   }
 };
-
-
 </script>
 
 <style>
-
 </style>
 
