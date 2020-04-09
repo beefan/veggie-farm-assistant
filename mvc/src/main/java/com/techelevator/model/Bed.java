@@ -6,7 +6,7 @@ public class Bed {
 	
 	private int bedId;
 
-	private String fieldName;
+	private int fieldId;
 	
 	private String cropName;
 	
@@ -14,12 +14,12 @@ public class Bed {
 	
 	private LocalDate transplantDate;
 
-	public String getFieldName() {
-		return fieldName;
+	public int getFieldId() {
+		return fieldId;
 	}
 
-	public void setFieldName(String fieldName) {
-		this.fieldName = fieldName;
+	public void setFieldId(int fieldId) {
+		this.fieldId = fieldId;
 	}
 
 	public String getCropName() {
