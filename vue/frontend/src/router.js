@@ -5,7 +5,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import UploadHarvestTimes from './views/UploadHarvestTimes.vue'
-
+import Expiration from './views/Expiration.vue'
 
 Vue.use(Router)
 
@@ -49,6 +49,11 @@ const router = new Router({
             path: "/harvesttimes",
             name: 'harvesttimes',
             component: UploadHarvestTimes,
+        },
+        {
+            path: "/wasteinfo",
+            name: 'expiration',
+            component: Expiration,
         }
     ]
 })
