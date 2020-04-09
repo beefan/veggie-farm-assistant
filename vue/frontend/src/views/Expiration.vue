@@ -22,6 +22,8 @@
             
             <td class="submit"><a href="wasteinfo"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
             </tr>
+    </table>
+    <table v-if="expirationTimes">
             <thead> 
             <tr>
               <th>Crop Name</th>
