@@ -6,7 +6,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import UploadHarvestTimes from './views/UploadHarvestTimes.vue'
 import Expiration from './views/Expiration.vue'
-
+import CropPlanner from './views/CropPlanner.vue'
 Vue.use(Router)
 
 /**
@@ -54,6 +54,11 @@ const router = new Router({
             path: "/wasteinfo",
             name: 'expiration',
             component: Expiration,
+        },
+        {
+            path: "/cropplanner",
+            name: 'cropplanner',
+            component: CropPlanner
         }
     ]
 })

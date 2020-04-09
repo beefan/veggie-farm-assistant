@@ -19,7 +19,7 @@ public interface BedDAO {
 	
 	public void updateField(int id, String fieldName);
 	
-	public void deleteField(String username, int id);
+	public void deleteField( int id);
 	
 	public List<Bed> getAllBedsByField(int fieldId);
 	

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JDBCBedDAO implements BedDAO{
 	
 	private JdbcTemplate jdbcTemplate;
@@ -69,12 +71,12 @@ public class JDBCBedDAO implements BedDAO{
 	}
 
 	@Override
-	public void deleteField(String username, int id) {
+	public void deleteField( int id) {
 		String sql = "delete from bed where field_id = ?";
 		jdbcTemplate.update(sql, id);
 		
-		sql = "delete from field where username = ? and id = ?";
-		jdbcTemplate.update(sql, username, id);
+		sql = "delete from field where id = ?";
+		jdbcTemplate.update(sql, id);
 		
 	}
 
@@ -103,7 +105,7 @@ public class JDBCBedDAO implements BedDAO{
 	@Override
 	public List<Field> getAllFields(String username) {
 		List<Field> fields = new ArrayList<Field>();
-		String sql = "select * from field where username = ?";
+		String sql = "select name, id from field where username = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
 		while(results.next()) {
 			Field field = new Field();
