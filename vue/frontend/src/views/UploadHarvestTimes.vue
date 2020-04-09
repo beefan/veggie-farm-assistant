@@ -1,23 +1,13 @@
 <template>
   <div class="container">
     <div class="panel panel-sm">
-      <div class="panel-heading">
-        <h4>Upload and Edit Harvest Times</h4>
-      </div>
       <div class="panel-body">
-        <div class="form-group">
-          <label for="csv_file" class="control-label col-sm-3 text-right">Import Your CSV File</label>
-          <div class="col-sm-9">
-            <input
-              type="file"
-              id="csv_file"
-              name="csv_file"
-              class="form-control"
-              @change="loadCSV($event)"
-            />
-            
-          </div>
-        </div>
+         <upload
+        :verifyUploadFormat="uploadVerify"
+        :uploadDocument="uploadSeedingTimes"
+        title="Upload and Edit Harvest Times"
+        @uploadSuccess="onUploadSuccess($event)"
+    ></upload>
         <table v-if="seedingTimes">
           <thead>
             <tr>
@@ -59,84 +49,35 @@
 </template>
 
 <script>
+import Upload from "../components/csvUpload.vue";
 export default {
   props: {
-    //apiUrl: String
+    // apiUrl: String
   },
+  components: { Upload: Upload },
   data() {
     return {
-      channel_name: "",
-      channel_fields: [],
-      channel_entries: [],
       parse_header: [],
       parse_csv: [],
-      sortOrders: {},
-      sortKey: "",
       seedingTimes: [],
       apiUrl: process.env.VUE_APP_REMOTE_API,
       trashUrl: require('../images/trash.png'),
       submitUrl: require('../images/submit.png')
     };
   },
-  filters: {
-    capitalize: function(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-  },
   methods: {
-    sortBy: function(key) {
-      let vm = this;
-      vm.sortKey = key;
-      vm.sortOrders[key] = vm.sortOrders[key] * -1;
-    },
-    csvJSON(csv) {
-      let vm = this;
-      let lines = csv.split("\n");
-      let result = [];
-      let headers = lines[0].split(",");
-      vm.parse_header = lines[0].split(",");
-      lines[0].split(",").forEach((key) => {
-        vm.sortOrders[key] = 1;
-      });
-
-      lines.map((line, indexLine) => {
-        if (indexLine < 1) return; // Jump header line
-
-        let obj = {};
-        let currentline = line.split(",");
-        headers = headers.map(x => {
-          if (x.includes("\r")) {
-            return x.substring(0, x.length - 1).trim();
-          } else {
-            return x.trim();
-          }
-        });
-        headers.map((header, indexHeader) => {
-          if (currentline[indexHeader].includes("\r")) {
-            currentline[indexHeader] = currentline[indexHeader]
-              .substring(0, currentline[indexHeader].length - 1)
-              .trim();
-          }
-          obj[header] = currentline[indexHeader].trim();
-        });
-        result.push(obj);
-      });
-
-      vm.parse_header = headers;
-      return result; // JavaScript object
-    },
-
     highLightRow(e){
       
       e.target.parentNode.classList.add("highlight");
-      
-      // setTimeout(() => {
-      //   e.target.parentNode.classList.remove("highlight")
-      // }, 1000);
     },
     
     unhighlight(e){
       e.target.parentNode.classList.remove("highlight");
+    },
+    onUploadSuccess(on) {
+      
+      this.parse_header = on.header;
+      this.parse_csv = on.csv;
     },
     
     addNewEntry(e) {
@@ -200,31 +141,7 @@ export default {
         });
 
     },
-    loadCSV(e) {
-      var vm = this;
-      if (window.FileReader) {
-        var reader = new FileReader();
-        reader.readAsText(e.target.files[0]);
-        // Handle errors load
-        reader.onload = function(event) {
-          var csv = event.target.result;
-          vm.parse_csv = vm.csvJSON(csv);
-          if (vm.verifyUploadFormat()) {
-            vm.uploadSeedingTimes();
-          } else {
-            alert("Incorrect file format");
-          }
-        };
-        reader.onerror = function(evt) {
-          if (evt.target.error.name == "NotReadableError") {
-            alert("Can't read file!");
-          }
-        };
-      } else {
-        alert("FileReader are not supported in this browser.");
-      }
-    },
-    verifyUploadFormat() {
+    uploadVerify() {
       let vm = this;
       if (
         vm.parse_header[0] != "cropName" ||

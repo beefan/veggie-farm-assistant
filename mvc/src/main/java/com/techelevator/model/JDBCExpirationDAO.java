@@ -44,8 +44,9 @@ public class JDBCExpirationDAO implements ExpirationDAO{
 		String sql = "delete from expiration where crop_id in (select id from crop where crop_name = ?);";
 		jdbcTemplate.update(sql, cropName);
 		
-		sql= "delete from crop where crop_name= ?";
-		jdbcTemplate.update(sql, cropName);
+		//Todo cleanuo?
+//		sql= "delete from crop where crop_name= ?";
+//		jdbcTemplate.update(sql, cropName);
 		
 	}
 

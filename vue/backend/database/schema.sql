@@ -1,5 +1,7 @@
 BEGIN TRANSACTION;
 
+drop table if exists bed;
+drop table if exists field;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS seeding_times;
 DROP TABLE IF EXISTS expiration;
@@ -32,6 +34,22 @@ create table expiration(
  crop_id int not null,
  days_until_expire int not null,
  constraint fk_crop_id foreign key (crop_id) references crop (id)
+ );
+ 
+ create table field (
+ id serial primary key,
+ name varchar(64) not null unique,
+ username varchar(255) NOT NULL,
+ constraint fk_username foreign key (username) references users (username)
+ );
+ 
+ create table bed (
+ id serial primary key,
+ field_id int not null,
+ crop_name varchar(64) not null,
+ planting_date date not null,
+ transplant_date date,
+ constraint fk_field_id foreign key (field_id) references field (id)
  );
 
 COMMIT TRANSACTION;
