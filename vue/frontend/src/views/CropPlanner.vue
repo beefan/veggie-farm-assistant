@@ -11,12 +11,12 @@
 
 
 <section class="fields">
+
 <div class ="fieldsWrapper">
-   
     <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
+      <div class="fieldName">
       <h3>Field Name:</h3>
-      <div class="fieldInput">
-      <input type="text" :value="field['name']" />
+      <input class="btn" type="text" :value="field['name']" />
       </div>
       
 
@@ -99,6 +99,7 @@
         
       </table>
       <br>
+      <div class ="csvUpload">
       <p>Upload CSV:</p>
       <upload
         :parentData="field['id']"
@@ -106,8 +107,8 @@
          title
         @uploadSuccess="onUploadSuccess($event)"
         :uploadDocument="uploadBeds"
-
       ></upload>
+      </div>
       <br>
     </div>
     <br><br>
