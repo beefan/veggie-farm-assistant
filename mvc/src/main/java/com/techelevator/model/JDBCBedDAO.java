@@ -109,8 +109,10 @@ public class JDBCBedDAO implements BedDAO{
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
 		while(results.next()) {
 			Field field = new Field();
+		
 			field.setName(results.getString("name"));
 			field.setId(results.getInt("id"));
+			field.setBeds(getAllBedsByField(field.getId()));
 			fields.add(field);
 		}
 		return fields;

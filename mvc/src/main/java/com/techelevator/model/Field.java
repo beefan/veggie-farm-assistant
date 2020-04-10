@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Field {
 	
 	private String name;
@@ -7,6 +9,16 @@ public class Field {
 	private String username;
 	
 	private int id;
+	
+	private List<Bed> beds;
+
+	public List<Bed> getBeds() {
+		return beds;
+	}
+
+	public void setBeds(List<Bed> beds) {
+		this.beds = beds;
+	}
 
 	public String getName() {
 		return name;
