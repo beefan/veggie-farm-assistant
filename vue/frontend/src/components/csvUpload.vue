@@ -1,13 +1,8 @@
 <template>
-  <div class="container">
-    <div class="panel panel-sm">
-      <div class="panel-heading">
-        <h4>{{title}}</h4>
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <label for="csv_file" class="control-label col-sm-3 text-right">Import Your CSV File</label>
-          <div class="col-sm-9">
+  <div class="csvContainer">
+        <h2>{{title}}</h2>
+      <div class="csvUploadData">
+        <br>
             <input
               type="file"
               id="csv_file"
@@ -18,9 +13,7 @@
             
           </div>
         </div>
-      </div>
-      </div>
-  </div>
+      
 </template>
 
 <script>

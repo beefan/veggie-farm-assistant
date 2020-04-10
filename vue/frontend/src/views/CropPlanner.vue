@@ -1,4 +1,5 @@
 <template>
+<body>
   <div class="container">
     <div>
       <button @click="addField($event)">Add New Field</button>
@@ -55,7 +56,7 @@
             <input
               class="fieldTable td"
               type="date"
-              :value="date = getDateFromJSON(st['transplantDate'])"
+              :value="st['transplantDate']"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -65,7 +66,7 @@
             <input
               class="fieldTable pd"
               type="date"
-              :value="getDateFromJSON(st['plantingDate'])"
+              :value="st['plantingDate']"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -89,6 +90,7 @@
     </div>
     <div></div>
   </div>
+  </body>
 </template>
 
 <script>

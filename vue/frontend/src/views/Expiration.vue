@@ -1,15 +1,25 @@
 <template>
-  <div class="container">
-    <div class="panel panel-sm">
-      <div class="panel-body">
-      <upload
-      :verifyUploadFormat="uploadVerify"
-      :uploadDocument="uploadExpirationTimes"
-      title="Upload Expiration Times"
-      @uploadSuccess="onUploadSuccess($event)"
-    ></upload>
-    <table v-if="expirationTimes">
-        <thead>
+<body class="wasteTimesBody">
+  <br>
+    <br>
+  <div class="wasteContainer">
+    <div class="wasteTimesUpload">
+      <div class="csvUpload">
+        <upload
+        class="csvUploadClickBox"
+          :verifyUploadFormat="uploadVerify"
+          :uploadDocument="uploadSeedingTimes"
+          title="Upload Expiration Times" 
+          @uploadSuccess="onUploadSuccess($event)"
+        ></upload>
+      </div>
+      <p class="getStarted">To get started, upload a .csv file with each Crop Name and it's Expiration Time, or you can use the Add New Crop field below to add them each individually.</p>
+      <br>
+
+
+      <div class="wasteTables">
+        <table v-if="expirationTimes" class="addNewCrop">
+          <thead>
             <tr>
               <th>Add New Crop</th>
               <th>Expiration Time</th> 
@@ -19,11 +29,11 @@
           <tr class="newCrop" >
             <td><input  class="harvestTable colName" type="text" value="Crop Name" /></td>
             <td><input  class="harvestTable colDSTH" type="text" /> </td>
-            
             <td class="submit"><a href="wasteinfo"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
             </tr>
     </table>
-    <table v-if="expirationTimes">
+    <br>
+    <table class="existingCrops" v-if="expirationTimes">
             <thead> 
             <tr>
               <th>Crop Name</th>
@@ -61,8 +71,11 @@
       </tr>
     </table>
       </div>
+      <br><br>
     </div>
-  </div>
+    </div>
+ 
+    </body>
 </template>
 
 <script>
