@@ -55,10 +55,14 @@
             />
           </td>
           <td>
+            <h1>  {{ Dates.map(st['transplantDate'].parse)}}
+              {{st['transplantDate'].year.toString() + '-' + st['transplantDate'].monthValue.toString() + '-' + st['transplantDate'].dayOfMonth.toString()}}</h1>
             <input
               class="fieldTable td"
               type="date"
-              :value="st['transplantDate']"
+              :value="((st['transplantDate'].year.toString() < 10) ? "0" + st['transplantDate'].year.toString() : st['transplantDate'].year.toString()) + 
+              '-' + st['transplantDate'].monthValue.toString() + 
+              '-' + st['transplantDate'].dayOfMonth.toString()"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
