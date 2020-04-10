@@ -16,11 +16,12 @@
 
 </template>
 
-
-import {Slide} from 'vue-burger-menu' //import the Css transitions
+<script>
+//import {Slide} from 'vue-burger-menu' //import the Css transitions
 
 export default {
     components: {
-        Slide
+        //Slide
     }
 }
+</script>

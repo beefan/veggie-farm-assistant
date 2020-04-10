@@ -24,4 +24,6 @@ public interface BedDAO {
 	public List<Bed> getAllBedsByField(int fieldId);
 	
 	public List<Field> getAllFields(String username);
+	
+	public void resetField(int fieldId);
 }

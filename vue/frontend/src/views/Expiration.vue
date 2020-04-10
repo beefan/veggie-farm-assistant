@@ -8,7 +8,7 @@
         <upload
         class="csvUploadClickBox"
           :verifyUploadFormat="uploadVerify"
-          :uploadDocument="uploadSeedingTimes"
+          :uploadDocument="uploadExpirationTimes"
           title="Upload Expiration Times" 
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
