@@ -19,7 +19,6 @@
             <th>Submit</th>
           </tr>
         </thead>
-        
         <tr :class="'newCrop ' + field['id']">
           <td>
             <input class="fieldTable colName" type="text" value="Crop Name" />
@@ -92,7 +91,8 @@
     </div>
     </div>
     <div></div>
-  </div>
+  
+  <br><br><br>
   </body>
 </template>
 
