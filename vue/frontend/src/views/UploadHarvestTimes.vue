@@ -1,14 +1,24 @@
 <template>
-  <div class="container">
-    <div class="panel panel-sm">
-      <div class="panel-body">
+<body class="harvestTimesBody">
+  <br>
+    <br>
+  <div class="harvestTimesContainer">
+    <div class="havestTimesUpload">
+      <div class="csvUpload">
         <upload
+        class="csvUploadClickBox"
           :verifyUploadFormat="uploadVerify"
           :uploadDocument="uploadSeedingTimes"
           title="Upload Your Harvest Times" 
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
-        <table v-if="seedingTimes">
+      </div>
+      <p class="getStarted">To get started, upload a .csv file with each Crop Name, the direct seed to harvest time, the direct seed to transplant time, and the transplant to harvest time, or you can use the Add New Crop field below to add them each individually.</p>
+      <br>
+      
+      <div class="harvestTables">
+        
+        <table v-if="seedingTimes" class="addNewCrop">
           <thead>
             <tr>
               <th>Add New Crop</th>
@@ -38,7 +48,8 @@
             </td>
           </tr>
         </table>
-        <table>
+        <br>
+        <table class ="existingCrops">
           <thead>
             <tr>
               <th>Crop Name</th>
@@ -97,8 +108,14 @@
           </tr>
         </table>
       </div>
+      <br><br>
     </div>
+    
+
   </div>
+  
+
+  </body>
 </template>
 
 <script>
