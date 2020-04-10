@@ -22,6 +22,7 @@ export default {
         title: String,
         verifyUploadFormat: Function,
         uploadDocument: Function,
+        parentData: Number,
         
     },
 
@@ -70,17 +71,25 @@ data() {
   
   loadCSV(e) {
       var vm = this;
+      
+    
       if (window.FileReader) {
         var reader = new FileReader();
         reader.readAsText(e.target.files[0]);
         // Handle errors load
+      
         reader.onload = function(event) {
           var csv = event.target.result;
           vm.parse_csv = vm.csvJSON(csv);
           vm.$emit("uploadSuccess", {csv:vm.parse_csv, header:vm.parse_header});
+         
           if (vm.verifyUploadFormat()) {
-            vm.uploadDocument();
             
+            if (vm.parentData == undefined) {
+            vm.uploadDocument();
+            } else {
+              vm.uploadDocument(vm.parentData);
+            }
             
           } else {
             alert("Incorrect file format");
@@ -94,6 +103,7 @@ data() {
       } else {
         alert("FileReader are not supported in this browser.");
       }
+      e.target.value="";
     },
 }
 }

@@ -70,10 +70,11 @@
             />
           </td>
           <td>
+            
             <input
               class="fieldTable td"
               type="date"
-              :value="st['transplantDate']"
+              :value="getDateFromJSON(st['transplantDate'])"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -83,7 +84,7 @@
             <input
               class="fieldTable pd"
               type="date"
-              :value="st['plantingDate']"
+              :value="getDateFromJSON(st['plantingDate'])"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -91,7 +92,7 @@
           </td>
           <td class="trash">
             <a href="cropplanner">
-              <img :src="trashUrl" @click="deleteEntry(st['cropName']);" />
+              <img :src="trashUrl" @click="deleteEntry(st['bedId']);" />
             </a>
           </td>
         </tr>
@@ -100,10 +101,12 @@
       <br>
       <p>Upload CSV:</p>
       <upload
+        :parentData="field['id']"
         :verifyUploadFormat="uploadVerify"
-        :uploadDocument="uploadBeds"
-        title
+         title
         @uploadSuccess="onUploadSuccess($event)"
+        :uploadDocument="uploadBeds"
+
       ></upload>
       <br>
     </div>
@@ -148,8 +151,8 @@ export default {
         console.log(item["cropName"]);
 
         if (
-          !item["cropName"].match(/[a-z]/i) ||
-          !item["transplantDate"].match(
+          !item["cropName"].match(/[a-z]/i) 
+          || !item["transplantDate"].match(
             /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
           ) ||
           !item["plantingDate"].match(
@@ -162,8 +165,27 @@ export default {
 
       return true;
     },
-    uploadBeds() {
-      fetch(this.apiUrl, {
+    deleteEntry(bedId) {
+      fetch(this.apiUrl + '/beds/' + bedId, {
+        method: "delete"
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    uploadBeds(fieldId) {
+
+      console.log(fieldId + '<---------')
+      this.parse_csv.forEach(bed => {
+        bed['fieldId'] = fieldId;
+      })
+      console.log(this.parse_csv + 'Its this one')
+      fetch(this.apiUrl + '/beds', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -293,9 +315,14 @@ export default {
       return this.beds[id];
     },
     getDateFromJSON(jsonDate) {
-      console.log(jsonDate.year + '-' + jsonDate.monthValue + '-' + jsonDate.dayOfMonth);
-      return String(jsonDate.year + '-' + jsonDate.monthValue + '-' + jsonDate.dayOfMonth);
-    }
+      if (jsonDate == null) {
+        return '';
+      }
+      let year = jsonDate.year;
+      let month = jsonDate.monthValue < 10 ? '0' + jsonDate.monthValue : jsonDate.monthValue;
+      let day = jsonDate.dayOfMonth < 10 ? '0' + jsonDate.dayOfMonth : jsonDate.dayOfMonth;
+      return year + '-' + month + '-' + day;
+    },
   },
   created() {
     this.getFields();
