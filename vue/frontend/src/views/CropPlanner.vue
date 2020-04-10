@@ -15,8 +15,7 @@
 <div class ="fieldsWrapper">
     <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
       <div class="fieldName">
-      <h3>Field Name:</h3>
-      <input class="btn" type="text" :value="field['name']" />
+      <input class="fieldNamebtn" type="text" :value="field['name']" />
       </div>
       
 

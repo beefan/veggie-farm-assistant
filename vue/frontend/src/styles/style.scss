@@ -493,6 +493,25 @@ div.fieldLoaded {
     border-top-width: 0;
 }
 
+.fieldNamebtn {
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    color: black;
+    font-family: 'Amatic SC', cursive;
+    padding: 0;
+    cursor: pointer;
+    font-size: 3rem;
+    width: 80%;
+    text-align: center;
+}
+
+.fieldNamebtn:hover {
+    opacity: 70%;
+}
+
 //hidden tables in field page
 .hide {
     visibility: hidden;
