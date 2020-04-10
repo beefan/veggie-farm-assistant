@@ -125,7 +125,7 @@ div.csvUpload {
     margin-right: auto;
 }
 
-//csv upload harvest times specific
+//text instructions for page
 p.getStarted {
     margin-left: 5%;
     margin-right: 5%;
@@ -144,6 +144,7 @@ div.havestTimesUpload {
     background: #fcead0;
 }
 
+//div section with tables on waste times page
 div.wasteTimesUpload {
     border: 2px solid black;
     border-radius: 10px;
@@ -156,18 +157,21 @@ div.wasteTimesUpload {
     background: #fcead0;
 }
 
+//sets width for tables inside container on harvest times page
 div.harvestTables {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
+//sets width for tables inside container on waste times page
 div.wasteTables {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
+//fields table css
 .fieldTable {
     border-collapse: collapse;
     font-size: 1.1rem;
@@ -181,6 +185,7 @@ div.wasteTables {
     padding: 0;
 }
 
+//harvest table css
 .harvestTable {
     border-collapse: collapse;
     font-size: 1.1rem;
@@ -194,6 +199,7 @@ div.wasteTables {
     padding: 0;
 }
 
+//add new crop css
 .addNewCrop {
     border-collapse: collapse;
     font-size: 1.1rem;
@@ -205,6 +211,7 @@ div.wasteTables {
     padding: 0;
 }
 
+//added crops css
 .existingCrops {
     border-collapse: collapse;
     font-size: 1.1rem;
@@ -215,6 +222,7 @@ div.wasteTables {
     padding: 0;
 }
 
+//borders and cell backgrounds for tables
 table,
 th,
 td {
@@ -223,8 +231,14 @@ td {
     padding: 0;
 }
 
+th {
+    height: 50px;
+}
+
 tr:hover {
     background-color: #f5f5f5;
+    width: auto;
+    height: auto;
 }
 
 tr:nth-child(odd) {
@@ -235,6 +249,7 @@ tr:nth-child(even) {
     background-color: #fcead0;
 }
 
+//trash can cell and logo css
 td.trash>a>img {
     width: 20%;
     padding: 8px 0 0 0;
@@ -254,12 +269,12 @@ td.trash>a>img:hover {
     width: 25%;
 }
 
+// Add new crop table row
 tr.newCrop {
     width: 10%;
     background-color: #fcead0;
 }
 
-//submit changes harvest times table field and image
 .addNewCrop {
     font-size: 1.1rem;
     width: 100%;
@@ -269,6 +284,7 @@ tr.newCrop {
     font-family: 'Muli', sans-serif;
 }
 
+//submit cell and logo css
 td.submit {
     text-align: center;
     padding: 0;
@@ -287,8 +303,11 @@ td.submit>a>img:hover {
     width: 30%;
 }
 
+//hover when editing fields
 .highlight {
-    border: 2px solid rgb(209, 209, 78) inset;
+    border: 3px solid rgb(209, 78, 78) inset;
+    height: auto;
+    width: auto;
     opacity: 40%;
 }
 

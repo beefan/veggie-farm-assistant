@@ -13,7 +13,7 @@
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
       </div>
-      <p class="getStarted">To get started, upload a .csv file with each Crop Name, the direct seed to harvest time, the direct seed to transplant time, and the transplant to harvest time, or you can use the Add New Crop field below to add them each individually.</p>
+      <p class="getStarted">To get started, upload a .csv file above by clicking "Choose File" and select your .csv file with each Crop Name, the direct seed to harvest time, the direct seed to transplant time, and the transplant to harvest time, or you can use the Add New Crop field below to add them each individually.</p>
       <br>
       
       <div class="harvestTables">
