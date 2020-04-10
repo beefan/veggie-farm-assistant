@@ -157,6 +157,39 @@ div.wasteTimesUpload {
     background: #fcead0;
 }
 
+//div setion for new fields
+div.newFieldContainer {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fcead0;
+}
+
+.addNewFieldCreate>button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 10px;
+}
+
+//div secition for added fields
+div.field {
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fcead0;
+}
+
 //sets width for tables inside container on harvest times page
 div.harvestTables {
     width: 90%;

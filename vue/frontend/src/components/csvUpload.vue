@@ -3,8 +3,6 @@
         <h2>{{title}}</h2>
       <div class="csvUploadData">
         <br>
-        
-          
             <input
               type="file"
               id="csv_file"

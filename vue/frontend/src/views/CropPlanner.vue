@@ -1,9 +1,15 @@
 <template>
-    <div class="container">
-        <div>
-        <button @click="addField($event)">Add New Field</button>
+<body>
+  <br><br>
+    <div class="newFieldContainer">
+      <h2> Add New Crop Field</h2>
+      <div class = "addNewFieldCreate"
+        <button @click="addField($event)"> Create </button>
         <input type="text" value="Field Name"/>
         </div>
+        <br>
+        </div>
+        
   <div class="field" v-for="field in fields" v-bind:key="field['id']">
       <input type="text" :value="field['name']"/>
         <table class="fieldTable">
@@ -15,6 +21,8 @@
               <th>Submit</th>
             </tr>
           </thead> 
+
+
           <tr class="newCrop" >
             <td><input  class="fieldTable colName" type="text" value="Crop Name" /></td>
             <td><input  class="fieldTable td" type="text" value="Transplant Date"/> </td>
@@ -67,7 +75,7 @@
         </td>
       </tr>
         </table>
-
+<br>
       <upload
       :verifyUploadFormat="uploadVerify"
       :uploadDocument="uploadExpirationTimes"
@@ -79,6 +87,7 @@
   
 
       </div>
+      </body>
 </template>
 
 <script>
