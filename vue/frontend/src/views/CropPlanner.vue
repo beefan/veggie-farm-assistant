@@ -64,7 +64,7 @@
               class="fieldTable colName"
               type="text"
               :value="st['cropName']"
-              @change="updateDatabase($event, st)"
+              @change="updateBed($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
             />
@@ -75,7 +75,7 @@
               class="fieldTable td"
               type="date"
               :value="getDateFromJSON(st['transplantDate'])"
-              @change="updateDatabase($event, st)"
+              @change="updateBed($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
             />
@@ -85,7 +85,7 @@
               class="fieldTable pd"
               type="date"
               :value="getDateFromJSON(st['plantingDate'])"
-              @change="updateDatabase($event, st)"
+              @change="updateBed($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
             />
@@ -260,6 +260,39 @@ export default {
       console.log(newEntry["fieldId"]);
 
       this.updateDatabase(e, newEntry);
+    },
+    updateBed(e, st) {
+      if (e.target.classList[1] === "colName") {
+        st["cropName"] = e.target.value;
+      } else if (e.target.classList[1] === "td") {
+        st["transplantDate"] = e.target.value;
+      } else if (e.target.classList[2] === "pd") {
+        st["plantingDate"] = e.target.value;
+      }
+      st.fieldId = e.target.parentNode.parentNode.parentNode.children[1].classList[1];
+      st.transplantDate = this.getDateFromJSON(st.transplantDate);
+      st.plantingDate = this.getDateFromJSON(st.plantingDate);
+
+console.log(st)
+       console.log('look at me im right here look')
+       console.log(st.fieldId)
+
+      fetch(this.apiUrl + "/beds/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(st)
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
     updateDatabase(e, st) {
       if (e.target.classList[1] === "colName") {

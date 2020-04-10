@@ -46,6 +46,15 @@ public class CropPlanController {
 		}
 	}
 	
+	@PostMapping("/beds/update")
+	public void updateCropPlanBed(@RequestBody Bed bed) {
+		if(bed.getTransplantDate() == null) {
+			bedDao.updateBed(bed.getBedId(), bed.getFieldId(), bed.getCropName(), bed.getPlantingDate());
+		}else {
+			bedDao.updateBed(bed.getBedId(), bed.getFieldId(), bed.getCropName(), bed.getPlantingDate(), bed.getTransplantDate());
+		}
+	}
+	
 	@PostMapping()
 	public void SaveCropPlanField(@RequestBody Field field) {
 		bedDao.saveField(field.getUsername(), field.getName());
