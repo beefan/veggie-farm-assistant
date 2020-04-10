@@ -269,7 +269,7 @@ export default {
       } else if (e.target.classList[2] === "pd") {
         st["plantingDate"] = e.target.value;
       }
-      st.fieldId = e.target.parentNode.parentNode.parentNode.children[1].classList[1];
+      st.fieldId = e.target.parentNode.parentNode.parentNode.previousSibling.previousSibling.children[1].classList[1];
       st.transplantDate = this.getDateFromJSON(st.transplantDate);
       st.plantingDate = this.getDateFromJSON(st.plantingDate);
 
