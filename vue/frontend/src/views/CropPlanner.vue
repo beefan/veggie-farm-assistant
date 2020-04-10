@@ -44,7 +44,7 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tr v-for="st in beds[field.id]" v-bind:key="st['bedId']">
+        <tr v-for="st in field.beds" v-bind:key="st['bedId']">
           <td>
             <input
               class="fieldTable colName"
@@ -288,13 +288,5 @@ export default {
 </script>
 
 <style>
-.field {
-  border: 2px solid black;
-}
-.field > img {
-  width: 10%;
-}
-.hide {
-  visibility: hidden;
-}
+
 </style>
