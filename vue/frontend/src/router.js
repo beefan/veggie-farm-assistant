@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from './auth'
-import Home from './views/Home.vue'
+import Dashboard from './views/Dashboard.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import UploadHarvestTimes from './views/UploadHarvestTimes.vue'
 import Expiration from './views/Expiration.vue'
 import CropPlanner from './views/CropPlanner.vue'
+import Homepage from './views/Homepage.vue'
 Vue.use(Router)
 
 /**
@@ -24,7 +25,7 @@ const router = new Router({
     routes: [{
             path: '/',
             name: 'home',
-            component: Home,
+            component: Homepage,
             meta: {
                 requiresAuth: false
             }
@@ -59,6 +60,11 @@ const router = new Router({
             path: "/cropplanner",
             name: 'cropplanner',
             component: CropPlanner
+        },
+        {
+            path: "/dashboard",
+            name: 'dashboard',
+            component: Dashboard
         }
     ]
 })

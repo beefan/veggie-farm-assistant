@@ -24,16 +24,34 @@ public class JDBCBedDAO implements BedDAO{
 
 	@Override
 	public void saveBed(int fieldId, String cropName, LocalDate plantingDate, LocalDate transplantDate) {
+		String sql = "select crop_name from crop where crop_name = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cropName);
+		if (!results.next()) {
+			sql = "insert into crop (crop_name) values (?)";
+			jdbcTemplate.update(sql, cropName);
+		}
 		
-		String sql = "insert into bed (crop_name, planting_date, transplant_date, field_id) values (?, ?, ?, ?)";
+		sql = "insert into bed (crop_name, planting_date, transplant_date, field_id) values (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, cropName, plantingDate, transplantDate, fieldId);
+		
+		
+		
 
 	}
 
 	@Override
 	public void saveBed(int fieldId, String cropName, LocalDate plantingDate) {
-		String sql = "insert into bed (crop_name, planting_date, field_id) values (?, ?, ?)";
+		String sql = "select crop_name from crop where crop_name = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cropName);
+		if (!results.next()) {
+			sql = "insert into crop (crop_name) values (?)";
+			jdbcTemplate.update(sql, cropName);
+		
+		sql = "insert into bed (crop_name, planting_date, field_id) values (?, ?, ?)";
 		jdbcTemplate.update(sql, cropName, plantingDate, fieldId);		
+		
+		
+		}
 	}
 	
 	@Override
@@ -105,7 +123,7 @@ public class JDBCBedDAO implements BedDAO{
 	@Override
 	public List<Field> getAllFields(String username) {
 		List<Field> fields = new ArrayList<Field>();
-		String sql = "select name, id from field where username = ?";
+		String sql = "select name, id from field where username = ? order by name";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
 		while(results.next()) {
 			Field field = new Field();
@@ -116,6 +134,14 @@ public class JDBCBedDAO implements BedDAO{
 			fields.add(field);
 		}
 		return fields;
+	}
+
+	@Override
+	public void resetField(int fieldId) {
+
+		String sql = "delete from bed where field_id = ?";
+		jdbcTemplate.update(sql, fieldId);
+		
 	}
 
 	

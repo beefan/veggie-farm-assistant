@@ -6,6 +6,7 @@
       <h2>Add New Field:  </h2>
       <input class="input btn" type="text" value="Enter New Field Name" />
       <button class="addNewField btn" @click="addField($event)">Create</button>
+      
     </div>
     </section>
 
@@ -15,8 +16,9 @@
 <div class ="fieldsWrapper">
     <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
       <div class="fieldName">
-      <h3>Field Name:</h3>
-      <input class="btn" type="text" :value="field['name']" />
+      
+      <input class="fieldNamebtn" type="text" :value="field['name']" @change="updateField($event, field)"/>
+      <img :src="trashUrl" @click="deleteField(field.id);" />
       </div>
       
 
@@ -75,9 +77,9 @@
               class="fieldTable td"
               type="date"
               :value="getDateFromJSON(st['transplantDate'])"
-              @change="updateBed($event, st)"
+              @blur="updateBed($event, st); unhighlight($event)"
               @click="highLightRow($event)"
-              @blur="unhighlight($event)"
+        
             />
           </td>
           <td>
@@ -85,9 +87,9 @@
               class="fieldTable pd"
               type="date"
               :value="getDateFromJSON(st['plantingDate'])"
-              @change="updateBed($event, st)"
+              @blur="updateBed($event, st); unhighlight($event)"
               @click="highLightRow($event)"
-              @blur="unhighlight($event)"
+             
             />
           </td>
           <td class="trash">
@@ -173,6 +175,24 @@ export default {
         .then(response => {
           if (response.ok) {
             //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    deleteField(fieldId) {
+      let randomname = confirm("Are you sure you want to delete this field?");
+      if (!randomname) {
+        return;
+      }
+      fetch(this.apiUrl + '/' + fieldId, {
+        method: "delete"
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+            this.getFields();
           }
         })
         .catch(err => {
@@ -266,7 +286,7 @@ export default {
         st["cropName"] = e.target.value;
       } else if (e.target.classList[1] === "td") {
         st["transplantDate"] = e.target.value;
-      } else if (e.target.classList[2] === "pd") {
+      } else if (e.target.classList[1] === "pd") {
         st["plantingDate"] = e.target.value;
       }
       st.fieldId = e.target.parentNode.parentNode.parentNode.previousSibling.previousSibling.children[1].classList[1];
@@ -287,6 +307,27 @@ console.log(st)
       })
         .then(response => {
           if (response.ok) {
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    updateField(e, field) {
+      field.name = e.target.value;
+      field.beds = null;
+      fetch(this.apiUrl + "/field/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(field)
+      })
+        .then(response => {
+          if (response.ok) {
+            this.getFields();
             //this.$emit("showReviews");
           }
         })
@@ -325,7 +366,7 @@ console.log(st)
     addField(event) {
       let field = {
         username: "user",
-        name: event.target.nextSibling.value
+        name: event.target.previousSibling.value
       };
       fetch(this.apiUrl, {
         method: "POST",
@@ -351,6 +392,8 @@ console.log(st)
     getDateFromJSON(jsonDate) {
       if (jsonDate == null) {
         return '';
+      } else if (jsonDate.year == undefined){
+        return jsonDate;
       }
       let year = jsonDate.year;
       let month = jsonDate.monthValue < 10 ? '0' + jsonDate.monthValue : jsonDate.monthValue;
