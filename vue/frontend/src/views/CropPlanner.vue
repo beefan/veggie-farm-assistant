@@ -58,7 +58,7 @@
             <input
               class="fieldTable td"
               type="date"
-              :value="st['transplantDate']"
+              :value="getDateFromJSON(st['transplantDate'])"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -68,7 +68,7 @@
             <input
               class="fieldTable pd"
               type="date"
-              :value="st['plantingDate']"
+              :value="getDateFromJSON(st['plantingDate'])"
               @change="updateDatabase($event, st)"
               @click="highLightRow($event)"
               @blur="unhighlight($event)"
@@ -274,9 +274,11 @@ export default {
       return this.beds[id];
     },
     getDateFromJSON(jsonDate) {
-      console.log(jsonDate.year + '-' + jsonDate.monthValue + '-' + jsonDate.dayOfMonth);
-      return String(jsonDate.year + '-' + jsonDate.monthValue + '-' + jsonDate.dayOfMonth);
-    }
+      let year = jsonDate.year;
+      let month = jsonDate.monthValue < 10 ? '0' + jsonDate.monthValue : jsonDate.monthValue;
+      let day = jsonDate.dayOfMonth < 10 ? '0' + jsonDate.dayOfMonth : jsonDate.dayOfMonth;
+      return year + '-' + month + '-' + day;
+    },
   },
   created() {
     this.getFields();
