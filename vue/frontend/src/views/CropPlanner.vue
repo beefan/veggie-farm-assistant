@@ -55,8 +55,7 @@
             />
           </td>
           <td>
-            <h1>  {{ Dates.map(st['transplantDate'].parse)}}
-              {{st['transplantDate'].year.toString() + '-' + st['transplantDate'].monthValue.toString() + '-' + st['transplantDate'].dayOfMonth.toString()}}</h1>
+            
             <input
               class="fieldTable td"
               type="date"
@@ -85,10 +84,12 @@
       </table>
 
       <upload
+        :parentData="field['id']"
         :verifyUploadFormat="uploadVerify"
-        :uploadDocument="uploadBeds"
-        title
+         title
         @uploadSuccess="onUploadSuccess($event)"
+        :uploadDocument="uploadBeds"
+
       ></upload>
     </div>
     </div>
@@ -131,8 +132,8 @@ export default {
         console.log(item["cropName"]);
 
         if (
-          !item["cropName"].match(/[a-z]/i) ||
-          !item["transplantDate"].match(
+          !item["cropName"].match(/[a-z]/i) 
+          || !item["transplantDate"].match(
             /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
           ) ||
           !item["plantingDate"].match(
@@ -145,8 +146,14 @@ export default {
 
       return true;
     },
-    uploadBeds() {
-      fetch(this.apiUrl, {
+    uploadBeds(fieldId) {
+
+      console.log(fieldId + '<---------')
+      this.parse_csv.forEach(bed => {
+        bed['fieldId'] = fieldId;
+      })
+      console.log(this.parse_csv + 'Its this one')
+      fetch(this.apiUrl + '/beds', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -276,6 +283,9 @@ export default {
       return this.beds[id];
     },
     getDateFromJSON(jsonDate) {
+      if (jsonDate == null) {
+        return '';
+      }
       let year = jsonDate.year;
       let month = jsonDate.monthValue < 10 ? '0' + jsonDate.monthValue : jsonDate.monthValue;
       let day = jsonDate.dayOfMonth < 10 ? '0' + jsonDate.dayOfMonth : jsonDate.dayOfMonth;

@@ -53,7 +53,9 @@ public class Bed {
 	}
 	
 	public void setTransplantDate(String transplantDate) {
+		if (transplantDate != "") {
 		this.transplantDate = LocalDate.parse(transplantDate);
+		}
 	}
 
 	public int getBedId() {
