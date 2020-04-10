@@ -19,7 +19,6 @@
             <th>Submit</th>
           </tr>
         </thead>
-        
         <tr :class="'newCrop ' + field['id']">
           <td>
             <input class="fieldTable colName" type="text" value="Crop Name" />
@@ -92,7 +91,8 @@
     </div>
     </div>
     <div></div>
-  </div>
+  
+  <br><br><br>
   </body>
 </template>
 
@@ -288,13 +288,6 @@ export default {
 </script>
 
 <style>
-.field {
-  border: 2px solid black;
-}
-.field > img {
-  width: 10%;
-}
-.hide {
-  visibility: hidden;
-}
+
+
 </style>
