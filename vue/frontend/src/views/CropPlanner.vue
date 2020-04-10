@@ -1,16 +1,26 @@
 <template>
-<body>
-  <div class="newFieldContainer">
+<body class="cropPlanner">
+  
+  <section class="newFieldContainer">
     <div class="newFieldCreate">
-      <h2>Add New Field</h2>
-      <button @click="addField($event)">Create</button>
-      <input type="text" value="Field Name" />
+      <h2>Add New Field:  </h2>
+      <input class="input btn" type="text" value="Enter New Field Name" />
+      <button class="addNewField btn" @click="addField($event)">Create</button>
     </div>
-    </div>
-    <div class="field" v-if="fieldsLoaded">
-    <div  v-for="field in fields" v-bind:key="field['id']">
+    </section>
+
+
+<section class="fields">
+<div class ="fieldsWrapper">
+   
+    <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
+      <h3>Field Name:</h3>
+      <div class="fieldInput">
       <input type="text" :value="field['name']" />
-      <table class="fieldTable">
+      </div>
+      
+
+      <table class="addNewCropFieldTable">
         <thead>
           <tr>
             <th>Add New Bed</th>
@@ -35,6 +45,11 @@
             </a>
           </td>
         </tr>
+      </table>
+
+      <br>
+
+      <table class="addedCropsFieldTable">
         <thead>
           <tr>
             <th>Crop Name</th>
@@ -80,20 +95,24 @@
             </a>
           </td>
         </tr>
+        
       </table>
-
+      <br>
+      <p>Upload CSV:</p>
       <upload
         :verifyUploadFormat="uploadVerify"
         :uploadDocument="uploadBeds"
         title
         @uploadSuccess="onUploadSuccess($event)"
       ></upload>
+      <br>
     </div>
+    <br><br>
     </div>
-    <div></div>
-  
-  <br><br><br>
+  </section>
+  <br>
   </body>
+  
 </template>
 
 <script>
