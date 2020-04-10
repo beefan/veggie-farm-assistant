@@ -77,7 +77,7 @@
           </td>
           <td class="trash">
             <a href="cropplanner">
-              <img :src="trashUrl" @click="deleteEntry(st['cropName']);" />
+              <img :src="trashUrl" @click="deleteEntry(st['bedId']);" />
             </a>
           </td>
         </tr>
@@ -145,6 +145,19 @@ export default {
       }
 
       return true;
+    },
+    deleteEntry(bedId) {
+      fetch(this.apiUrl + '/beds/' + bedId, {
+        method: "delete"
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
     uploadBeds(fieldId) {
 
