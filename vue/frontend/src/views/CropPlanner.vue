@@ -1,12 +1,14 @@
 <template>
 <body>
-  <div class="container">
-    <div>
-      <button @click="addField($event)">Add New Field</button>
+  <div class="newFieldContainer">
+    <div class="newFieldCreate">
+      <h2>Add New Field</h2>
+      <button @click="addField($event)">Create</button>
       <input type="text" value="Field Name" />
     </div>
-    <div v-if="fieldsLoaded">
-    <div class="field" v-for="field in fields" v-bind:key="field['id']">
+    </div>
+    <div class="field" v-if="fieldsLoaded">
+    <div  v-for="field in fields" v-bind:key="field['id']">
       <input type="text" :value="field['name']" />
       <table class="fieldTable">
         <thead>
@@ -17,6 +19,7 @@
             <th>Submit</th>
           </tr>
         </thead>
+        
         <tr :class="'newCrop ' + field['id']">
           <td>
             <input class="fieldTable colName" type="text" value="Crop Name" />
