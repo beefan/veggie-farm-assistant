@@ -51,7 +51,7 @@ export default {
     Carousel,
     Slide,
     Burger,
-   Sidebar,
+    Sidebar,
     
   },
 

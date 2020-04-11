@@ -58,4 +58,7 @@
         padding: 3rem 20px 2rem 20px;
         width: 200px;
     }
+    .sidebar>img{
+        opacity:20%;
+    }
 </style>
