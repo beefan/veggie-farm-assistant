@@ -130,7 +130,6 @@ export default {
   data() {
     return {
       fields: [],
-      beds: [],
       fieldsLoaded: false,
       parse_csv: [],
       apiUrl: process.env.VUE_APP_REMOTE_API_CROP,
@@ -237,20 +236,6 @@ export default {
     unhighlight(e) {
       e.target.parentNode.classList.remove("highlight");
     },
-    getBedsByField(id) {
-      fetch(this.apiUrl + "/beds/" + id)
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          //console.log(data);
-          this.beds[id]=data;
-          console.log(this.beds[id]);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
     getFields() {
       fetch(this.apiUrl + "/user")
         .then(response => {
@@ -258,9 +243,6 @@ export default {
         })
         .then(data => {
           this.fields = data;
-          this.fields.forEach(field => {
-            this.getBedsByField(field["id"]);
-          });
           this.fieldsLoaded = true;
           console.log(data);
         })

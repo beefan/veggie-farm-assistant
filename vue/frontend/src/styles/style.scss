@@ -544,6 +544,29 @@
     .fieldNamebtn:hover {
         opacity: 70%;
     }
+
+    //farm log css
+    #log {
+        margin-top: 5%;
+        display: flex;
+        flex-flow: row;
+    }
+    #log>.logEntry>select {
+        margin-left: 8%;
+        margin-right: 8%;
+        margin-bottom: 8%;
+    }
+    div.logEntry {
+        border: 2px solid black;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #fcead0;
+    }
     
     //landing page css
     img.mainLogo {

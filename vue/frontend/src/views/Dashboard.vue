@@ -5,25 +5,17 @@
 
 <template>
   
-<html>
-  <div class="home">
-    <img :src= "logoUrl" />
-    
-  </div>
-  </html>
+<body>
+  <Header></Header>
+</body>
 
 </template>
 
 
 <script>
+import Header from '../components/header.vue'
 export default {
-  name: 'home',
-  
-  data () {
-    return {
-      
-    }
-  }
+  components: {Header: Header}
 }
 
 </script>

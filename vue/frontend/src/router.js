@@ -8,6 +8,8 @@ import UploadHarvestTimes from './views/UploadHarvestTimes.vue'
 import Expiration from './views/Expiration.vue'
 import CropPlanner from './views/CropPlanner.vue'
 import Homepage from './views/Homepage.vue'
+import FarmLog from './views/FarmLog.vue'
+
 Vue.use(Router)
 
 /**
@@ -65,6 +67,11 @@ const router = new Router({
             path: "/dashboard",
             name: 'dashboard',
             component: Dashboard
+        },
+        {
+            path: "/farmlog",
+            name: "farmlog",
+            component: FarmLog
         }
     ]
 })
