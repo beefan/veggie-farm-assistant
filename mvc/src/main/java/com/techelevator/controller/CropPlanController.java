@@ -45,6 +45,7 @@ public class CropPlanController {
 		if (bedList.size() > 1) {
 		bedDao.resetField(bedList.get(0).getFieldId());
 		}
+				
 		for(Bed be: bedList) {
 			
 			if(be.getTransplantDate() == null) {

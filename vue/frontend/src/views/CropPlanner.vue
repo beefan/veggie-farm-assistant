@@ -159,9 +159,9 @@ export default {
 
         if (
           !item["cropName"].match(/[a-z]/i) 
-          || !item["transplantDate"].match(
+          || (item["transplantDate"] && !item["transplantDate"].match(
             /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
-          ) ||
+          ) )||
           !item["plantingDate"].match(
             /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
           )
@@ -203,32 +203,6 @@ export default {
           console.error(err);
         });
     },
-    uploadBeds(fieldId) {
-
-      console.log(fieldId + '<---------')
-      this.parse_csv.forEach(bed => {
-        bed['fieldId'] = fieldId;
-      })
-      console.log(this.parse_csv + 'Its this one')
-      fetch(this.apiUrl + '/beds', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.parse_csv)
-      })
-        .then(response => {
-          if (response.ok) {
-            //this.$emit("showReviews");
-            alert("Your upload was successful.");
-            this.getFields();
-          }
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
-
     onUploadSuccess(on) {
       this.parse_header = on.header;
       this.parse_csv = on.csv;
@@ -322,6 +296,32 @@ console.log(st)
           console.error(err);
         });
     },
+    uploadBeds(fieldId) {
+
+      console.log(fieldId + '<---------')
+      this.parse_csv.forEach(bed => {
+        bed['fieldId'] = fieldId;
+      })
+      console.log("beds going to java ---- V")
+      console.log(this.parse_csv )
+      fetch(this.apiUrl + '/beds', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.parse_csv)
+      })
+        .then(response => {
+          if (response.ok) {
+            //this.$emit("showReviews");
+            alert("Your upload was successful.");
+            this.getFields();
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
     updateDatabase(e, st) {
       if (e.target.classList[1] === "colName") {
         st["cropName"] = e.target.value;
@@ -355,6 +355,7 @@ console.log(st)
         username: "user",
         name: event.target.previousSibling.value
       };
+      event.target.previousSibling.value = "";
       fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -364,8 +365,7 @@ console.log(st)
       })
         .then(response => {
           if (response.ok) {
-            //this.$emit("showReviews");
-            alert("Your upload was successful.");
+            alert("Field added successfully.");
             this.getFields();
           }
         })

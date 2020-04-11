@@ -46,12 +46,10 @@ public class JDBCBedDAO implements BedDAO{
 		if (!results.next()) {
 			sql = "insert into crop (crop_name) values (?)";
 			jdbcTemplate.update(sql, cropName);
-		
+		}
 		sql = "insert into bed (crop_name, planting_date, field_id) values (?, ?, ?)";
 		jdbcTemplate.update(sql, cropName, plantingDate, fieldId);		
 		
-		
-		}
 	}
 	
 	@Override

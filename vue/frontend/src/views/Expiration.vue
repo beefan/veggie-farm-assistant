@@ -126,6 +126,8 @@ export default {
     },
 
     uploadExpirationTimes() {
+      console.error("uploading these expiration times V")
+      console.log(this.parse_csv)
       fetch(this.apiUrl, {
         method: "POST",
         headers: {
