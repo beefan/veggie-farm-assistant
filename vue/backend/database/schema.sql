@@ -52,5 +52,17 @@ create table expiration(
  constraint fk_field_id foreign key (field_id) references field (id),
  constraint fk_cron_nam foreign key (crop_name) references crop (crop_name)
  );
+ 
+ create table harvest(
+ id serial primary key,
+ bed_id int not null,
+ crop_id int not null,
+ crop_weight int not null,
+ crop_count int,
+ username varchar(255) not null,
+ constraint fk_bed_id foreign key (bed_id) references bed(id),
+ constraint fk_crop_id foreign key (crop_id) references crop(id),
+ constraint fk_username foreign key (username) references users(username)
+ );
 
 COMMIT TRANSACTION;

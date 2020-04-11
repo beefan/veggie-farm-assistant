@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import { Carousel, Slide } from 'vue-carousel';
+import { Carousel, Slide } from 'vue-carousel';
 export default {
     name: 'home',
     
@@ -43,8 +43,11 @@ export default {
         }
     
     }
-}
+};
 </script>
+<style scoped>
+
+</style>
 
 <style scoped>
 div#app{
