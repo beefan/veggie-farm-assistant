@@ -543,9 +543,21 @@ div.fieldLoaded {
     opacity: 70%;
 }
 
+//landing page css
+div.headerMain {
+    background-color: #f7b254;
+    width: 100%;
+    height: 40%;
+}
+
+div.imgSlider {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 img.mainImages {
-    width: 800px;
-    height: 513px;
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
 }
