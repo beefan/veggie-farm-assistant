@@ -28,7 +28,7 @@
             </tr>
           </thead> 
           <tr class="newCrop" >
-            <td><input  class="harvestTable colName" type="text" value="Crop Name" /></td>
+            <td><input  class="harvestTable colName" type="text" placeholder="Crop Name" /></td>
             <td><input  class="harvestTable colDSTH" type="text" /> </td>
             <td class="submit"><a href="wasteinfo"><img :src= "submitUrl" @click="addNewEntry($event);"/></a></td>
             </tr>

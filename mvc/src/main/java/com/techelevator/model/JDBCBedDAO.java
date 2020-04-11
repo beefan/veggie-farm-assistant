@@ -101,7 +101,7 @@ public class JDBCBedDAO implements BedDAO{
 	@Override
 	public List<Bed> getAllBedsByField(int fieldId) {
 		List<Bed> beds = new ArrayList<Bed>();
-		String sql = "select id, crop_name, planting_date, transplant_date from bed where field_id = ?";
+		String sql = "select id, crop_name, planting_date, transplant_date from bed where field_id = ? order by id";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, fieldId);
 		
 		while(results.next()) {

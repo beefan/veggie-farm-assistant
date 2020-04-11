@@ -4,7 +4,7 @@
   <section class="newFieldContainer">
     <div class="newFieldCreate">
       <h2>Add New Field:  </h2>
-      <input class="input btn" type="text" value="Enter New Field Name" />
+      <input class="input btn" type="text" placeholder="Enter New Field Name" />
       <button class="addNewField btn" @click="addField($event)">Create</button>
       
     </div>
@@ -33,7 +33,7 @@
         </thead>
         <tr :class="'newCrop ' + field['id']">
           <td>
-            <input class="fieldTable colName" type="text" value="Crop Name" />
+            <input class="fieldTable colName" type="text" placeholder="Crop Name" />
           </td>
           <td>
             <input class="fieldTable td" type="date" value="Transplant Date" />
@@ -54,6 +54,7 @@
       <table class="addedCropsFieldTable">
         <thead>
           <tr>
+            <th>Bed #</th>
             <th>Crop Name</th>
             <th>Transplant Date</th>
             <th>Planting Date</th>
@@ -61,6 +62,9 @@
           </tr>
         </thead>
         <tr v-for="st in field.beds" v-bind:key="st['bedId']">
+          <td>
+            <p>{{ field.beds.indexOf(st) + 1 }}</p>
+          </td>
           <td>
             <input
               class="fieldTable colName"

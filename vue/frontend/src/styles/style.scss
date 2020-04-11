@@ -551,11 +551,28 @@
         display: flex;
         flex-flow: row;
     }
-    #log>.logEntry>select {
+    #log>.logEntry>select, #log>.logEntry>div {
         margin-left: 8%;
         margin-right: 8%;
         margin-bottom: 8%;
     }
+
+    #log>.logEntry>button {
+        border: none;
+        padding: 2%;
+        width: 40%;
+        margin: auto;
+        margin-bottom: 8%;
+        background-color: #f7b254;
+        color: white;
+        font-weight: bold;
+        box-shadow: 1px 1px 2px rgb(197, 135, 49), -1px -1px 2px #F9C782;
+    }
+
+    #log>.logEntry>button:hover {
+        box-shadow: 1px 1px 3px #B4823E inset, -1px -1px 3px #F9C782 inset;
+    }
+
     div.logEntry {
         border: 2px solid black;
         border-radius: 10px;
