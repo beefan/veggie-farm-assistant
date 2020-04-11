@@ -24,6 +24,8 @@ public class HarvestController {
 
 	@Autowired
 	private HarvestDAO harvestDao;
+	
+	@Autowired
 	private SaleDAO saleDao;
 	
 	

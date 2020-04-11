@@ -116,13 +116,14 @@ export default {
       sale.dollarAmount = document.getElementById("salesAmount").value;
       sale.saleType = document.getElementById("salesType").value;
 
-      if (isNaN(sale.dollarAmount)) {
+      if (isNaN(sale.dollarAmount) || !sale.dollarAmount) {
         alert("Please enter a valid sale value.");
         return;
       }
 
       this.sendSaleToJava(sale);
       this.cropSelected = false;
+      document.getElementById("salesCrop").value = "";
     },
     sendSaleToJava(sale) {
       fetch(this.harvestApiUrl + '/sale', {
