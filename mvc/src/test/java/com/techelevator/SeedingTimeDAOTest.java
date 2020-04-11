@@ -90,6 +90,7 @@ public class SeedingTimeDAOTest extends DAOIntegrationTest{
 		dao.save("Cheetos",  69);
 		dao.delete("Cheetos");
 		Assert.assertTrue(0 == dao.getAllSeedingTimes().size());
+		System.out.print("stuff".compareTo("applebeesisonthemenu"));
 	}
 	
 	

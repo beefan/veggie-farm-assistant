@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,11 @@ public class CropPlanController {
 	
 	@PostMapping("/beds")
 	public void saveCropPlanBed(@RequestBody List<Bed> bedList) {
+		if (bedList.size() > 1) {
+		bedDao.resetField(bedList.get(0).getFieldId());
+		}
 		for(Bed be: bedList) {
+			
 			if(be.getTransplantDate() == null) {
 			bedDao.saveBed(be.getFieldId(), be.getCropName(), be.getPlantingDate());
 			}else {
@@ -46,9 +51,22 @@ public class CropPlanController {
 		}
 	}
 	
+	@PostMapping("/beds/update")
+	public void updateCropPlanBed(@RequestBody Bed bed) {
+		if(bed.getTransplantDate() == null) {
+			bedDao.updateBed(bed.getBedId(), bed.getFieldId(), bed.getCropName(), bed.getPlantingDate());
+		}else {
+			bedDao.updateBed(bed.getBedId(), bed.getFieldId(), bed.getCropName(), bed.getPlantingDate(), bed.getTransplantDate());
+		}
+	}
+	
 	@PostMapping()
 	public void SaveCropPlanField(@RequestBody Field field) {
 		bedDao.saveField(field.getUsername(), field.getName());
+	}
+	@PostMapping("/field/update")
+	public void updateFieldNme(@RequestBody Field field) {
+		bedDao.updateField(field.getId(), field.getName());
 	}
 	
 	@DeleteMapping("{fieldId}")

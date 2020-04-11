@@ -49,7 +49,8 @@ create table expiration(
  crop_name varchar(64) not null,
  planting_date date not null,
  transplant_date date,
- constraint fk_field_id foreign key (field_id) references field (id)
+ constraint fk_field_id foreign key (field_id) references field (id),
+ constraint fk_cron_nam foreign key (crop_name) references crop (crop_name)
  );
  
  create table harvest(

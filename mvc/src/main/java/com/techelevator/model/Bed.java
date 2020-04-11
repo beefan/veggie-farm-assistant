@@ -2,6 +2,8 @@ package com.techelevator.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.datetime.joda.LocalDateParser;
+
 public class Bed {
 	
 	private int bedId;
@@ -37,13 +39,23 @@ public class Bed {
 	public void setPlantingDate(LocalDate plantingDate) {
 		this.plantingDate = plantingDate;
 	}
+	
+	public void setPlantingDate(String plantingDate) {
+		this.plantingDate = LocalDate.parse(plantingDate);
+	}
 
 	public LocalDate getTransplantDate() {
 		return transplantDate;
 	}
 
 	public void setTransplantDate(LocalDate transplantDate) {
-		this.transplantDate = transplantDate;
+		this.transplantDate = transplantDate;		
+	}
+	
+	public void setTransplantDate(String transplantDate) {
+		if (transplantDate != "") {
+		this.transplantDate = LocalDate.parse(transplantDate);
+		}
 	}
 
 	public int getBedId() {

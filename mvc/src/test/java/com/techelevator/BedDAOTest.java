@@ -93,7 +93,7 @@ public class BedDAOTest extends DAOIntegrationTest{
 	
 	@Test
 	public void testing_the_delete_field_method() {
-		dao.deleteField("user", fieldId);
+		dao.deleteField(fieldId);
 		Assert.assertEquals(1, dao.getAllFields("user").size());
 	}
 	
