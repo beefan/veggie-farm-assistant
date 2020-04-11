@@ -1,10 +1,9 @@
 <template>
     <div class="sidebar" >
         <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
-        <transition name="slide" >
+        <transition name="slide">
             <div v-if="isPanelOpen"
-                 class="sidebar-panel"
-                 @click="closeSidebarPanel">
+                 class="sidebar-panel">
                 <slot></slot>
             </div>
         </transition>
@@ -29,12 +28,12 @@
     .slide-enter-active,
     .slide-leave-active
     {
-        transition: transform 0.4s ease;
+        transition: transform 0.2s ease;
     }
 
     .slide-enter,
     .slide-leave-to {
-        transform: translateX(-100%);
+        transform: translateX(100%);
         transition: all 150ms ease-in 0s
     }
 
@@ -52,11 +51,14 @@
         overflow-y: auto;
         background-color: #130f40;
         position: fixed;
-        left: 0;
+        text-align:right;
+        right:0;
         top: 0;
         height: 100vh;
         z-index: 999;
         padding: 3rem 20px 2rem 20px;
-        width: 200px;
+        width: 180px;
+        font-family: 'Muli', sans-serif;
     }
+    @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 </style>

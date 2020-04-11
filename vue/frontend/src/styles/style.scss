@@ -1,6 +1,5 @@
     //page background
-    body {
-        background: #a9e4f7;
+    body.cropPlanner {
         background: linear-gradient(-76deg, #a9e4f7 0%, #0fb4e7 100%) no-repeat top-left;
         border: 0;
         padding: 0;
@@ -114,21 +113,6 @@
         margin: 0 0 0 15px;
         color: #4d4d4d;
         align-self: left;
-    }
-    
-    //login page css
-    #login>form>a {
-        text-decoration: none;
-        font-family: 'Amatic SC', cursive;
-    }
-    
-    #login>form {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-        align-items: center;
     }
     
     //csv upload container
@@ -544,35 +528,20 @@
     .fieldNamebtn:hover {
         opacity: 70%;
     }
-
+    
     //farm log css
     #log {
         margin-top: 5%;
         display: flex;
         flex-flow: row;
     }
-    #log>.logEntry>select, #log>.logEntry>div {
+    
+    #log>.logEntry>select {
         margin-left: 8%;
         margin-right: 8%;
         margin-bottom: 8%;
     }
-
-    #log>.logEntry>button {
-        border: none;
-        padding: 2%;
-        width: 40%;
-        margin: auto;
-        margin-bottom: 8%;
-        background-color: #f7b254;
-        color: white;
-        font-weight: bold;
-        box-shadow: 1px 1px 2px rgb(197, 135, 49), -1px -1px 2px #F9C782;
-    }
-
-    #log>.logEntry>button:hover {
-        box-shadow: 1px 1px 3px #B4823E inset, -1px -1px 3px #F9C782 inset;
-    }
-
+    
     div.logEntry {
         border: 2px solid black;
         border-radius: 10px;
@@ -583,58 +552,6 @@
         margin-left: auto;
         margin-right: auto;
         background: #fcead0;
-    }
-    
-    //landing page css
-    img.mainLogo {
-        display: block;
-        width: 20%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    div.headerMain {
-        align-self: center;
-        justify-content: center;
-        display: flex;
-        background-color: #f7b254;
-        width: 100%;
-        height: 15%;
-        font-family: 'Amatic SC', cursive;
-    }
-    
-    .main-nav {
-        display: flex;
-        justify-content: center;
-        padding: 0.5rem 0.8rem;
-    }
-    
-    ul.sidebar-panel-nav {
-        list-style-type: none;
-    }
-    
-    ul.sidebar-panel-nav>li>a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.5rem;
-        display: block;
-        padding-bottom: 0.5em;
-    }
-    
-    div.imgSlider {
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    img.mainImages {
-        width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    
-    img.mainImages:hover {
-        opacity: 80%;
     }
 
     .sticky {

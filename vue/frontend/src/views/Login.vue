@@ -1,26 +1,25 @@
 <template>
-<body>
-    <div class="headerMain">
-<div id="app">
+ <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       <router-link :to="{ name: 'home' }"><img class="mainLogo" :src="logo" /></router-link>
+       <img class="mainLogo" :src="logo" />
      </div>
      <Burger></Burger>
    </nav>
+
    <Sidebar>
      <ul class="sidebar-panel-nav">
-       <li><router-link :to="{ name: 'home' }">Home</router-link></li>
+       <li><router-link :to="{ name: 'home' }" >Home</router-link></li>
        <li><router-link :to="{ name: 'login' }">Login</router-link></li>
        <li><a href="#contact">Contact</a></li>
      </ul>
    </Sidebar>
-   </div>
-</div>
+   
+
      <br><br>
-  <div id="login" class="text-center">
+     <div class="loginWrapper">
+    <div id="login" >
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
       </div>
@@ -49,14 +48,15 @@
         required
       />
       <br>
-      <button type="submit">Sign in</button>
-      <br><br>
-      <!--<router-link :to="{ name: 'register' }">Need an account?</router-link>-->
+     <router-link class="login" :to="{ name: 'dashboard' }"><button class="btn createBtn" type="submit">Sign in</button></router-link>
+      <br>
+      <router-link class="register" :to="{ name: 'register' }">Need an account?</router-link>
       
     </form>
-    
+    </div>
   </div>
-  </body>
+  </div>
+  
 </template>
 
 <script>
@@ -116,5 +116,81 @@ export default {
 </script>
 
 <style>
+#login>form>a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: white;
+        font-family: 'Muli', sans-serif;
+    }
+    label {
+      color: white;
+      font-family: 'Muli', sans-serif;
+    }
+    
+    #login{
+        text-align: center;
+        margin:0;
+        padding:0;
+        font-size: 1.1rem;
+        color: white;
+        font-family: 'Muli', sans-serif;
+        align-items: center;
+    }
+    form.form-signin{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items: center;
+      align-content:center;
+      width:100%;
+      height:100%;
+    }
+    
 
+    .loginWrapper {
+    display:flex;
+     margin:auto;
+     background: rgba(12,12,12,.6);
+     border: 2px solid #f7b254;
+     border-radius: 6px;
+     width: 16vw;
+     height:30vh;
+     
+    }
+    .sr-only{
+     
+      margin-left: auto;
+      margin-right:auto;
+      font-family: 'Muli', sans-serif;
+    }
+    label{
+      color: white;
+    }
+    #username{
+      width:14vw;
+      height:1.2vw;
+      font-family: 'Muli', sans-serif;
+    }
+    #password{
+      width:14vw;
+      height:1.2vw;
+      font-family: 'Muli', sans-serif;
+    }
+   loginBtn{
+      margin-left: auto;
+      margin-right:auto;
+      height: 2rem;
+      width: 6rem;
+      background: #f7b254;
+      border-radius: 6px;
+      border: .05rem solid black;
+      color: black;
+      font-weight: bolder;
+      padding: 0;
+      cursor: pointer;
+      font-family: 'Muli', sans-serif;
+    }
+
+@import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 </style>
+

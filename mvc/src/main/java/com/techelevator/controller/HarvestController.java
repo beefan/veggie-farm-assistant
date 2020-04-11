@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.model.Harvest;
 import com.techelevator.model.HarvestDAO;
+import com.techelevator.model.Sale;
+import com.techelevator.model.SaleDAO;
 
 @RestController
 @RequestMapping("/api/harvest")
@@ -22,6 +24,7 @@ public class HarvestController {
 
 	@Autowired
 	private HarvestDAO harvestDao;
+	private SaleDAO saleDao;
 	
 	
 	@GetMapping("/{bedId}")
@@ -39,9 +42,18 @@ public class HarvestController {
 	
 	
 }
+	
+	@PostMapping("/sale")
+	public void saveNewSale(@RequestBody Sale sale) {
+		saleDao.saveSale(sale.getCropName(), sale.getDollarAmount(), sale.getSaleType());
+		
+	}
+	
 	@DeleteMapping()
 	public void deleteHarvest(@PathVariable int harvestId) {
 		harvestDao.deleteHarvest(harvestId);
 	}
+	
+	
 	
 }
