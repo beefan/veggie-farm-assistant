@@ -59,10 +59,10 @@
     .burger-bar {
         background-color: #130f40;
         position: absolute;
-        top: 50%;
-        right: 6px;
-        left: 6px;
-        height: 2px;
+        top: 95%;
+        right: 1px;
+        left: 8px;
+        height: 3px;
         width: auto;
         margin-top: -1px;
         transition: transform .6s cubic-bezier(.165,.84,.44,1),opacity .3s cubic-bezier(.165,.84,.44,1),background-color .6s cubic-bezier(.165,.84,.44,1);
@@ -74,8 +74,8 @@
     }
 
     .burger-bar--2 {
-        transform-origin: 100% 50%;
-        transform: scaleX(.8);
+        transform-origin: 100s% 50%;
+        transform: scaleX(.4);
     }
 
     .burger-button:hover .burger-bar--2 {
@@ -91,7 +91,7 @@
     }
 
     #burger.active .burger-button {
-        transform: rotate(-180deg);
+        transform: rotate(-45deg);
     }
 
     #burger.active .burger-bar {
