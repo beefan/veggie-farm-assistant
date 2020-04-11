@@ -5,21 +5,30 @@
     <div class="logEntry">
       <h1>Log Harvest</h1>
       <select id="field" name="fields" @change="showCrops($event)">
-        <option value>-------- select a field --------</option>
+        <option value="">-------- select a field --------</option>
         <option
           v-for="field in fields"
           :value="field.id"
           v-bind:key="field.id"
         >{{ field.name }}</option>
       </select>
-      <select v-if="fieldSelected" id="crop" name="crops">
+      <select v-if="fieldSelected" id="crop" name="crops" @change="showInput($event)">
         <option value>-------- select a bed/crop --------</option>
         <option
           v-for="bed in beds"
-          :value="bed.cropName"
+          :value="bed"
           v-bind:key="bed.bedId"
-        >{{ bed.cropName }}</option>
+        >{{ '(' + String(beds.indexOf(bed) + 1) + ')  ' + bed.cropName }}</option>
       </select>
+      <div v-if="cropSelected">
+    <label for="harvestWeight" >Weight: </label>
+      <input type="text" id="harvestWeight" placeholder="harvest weight (lbs)"/>
+      </div>
+      <div v-if="cropSelected">
+          <label for="harvestCount">Count: </label>
+      <input type="text" id="harvestCount" placeholder="          (optional)" />
+      </div>
+      <button v-if="cropSelected" @click="submitHarvest" >Submit</button>
     </div>
     <div class="logEntry">
       <h1>Log Sales</h1>
@@ -37,24 +46,31 @@ export default {
       beds: [],
       fields: [],
       fieldSelected: false,
+      cropSelected: false,
       cropApiUrl: process.env.VUE_APP_REMOTE_API_CROP
     };
   },
   methods: {
     showCrops(event) {
-        let fieldId = event.target.value;
-        console.error(fieldId)
-        if (fieldId != "") {
+        let fieldSelection = event.target.value;
+        if (fieldSelection != "") {
             this.fieldSelected = true;
-        }else if (this.fieldSelected){
+        }else {
             this.fieldSelected = false;
-            fieldId = "";
+            fieldSelection = "";
         }
-      console.log(this.fields.filter(x=>x.id=fieldId))
       this.beds = this.fields.filter( field => {
-          return field.id = fieldId
+          return field.id === Number(fieldSelection)
       })[0].beds;
-
+    },
+    showInput(event) {
+        let bed = event.target.value;
+        console.log(bed)
+        if (bed) {
+            this.cropSelected = true;
+        }else {
+            this.cropSelected = "";
+        }
     },
     getFields() {
       fetch(this.cropApiUrl + "/user")

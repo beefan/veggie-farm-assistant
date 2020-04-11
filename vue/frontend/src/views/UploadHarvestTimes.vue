@@ -31,7 +31,7 @@
           </thead>
           <tr class="newCrop">
             <td>
-              <input class="harvestTable colName" type="text" value="Crop Name" />
+              <input class="harvestTable colName" type="text" placeholder="Crop Name" />
             </td>
             <td>
               <input class="harvestTable colDSTH" type="text" />
