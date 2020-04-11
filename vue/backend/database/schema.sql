@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+drop table if exists harvest;
 drop table if exists bed;
 drop table if exists field;
 DROP TABLE IF EXISTS users;
@@ -49,8 +50,7 @@ create table expiration(
  crop_name varchar(64) not null,
  planting_date date not null,
  transplant_date date,
- constraint fk_field_id foreign key (field_id) references field (id),
- constraint fk_cron_nam foreign key (crop_name) references crop (crop_name)
+ constraint fk_field_id foreign key (field_id) references field (id)
  );
  
  create table harvest(
@@ -60,6 +60,7 @@ create table expiration(
  crop_weight int not null,
  crop_count int,
  username varchar(255) not null,
+ harvest_date date not null,
  constraint fk_bed_id foreign key (bed_id) references bed(id),
  constraint fk_crop_id foreign key (crop_id) references crop(id),
  constraint fk_username foreign key (username) references users(username)
