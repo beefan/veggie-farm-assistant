@@ -16,8 +16,6 @@
       </slide>
 </carousel>
 </section> 
-
-
 </body>
 </template>
 
