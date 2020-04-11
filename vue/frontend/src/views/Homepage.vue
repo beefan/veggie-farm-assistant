@@ -3,17 +3,19 @@
     <section class="headerMain">
     </section>
 <section class="bodyMain">
-<carousel
- :paginationEnabled=true
- :per-page="1">
+<carousel :perPage="[1]" :autoplay="[true]" :centerMode="[true]" :autoplayHoverPause="[true]" :autoplayTimeout="[6000]" :paginationColor="[f7b254]" :loop="[true]">
   <slide>
-    Slide 1 Content
+    <img class="mainImages" :src= "seedlings"/>
+    
   </slide>
   <slide>
-    Slide 2 Content
+    <img class="mainImages" :src= "harvest"/>
   </slide>
+  <slide>
+      <img class="mainImages" :src= "farm"/>
+      </slide>
 </carousel>
-</section>
+</section> 
 
 
 </body>
@@ -22,11 +24,13 @@
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 export default {
-  components: {
+    name: 'home',
+    
+    components: {
     Carousel,
     Slide
   },
-    name: 'home',
+
     data() {
         return {
             seedlings: require('../images/seedlings.jpg'),
@@ -41,3 +45,8 @@ export default {
 
 </style>
 
+<style scoped>
+div#app{
+    visibility: hidden;
+}
+</style>
