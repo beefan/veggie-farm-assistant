@@ -3,7 +3,9 @@
     <section class="headerMain">
     </section>
 <section class="bodyMain">
-<carousel>
+<carousel
+ :paginationEnabled=true
+ :per-page="1">
   <slide>
     Slide 1 Content
   </slide>
@@ -18,16 +20,12 @@
 </template>
 
 <script>
-  import { Carousel, Slide } from 'vue-carousel';
+import { Carousel, Slide } from 'vue-carousel';
 export default {
-  ...
   components: {
     Carousel,
     Slide
-  }
-  ...
-};
-export default {
+  },
     name: 'home',
     data() {
         return {
@@ -37,6 +35,9 @@ export default {
         }
     
     }
-}
+};
 </script>
+<style scoped>
+
+</style>
 

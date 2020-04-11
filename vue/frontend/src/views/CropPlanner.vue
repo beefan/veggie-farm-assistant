@@ -1,6 +1,6 @@
 <template>
 <body class="cropPlanner">
-  
+  <Header></Header>
   <section class="newFieldContainer">
     <div class="newFieldCreate">
       <h2>Add New Field:  </h2>
@@ -123,8 +123,9 @@
 
 <script>
 import Upload from "../components/csvUpload.vue";
+import Header from "../components/header.vue"
 export default {
-  components: { Upload: Upload },
+  components: { Upload: Upload, Header: Header },
 
   data() {
     return {
