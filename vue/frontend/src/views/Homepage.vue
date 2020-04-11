@@ -1,27 +1,22 @@
-
-
-
-
-
 <template>
-    <Slide>
-        <a id ="home" href="#">
-            <span> Home </span>
-        </a>
-        <a id="login" href="#">
-            <span>Login</span>
-        </a>
-    </Slide>
+<body>
 
 
+</body>
 </template>
 
 <script>
-//import {Slide} from 'vue-burger-menu' //import the Css transitions
-
+  
 export default {
-    components: {
-        //Slide
+    name: 'home',
+    data() {
+        return {
+            seedlings: require('../images/seedlings.jpg'),
+            harvest: require('../images/harvest.jpg'),
+            farm: require('../images/farm.jpg')
+        }
+    
     }
 }
 </script>
+
