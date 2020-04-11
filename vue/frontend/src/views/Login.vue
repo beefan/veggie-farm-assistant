@@ -51,7 +51,7 @@
       <br>
       <button type="submit">Sign in</button>
       <br><br>
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <!--<router-link :to="{ name: 'register' }">Need an account?</router-link>-->
       
     </form>
     
@@ -81,8 +81,11 @@ export default {
     };
   },
   methods: {
+    noprevention() {
+      return true;
+    },
     login() {
-      fetch(`${process.env.VUE_APP_REMOTE_API}/login`, {
+      fetch(process.env.VUE_APP_REMOTE_API_LOGIN, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

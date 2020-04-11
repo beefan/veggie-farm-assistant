@@ -26,4 +26,6 @@ public interface BedDAO {
 	public List<Field> getAllFields(String username);
 	
 	public void resetField(int fieldId);
+	
+	public List<String> getAllCrops();
 }

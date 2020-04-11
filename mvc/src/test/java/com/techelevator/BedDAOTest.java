@@ -41,6 +41,12 @@ public class BedDAOTest extends DAOIntegrationTest{
 	}
 	
 	@Test
+	public void get_all_crops() {
+		Assert.assertEquals(2, dao.getAllCrops().size());
+		
+	}
+	
+	@Test
 	public void testing_save_field_method() {
 		Assert.assertEquals(2, dao.getAllFields("user").size());
 		System.out.print(fieldId);
@@ -105,6 +111,8 @@ public class BedDAOTest extends DAOIntegrationTest{
 		sql = "truncate field cascade";
 		jdbcTemplate.update(sql);
 		sql = "truncate users cascade";
+		jdbcTemplate.update(sql);
+		sql = "truncate crop cascade";
 		jdbcTemplate.update(sql);
 	}
 

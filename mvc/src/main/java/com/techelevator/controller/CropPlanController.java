@@ -25,6 +25,10 @@ public class CropPlanController {
 	@Autowired
 	private BedDAO bedDao;
 	
+	@GetMapping("/crops")
+	public List<String> cropList() {
+		return bedDao.getAllCrops();
+	}
 	
 	@GetMapping("/beds/{fieldId}")
 	public List<Bed> bedList(@PathVariable int fieldId){

@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="sticky">
     <img :src= "logoUrl" />
     <div id="nav">
       <router-link class="spacing" :to = "{name:'home'}">Home</router-link>

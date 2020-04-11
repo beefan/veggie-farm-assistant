@@ -144,6 +144,18 @@ public class JDBCBedDAO implements BedDAO{
 		
 	}
 
+	@Override
+	public List<String> getAllCrops() {
+		List<String> crops = new ArrayList<String>();
+		
+		String sql = "select crop_name from crop";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+		while(result.next()) {
+			crops.add(result.getString("crop_name"));
+		}
+		return crops;
+	}
+
 	
 
 	
