@@ -1,576 +1,624 @@
-//page background
-body {
-    background-color: #e1faff;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    border: .05rem solid black;
-    color: black;
-    padding: 0;
-    cursor: pointer;
-    font-family: 'Muli', sans-serif;
-}
-
-body.cropPlanner {
-    white-space: nowrap;
-}
-
-//harvest assist logo css
-#app>img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
-    align-items: center;
-}
-
-//navigation bar
-#nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #f7b254;
-    border-top: 2px solid #B4823E;
-    border-bottom: 2px solid #B4823E;
-}
-
-//nav bar links (all except last link(see a.spacing1))
-a.spacing {
-    text-decoration: none;
-    margin-right: 25px;
-    font-family: 'Amatic SC', cursive;
-    color: #ffffff;
-    font-size: 2.5vw;
-}
-
-//nav bar last link on right with no margin
-a.spacing1 {
-    text-decoration: none;
-    font-family: 'Amatic SC', cursive;
-    color: #ffffff;
-    font-size: 2.5vw;
-}
-
-//nav bar links on hover
-a.spacing:hover {
-    opacity: 70%;
-}
-
-a.spacing1:hover {
-    opacity: 70%;
-}
-
-//paragraph text
-p {
-    font-family: 'Muli', sans-serif;
-}
-
-//headers
-h1 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 6.5vw;
-    font-weight: bold;
-    padding: 0;
-    margin: 0;
-    color: #f7b254;
-    align-self: center;
-}
-
-//h2 is used in upload fields
-h2 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 5vw;
-    font-weight: bold;
-    padding: 0;
-    margin: 0;
-    color: #4d4d4d;
-    align-self: center;
-}
-
-//h3 is used in field tables
-h3 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 2vw;
-    font-weight: bold;
-    padding: 0;
-    margin: 0 0 0 15px;
-    color: #4d4d4d;
-    align-self: left;
-}
-
-//login page css
-#login>form>a {
-    text-decoration: none;
-    font-family: 'Amatic SC', cursive;
-}
-
-#login>form {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-}
-
-//csv upload container
-.csvContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.csvUploadData {
-    margin-left: auto;
-    margin-right: auto;
-    width: 150px;
-}
-
-.csvUploadButtonWrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-}
-
-div.csvUpload {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.csvUploadClickBox {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-//text instructions for page
-p.getStarted {
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-//div section with tables on harvest times page
-div.havestTimesUpload {
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #fcead0;
-}
-
-//div section with tables on waste times page
-div.wasteTimesUpload {
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #fcead0;
-}
-
-#log {
-    margin-top: 5%;
-    display: flex;
-    flex-flow: row;
-}
-#log>.logEntry>select {
-    margin-left: 8%;
-    margin-right: 8%;
-    margin-bottom: 8%;
-}
-div.logEntry {
-    border: 2px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #fcead0;
-}
-
-//sets width for tables inside container on harvest times page
-div.harvestTables {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-//sets width for tables inside container on waste times page
-div.wasteTables {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-//fields table css
-.fieldTable {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 90%;
-    color: #4d4d4d;
-    border: none;
-    background-color: transparent;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-//harvest table css
-.harvestTable {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 100%;
-    color: #4d4d4d;
-    border: none;
-    background-color: transparent;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-//add new crop css
-.addNewCrop {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 100%;
-    color: #4d4d4d;
-    border: none;
-    font-family: 'Muli', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-//added crops css
-.existingCrops {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 100%;
-    color: #4d4d4d;
-    font-family: 'Muli', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-//borders and cell backgrounds for tables
-table,
-th,
-td {
-    border: 2px solid black;
-    margin: 0;
-    padding: 0;
-}
-
-th {
-    height: 50px;
-}
-
-td:hover {
-    background-color: #f5f5f5;
-    width: auto;
-    height: auto;
-    cursor: pointer;
-}
-
-tr:nth-child(odd) {
-    background-color: #F9C782;
-}
-
-tr:nth-child(even) {
-    background-color: #fcead0;
-}
-
-div.fieldName>img {
-    width: 2%;
-    padding: 8px 0 0 0;
-    margin: 0;
-    border: 0;
-}
-
-//trash can cell and logo css
-td.trash>a>img {
-    width: 20%;
-    padding: 8px 0 0 0;
-    margin: 0;
-    border: 0;
-}
-
-th {
-    background: #f7b254;
-}
-
-td.trash {
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 0;
-    width: 10%;
-}
-
-td.trash>a>img:hover {
-    opacity: 70%;
-    width: 25%;
-    cursor: pointer;
-}
-
-// Add new crop table row
-tr.newCrop {
-    width: 10%;
-    background-color: #fcead0;
-}
-
-.addNewCrop {
-    font-size: 1.1rem;
-    width: 100%;
-    color: #4d4d4d;
-    border: none;
-    background-color: transparent;
-    font-family: 'Muli', sans-serif;
-}
-
-//submit cell and logo css
-td.submit {
-    text-align: center;
-    padding: 0;
-    width: 10%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-td.submit>a>img {
-    width: 25%;
-    padding: 8px 0 0 0;
-}
-
-td.submit>a>img:hover {
-    opacity: 70%;
-    width: 30%;
-    cursor: pointer;
-}
-
-//hover when editing fields
-.highlight {
-    border: 3px solid rgb(209, 78, 78) inset;
-    height: auto;
-    width: auto;
-    opacity: 40%;
-    cursor: pointer;
-}
-
-//fields page
-//div setion for new fields
-.newFieldContainer {
-    flex-basis: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 0.8rem 0;
-    padding: 0 1rem;
-    color: #f6f6f6;
-    background: #fcead0;
-    border-top: 2px solid #f8c073;
-    border-bottom: 2px solid #f8c073;
-    height: 4rem;
-}
-
-.newFieldCreate {
-    display: flex;
-    align-items: center;
-}
-
-.fieldName {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.csvUpload {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.fieldName.btn {
-    width: 400px;
-    height: 1.8rem;
-}
-
-.newFieldContainer h2 {
-    font-size: 1.8rem;
-    white-space: nowrap;
-    border: none;
-    font-family: 'Muli', sans-serif;
-    margin-right: 1rem;
-}
-
-.newFieldContainer .btn:last-of-type {
-    margin-right: 1rem;
-    margin-left: 0rem;
-    height: 30px;
-}
-
-.newFieldContainer .btn {
-    font-size: 1.4rem;
-    transition: background-color 150ms;
-    padding: 0 0.6rem;
-    border-radius: 0.3rem;
-    height: 3rem;
-    font-family: 'Muli', sans-serif;
-}
-
-.addNewFieldCreate>button {
-    margin-left: auto;
-    margin-right: auto;
-    width: 10px;
-}
-
-.fieldsWrapper {
-    position: relative;
-    top: 50px;
-    margin: auto;
-}
-
-.fieldsLoaded {
-    flex-basis: 40%;
-    align-self: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: space-around;
-}
-
-//div secition for added fields
-div.fieldLoaded {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: 10px;
-    background: #fcead0;
-    margin-bottom: 20px;
-}
-
-div.fieldLoaded {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #fcead0;
-}
-
-.addNewCropFieldTable {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 90%;
-    color: #4d4d4d;
-    border: none;
-    background-color: transparent;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
-
-.addedCropsFieldTable {
-    border-collapse: collapse;
-    font-size: 1.1rem;
-    width: 90%;
-    color: #4d4d4d;
-    border: none;
-    background-color: transparent;
-    font-family: 'Muli', sans-serif;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
-
-.fields::-webkit-scrollbar {
-    height: 2.4rem;
-}
-
-.fields::-webkit-scrollbar-thumb {
-    background-color: #66a3c7;
-    border: 0.8rem solid #0079bf;
-    border-top-width: 0;
-}
-
-.fieldNamebtn {
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    color: black;
-    font-family: 'Amatic SC', cursive;
-    padding: 0;
-    cursor: pointer;
-    font-size: 3rem;
-    width: 80%;
-    text-align: center;
-}
-
-.fieldNamebtn:hover {
-    opacity: 70%;
-}
-
-//hidden tables in field page
-.hide {
-    visibility: hidden;
-}
-
-.fieldNamebtn {
-    background: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    color: black;
-    font-family: 'Amatic SC', cursive;
-    padding: 0;
-    cursor: pointer;
-    font-size: 3rem;
-    width: 80%;
-    text-align: center;
-}
-
-.fieldNamebtn:hover {
-    opacity: 70%;
-}
-
-img.mainImages {
-    width: 800px;
-    height: 513px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    //page background
+    body {
+        background: #a9e4f7;
+        background: linear-gradient(-76deg, #a9e4f7 0%, #0fb4e7 100%) no-repeat top-left;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border: .05rem solid black;
+        color: black;
+        padding: 0;
+        cursor: pointer;
+        font-family: 'Muli', sans-serif;
+    }
+    
+    body.cropPlanner {
+        white-space: nowrap;
+    }
+    
+    //harvest assist logo css
+    #app>img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+        align-items: center;
+    }
+    
+    //navigation bar
+    #nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #f7b254;
+        border-top: 2px solid #B4823E;
+        border-bottom: 2px solid #B4823E;
+    }
+    
+    //nav bar links (all except last link(see a.spacing1))
+    a.spacing {
+        text-decoration: none;
+        margin-right: 25px;
+        font-family: 'Amatic SC', cursive;
+        color: #ffffff;
+        font-size: 2.5vw;
+    }
+    
+    //nav bar last link on right with no margin
+    a.spacing1 {
+        text-decoration: none;
+        font-family: 'Amatic SC', cursive;
+        color: #ffffff;
+        font-size: 2.5vw;
+    }
+    
+    //nav bar links on hover
+    a.spacing:hover {
+        opacity: 70%;
+    }
+    
+    a.spacing1:hover {
+        opacity: 70%;
+    }
+    
+    //paragraph text
+    p {
+        font-family: 'Muli', sans-serif;
+    }
+    
+    //headers
+    h1 {
+        font-family: 'Amatic SC', cursive;
+        font-size: 6.5vw;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        color: #f7b254;
+        align-self: center;
+    }
+    
+    //h2 is used in upload fields
+    h2 {
+        font-family: 'Amatic SC', cursive;
+        font-size: 5vw;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+        color: #4d4d4d;
+        align-self: center;
+    }
+    
+    //h3 is used in field tables
+    h3 {
+        font-family: 'Amatic SC', cursive;
+        font-size: 2vw;
+        font-weight: bold;
+        padding: 0;
+        margin: 0 0 0 15px;
+        color: #4d4d4d;
+        align-self: left;
+    }
+    
+    //login page css
+    #login>form>a {
+        text-decoration: none;
+        font-family: 'Amatic SC', cursive;
+    }
+    
+    #login>form {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    //csv upload container
+    .csvContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .csvUploadData {
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+    }
+    
+    .csvUploadButtonWrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+    
+    div.csvUpload {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .csvUploadClickBox {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    //text instructions for page
+    p.getStarted {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    
+    //div section with tables on harvest times page
+    div.havestTimesUpload {
+        border: 2px solid black;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #fcead0;
+    }
+    
+    //div section with tables on waste times page
+    div.wasteTimesUpload {
+        border: 2px solid black;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #fcead0;
+    }
+    
+    //sets width for tables inside container on harvest times page
+    div.harvestTables {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    //sets width for tables inside container on waste times page
+    div.wasteTables {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    //fields table css
+    .fieldTable {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 90%;
+        color: #4d4d4d;
+        border: none;
+        background-color: transparent;
+        font-family: 'Muli', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    //harvest table css
+    .harvestTable {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 100%;
+        color: #4d4d4d;
+        border: none;
+        background-color: transparent;
+        font-family: 'Muli', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    //add new crop css
+    .addNewCrop {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 100%;
+        color: #4d4d4d;
+        border: none;
+        font-family: 'Muli', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    //added crops css
+    .existingCrops {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 100%;
+        color: #4d4d4d;
+        font-family: 'Muli', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    //borders and cell backgrounds for tables
+    table,
+    th,
+    td {
+        border: 2px solid black;
+        margin: 0;
+        padding: 0;
+    }
+    
+    th {
+        height: 50px;
+    }
+    
+    td:hover {
+        background-color: #f5f5f5;
+        width: auto;
+        height: auto;
+        cursor: pointer;
+    }
+    
+    tr:nth-child(odd) {
+        background-color: #F9C782;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #fcead0;
+    }
+    
+    div.fieldName>img {
+        width: 2%;
+        padding: 8px 0 0 0;
+        margin: 0;
+        border: 0;
+    }
+    
+    //trash can cell and logo css
+    td.trash>a>img {
+        width: 20%;
+        padding: 8px 0 0 0;
+        margin: 0;
+        border: 0;
+    }
+    
+    th {
+        background: #f7b254;
+    }
+    
+    td.trash {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 0;
+        width: 10%;
+    }
+    
+    td.trash>a>img:hover {
+        opacity: 70%;
+        width: 25%;
+        cursor: pointer;
+    }
+    
+    // Add new crop table row
+    tr.newCrop {
+        width: 10%;
+        background-color: #fcead0;
+    }
+    
+    .addNewCrop {
+        font-size: 1.1rem;
+        width: 100%;
+        color: #4d4d4d;
+        border: none;
+        background-color: transparent;
+        font-family: 'Muli', sans-serif;
+    }
+    
+    //submit cell and logo css
+    td.submit {
+        text-align: center;
+        padding: 0;
+        width: 10%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    td.submit>a>img {
+        width: 25%;
+        padding: 8px 0 0 0;
+    }
+    
+    td.submit>a>img:hover {
+        opacity: 70%;
+        width: 30%;
+        cursor: pointer;
+    }
+    
+    //hover when editing fields
+    .highlight {
+        border: 3px solid rgb(209, 78, 78) inset;
+        height: auto;
+        width: auto;
+        opacity: 40%;
+        cursor: pointer;
+    }
+    
+    //fields page
+    //div setion for new fields
+    .newFieldContainer {
+        flex-basis: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0.8rem 0;
+        padding: 0 1rem;
+        color: #f6f6f6;
+        background: #fcead0;
+        border-top: 2px solid #f8c073;
+        border-bottom: 2px solid #f8c073;
+        height: 4rem;
+    }
+    
+    .newFieldCreate {
+        display: flex;
+        align-items: center;
+    }
+    
+    .fieldName {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .csvUpload {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .fieldName.btn {
+        width: 400px;
+        height: 1.8rem;
+    }
+    
+    .newFieldContainer h2 {
+        font-size: 1.8rem;
+        white-space: nowrap;
+        border: none;
+        font-family: 'Muli', sans-serif;
+        margin-right: 1rem;
+    }
+    
+    .newFieldContainer .btn:last-of-type {
+        margin-right: 1rem;
+        margin-left: 0rem;
+        height: 30px;
+    }
+    
+    .newFieldContainer .btn {
+        font-size: 1.4rem;
+        transition: background-color 150ms;
+        padding: 0 0.6rem;
+        border-radius: 0.3rem;
+        height: 3rem;
+        font-family: 'Muli', sans-serif;
+    }
+    
+    .addNewFieldCreate>button {
+        margin-left: auto;
+        margin-right: auto;
+        width: 10px;
+    }
+    
+    .fieldsWrapper {
+        position: relative;
+        top: 50px;
+        margin: auto;
+    }
+    
+    .fieldsLoaded {
+        flex-basis: 40%;
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: space-around;
+    }
+    
+    //div secition for added fields
+    div.fieldLoaded {
+        border: 2px solid black;
+        border-radius: 10px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: 10px;
+        background: #fcead0;
+        margin-bottom: 20px;
+    }
+    
+    div.fieldLoaded {
+        border: 2px solid black;
+        border-radius: 10px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #fcead0;
+    }
+    
+    .addNewCropFieldTable {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 90%;
+        color: #4d4d4d;
+        border: none;
+        background-color: transparent;
+        font-family: 'Muli', sans-serif;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+    
+    .addedCropsFieldTable {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 90%;
+        color: #4d4d4d;
+        border: none;
+        background-color: transparent;
+        font-family: 'Muli', sans-serif;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+    
+    .fields::-webkit-scrollbar {
+        height: 2.4rem;
+    }
+    
+    .fields::-webkit-scrollbar-thumb {
+        background-color: #66a3c7;
+        border: 0.8rem solid #0079bf;
+        border-top-width: 0;
+    }
+    
+    .fieldNamebtn {
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        color: black;
+        font-family: 'Amatic SC', cursive;
+        padding: 0;
+        cursor: pointer;
+        font-size: 3rem;
+        width: 80%;
+        text-align: center;
+    }
+    
+    .fieldNamebtn:hover {
+        opacity: 70%;
+    }
+    
+    //hidden tables in field page
+    .hide {
+        visibility: hidden;
+    }
+    
+    .fieldNamebtn {
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0;
+        color: black;
+        font-family: 'Amatic SC', cursive;
+        padding: 0;
+        cursor: pointer;
+        font-size: 5rem;
+        width: 80%;
+        text-align: center;
+    }
+    
+    .fieldNamebtn:hover {
+        opacity: 70%;
+    }
+
+    //farm log css
+    #log {
+        margin-top: 5%;
+        display: flex;
+        flex-flow: row;
+    }
+    #log>.logEntry>select {
+        margin-left: 8%;
+        margin-right: 8%;
+        margin-bottom: 8%;
+    }
+    div.logEntry {
+        border: 2px solid black;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #fcead0;
+    }
+    
+    //landing page css
+    img.mainLogo {
+        display: block;
+        width: 20%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    div.headerMain {
+        align-self: center;
+        justify-content: center;
+        display: flex;
+        background-color: #f7b254;
+        width: 100%;
+        height: 15%;
+        font-family: 'Amatic SC', cursive;
+    }
+    
+    .main-nav {
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    ul.sidebar-panel-nav {
+        list-style-type: none;
+    }
+    
+    ul.sidebar-panel-nav>li>a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.5rem;
+        display: block;
+        padding-bottom: 0.5em;
+    }
+    
+    div.imgSlider {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    img.mainImages {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
+    img.mainImages:hover {
+        opacity: 80%;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
