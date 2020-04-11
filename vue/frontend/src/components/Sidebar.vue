@@ -1,10 +1,9 @@
 <template>
-    <div class="sidebar" @click="closeSidebarPanel">
+    <div class="sidebar" >
         <div class="sidebar-backdrop" @click="closeSidebarPanel" v-if="isPanelOpen"></div>
-        <transition name="slide" >
+        <transition name="slide">
             <div v-if="isPanelOpen"
-                 class="sidebar-panel"
-                 @click="closeSidebarPanel">
+                 class="sidebar-panel">
                 <slot></slot>
             </div>
         </transition>

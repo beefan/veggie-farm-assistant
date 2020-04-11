@@ -58,14 +58,14 @@ html {
    
  }
 
-body{
+html{
    border: 0; margin: 0; padding: 0;
    font-family: 'Lato';
    width:auto;
    height: 100%;
    background-image: url('../images/background.jpg');
         background-size:cover;
-        background-repeat: no-repeat;
+        
  }
 
  .mainLogo{
