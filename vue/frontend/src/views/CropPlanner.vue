@@ -1,6 +1,6 @@
 <template>
 <body class="cropPlanner">
-  
+  <Header></Header>
   <section class="newFieldContainer">
     <div class="newFieldCreate">
       <h2>Add New Field:  </h2>
@@ -123,13 +123,13 @@
 
 <script>
 import Upload from "../components/csvUpload.vue";
+import Header from "../components/header.vue"
 export default {
-  components: { Upload: Upload },
+  components: { Upload: Upload, Header: Header },
 
   data() {
     return {
       fields: [],
-      beds: [],
       fieldsLoaded: false,
       parse_csv: [],
       apiUrl: process.env.VUE_APP_REMOTE_API_CROP,
@@ -236,20 +236,6 @@ export default {
     unhighlight(e) {
       e.target.parentNode.classList.remove("highlight");
     },
-    getBedsByField(id) {
-      fetch(this.apiUrl + "/beds/" + id)
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          //console.log(data);
-          this.beds[id]=data;
-          console.log(this.beds[id]);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    },
     getFields() {
       fetch(this.apiUrl + "/user")
         .then(response => {
@@ -257,9 +243,6 @@ export default {
         })
         .then(data => {
           this.fields = data;
-          this.fields.forEach(field => {
-            this.getBedsByField(field["id"]);
-          });
           this.fieldsLoaded = true;
           console.log(data);
         })

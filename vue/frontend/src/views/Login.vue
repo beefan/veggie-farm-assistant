@@ -1,4 +1,23 @@
 <template>
+<body>
+    <div class="headerMain">
+<div id="app">
+   <nav class="main-nav">
+     <div class="logo">
+       <router-link :to="{ name: 'home' }"><img class="mainLogo" :src="logo" /></router-link>
+     </div>
+     <Burger></Burger>
+   </nav>
+   <Sidebar>
+     <ul class="sidebar-panel-nav">
+       <li><router-link :to="{ name: 'home' }">Home</router-link></li>
+       <li><router-link :to="{ name: 'login' }">Login</router-link></li>
+       <li><a href="#contact">Contact</a></li>
+     </ul>
+   </Sidebar>
+   </div>
+</div>
+     <br><br>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -37,16 +56,23 @@
     </form>
     
   </div>
+  </body>
 </template>
 
 <script>
 import auth from '../auth';
+import Burger from '../components/Burger.vue';
+import Sidebar from '../components/Sidebar.vue';
 
 export default {
   name: 'login',
-  components: {},
+  components: {
+    Burger,
+   Sidebar,
+  },
   data() {
     return {
+      logo: require('../images/harvestassistlogo.png'),
       user: {
         username: '',
         password: '',

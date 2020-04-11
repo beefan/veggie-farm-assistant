@@ -1,5 +1,6 @@
 <template>
 <body class="harvestTimesBody">
+  <Header></Header>
   <br>
     <br>
   <div class="harvestTimesContainer">
@@ -120,11 +121,12 @@
 
 <script>
 import Upload from "../components/csvUpload.vue";
+import Header from "../components/header.vue";
 export default {
   props: {
     // apiUrl: String
   },
-  components: { Upload: Upload },
+  components: { Upload: Upload, Header: Header },
   data() {
     return {
       parse_header: [],
