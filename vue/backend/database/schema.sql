@@ -1,5 +1,7 @@
 BEGIN TRANSACTION;
 
+drop table if exists sales;
+drop table if exists harvest;
 drop table if exists bed;
 drop table if exists field;
 DROP TABLE IF EXISTS users;
@@ -49,20 +51,29 @@ create table expiration(
  crop_name varchar(64) not null,
  planting_date date not null,
  transplant_date date,
- constraint fk_field_id foreign key (field_id) references field (id),
- constraint fk_cron_nam foreign key (crop_name) references crop (crop_name)
+ constraint fk_field_id foreign key (field_id) references field (id)
  );
  
  create table harvest(
  id serial primary key,
  bed_id int not null,
  crop_id int not null,
- crop_weight int not null,
+ crop_weight decimal not null,
  crop_count int,
  username varchar(255) not null,
+ harvest_date date not null,
  constraint fk_bed_id foreign key (bed_id) references bed(id),
  constraint fk_crop_id foreign key (crop_id) references crop(id),
  constraint fk_username foreign key (username) references users(username)
  );
+ 
+ create table sales(
+ id serial primary key,
+ crop_id int not null unique,
+ dollar_amount decimal not null,
+ sale_type varchar(255) not null,
+constraint fk_crop_name foreign key (crop_id) references crop(id)
+);
+
 
 COMMIT TRANSACTION;
