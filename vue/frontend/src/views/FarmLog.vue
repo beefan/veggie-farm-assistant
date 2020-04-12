@@ -1,6 +1,7 @@
 <template>
 <body>
   <Header></Header>
+  <!-- <email-notify></email-notify> -->
   <div id="log">
     <div class="logEntry">
       <h1>Log Harvest</h1>
@@ -51,8 +52,12 @@
 
 <script>
 import Header from "../components/header.vue";
+// import Notify from "../components/notify.vue"
 export default {
-  components: { Header },
+  components: { 
+      Header, 
+//   'email-notify':Notify
+  },
   data() {
     return {
       beds: [],
@@ -165,7 +170,6 @@ export default {
     },
     showInput(event) {
       let bed = event.target.value;
-      console.log(bed);
       if (bed) {
         this.bedSelected = true;
       } else {
@@ -180,7 +184,6 @@ export default {
         })
         .then(data => {
           this.fields = data;
-          console.log(data);
         })
         .catch(err => {
           console.error(err);
@@ -193,7 +196,6 @@ export default {
         })
         .then(data => {
           this.crops = data;
-          console.log(data);
         })
         .catch(err => {
           console.error(err);

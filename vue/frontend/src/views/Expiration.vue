@@ -16,8 +16,6 @@
       </div>
       <p class="getStarted">To get started, upload a .csv file with each Crop Name and it's Expiration Time, or you can use the Add New Crop field below to add them each individually.</p>
       <br>
-
-
       <div class="wasteTables">
         <table v-if="expirationTimes" class="addNewCrop">
           <thead>
@@ -100,7 +98,6 @@ export default {
   },
   methods: {
     uploadVerify() {
-      console.log(this.parse_header), console.log(this.parse_csv);
       let vm = this;
       if (
         vm.parse_header[0] != "cropName" ||
@@ -111,8 +108,6 @@ export default {
       }
 
       for (let item of this.parse_csv) {
-        console.log(item["cropName"]);
-        console.log(isNaN(item["daysToExpiration"]));
         if (
           !item["cropName"].match(/[a-z]/i) ||
           isNaN(item["daysToExpiration"])
@@ -127,7 +122,6 @@ export default {
 
     uploadExpirationTimes() {
       console.error("uploading these expiration times V")
-      console.log(this.parse_csv)
       fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -153,7 +147,6 @@ export default {
         })
         .then(data => {
           this.expirationTimes = data;
-          console.log(data)
         })
         .catch(err => {
           console.error(err);
@@ -182,7 +175,6 @@ export default {
         st['daysToExpiration'] = e.target.value;
       } 
       let jasonsArray = [st]
-      console.log(JSON.stringify(jasonsArray));
       fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -227,7 +219,6 @@ export default {
     
   },
   created() {
-        console.log("Test")
         this.getExpirationTimes();
     },
 };

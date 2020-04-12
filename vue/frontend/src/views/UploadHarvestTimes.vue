@@ -187,7 +187,6 @@ export default {
         st["transplantToHarvestInDays"] = e.target.value;
       }
       let jasonsArray = [st];
-      console.log(JSON.stringify(jasonsArray));
       fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -217,8 +216,6 @@ export default {
       }
 
       for (let item of this.parse_csv) {
-        console.log(item["cropName"]);
-        console.log(isNaN(item["transplantToHarvestInDays"]));
         if (
           !item["cropName"].match(/[a-z]/i) ||
           isNaN(item["directSeedToHarvestInDays"]) ||

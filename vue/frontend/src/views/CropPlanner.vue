@@ -144,7 +144,6 @@ export default {
   },
   methods: {
     uploadVerify() {
-      console.log(this.parse_header), console.log(this.parse_csv);
       let vm = this;
       if (
         vm.parse_header[0] != "cropName" ||
@@ -155,8 +154,6 @@ export default {
       }
 
       for (let item of this.parse_csv) {
-        console.log(item["cropName"]);
-
         if (
           !item["cropName"].match(/[a-z]/i) 
           || (item["transplantDate"] && !item["transplantDate"].match(
@@ -222,7 +219,6 @@ export default {
         .then(data => {
           this.fields = data;
           this.fieldsLoaded = true;
-          console.log(data);
         })
         .catch(err => {
           console.error(err);
@@ -238,8 +234,6 @@ export default {
       newEntry["plantingDate"] = x[2].firstChild.value;
       newEntry["fieldId"] = parentNode.classList[1];
 
-      console.log(newEntry["fieldId"]);
-
       this.updateDatabase(e, newEntry);
     },
     updateBed(e, st) {
@@ -253,10 +247,6 @@ export default {
       st.fieldId = e.target.parentNode.parentNode.parentNode.previousSibling.previousSibling.children[1].classList[1];
       st.transplantDate = this.getDateFromJSON(st.transplantDate);
       st.plantingDate = this.getDateFromJSON(st.plantingDate);
-
-console.log(st)
-       console.log('look at me im right here look')
-       console.log(st.fieldId)
 
       fetch(this.apiUrl + "/beds/update", {
         method: "POST",
@@ -297,13 +287,10 @@ console.log(st)
         });
     },
     uploadBeds(fieldId) {
-
-      console.log(fieldId + '<---------')
       this.parse_csv.forEach(bed => {
         bed['fieldId'] = fieldId;
       })
-      console.log("beds going to java ---- V")
-      console.log(this.parse_csv )
+
       fetch(this.apiUrl + '/beds', {
         method: "POST",
         headers: {
@@ -332,7 +319,6 @@ console.log(st)
       }
 
       let jasonsArray = [st];
-      console.log(JSON.stringify(jasonsArray));
       fetch(this.apiUrl + "/beds", {
         method: "POST",
         headers: {
