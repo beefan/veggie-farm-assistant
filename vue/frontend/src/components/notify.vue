@@ -2,32 +2,36 @@
   <div>
     <div class="sectionHeader">Harvest Assist Action Items</div>
     <div id="dailies">
-      <div id="planting" v-if="this.dailies.planting.length > 0">
-        <h2>Planting</h2>
+      <div class="notify" id="planting" v-if="this.dailies.planting.length > 0">
+        <h2 class="sectionHeaderNotify">Planting</h2>
         <ul>
           <li v-for="item in this.dailies.planting" v-bind:key="item">{{item}}</li>
         </ul>
+        <br>
       </div>
-      <div id="transplant" v-if="this.dailies.transplant.length > 0">
-        <h2>Transplants</h2>
+      <div class="notify" id="transplant" v-if="this.dailies.transplant.length > 0">
+        <h2 class="sectionHeaderNotify">Transplants</h2>
         <ul>
           <li v-for="item in this.dailies.transplant" v-bind:key="item">{{item}}</li>
         </ul>
+        <br>
       </div>
-      <div id="harvest" v-if="this.dailies.harvest.length > 0">
-        <h2>Harvests</h2>
+      <div class="notify" id="harvest" v-if="this.dailies.harvest.length > 0">
+        <h2 class="sectionHeaderNotify">Harvests</h2>
         <ul>
           <li v-for="item in this.dailies.harvest" v-bind:key="item">{{item}}</li>
         </ul>
+        
       </div>
-      <div id="expiration" v-if="this.dailies.expiration.length > 0">
-        <h2>Expirations</h2>
+      <div class="notify" id="expiration" v-if="this.dailies.expiration.length > 0">
+        <h2 class="sectionHeaderNotify">Expirations</h2>
         <ul>
           <li v-for="item in this.dailies.expiration" v-bind:key="item">{{item}}</li>
         </ul>
+        <br>
       </div>
     </div>
-    <div>
+    <div class="email">
       <label for="submitEmailRegistration">Check to receive daily email notifications</label>
       <input
         @click="registerForNotifications"
@@ -38,6 +42,60 @@
     </div>
   </div>
 </template>
+
+<style>
+#dailies{
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+
+.notify ul{
+  list-style:none;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 5px;
+  
+}
+.notify {
+  width:40%;
+  height:auto;
+  font-family: 'Lato', sans-serif;
+        font-size: 1.5vw;
+        background: transparent;
+        border-radius:30px;
+        box-shadow: 3px 3px 5px rgb(180, 180, 180), -5px -5px 10px rgb(255, 255, 255);
+        margin: 10px;
+        color: #130f40;
+        align-self: left;
+        
+}
+
+.sectionHeaderNotify {
+  
+        background-color: #f7b254;
+        width: 100%;
+        
+        color: #130f40;
+        text-align: center;
+        font-size: 2rem;
+        font-family: 'Lato', sans-serif;
+        margin: 0;
+        height: auto;
+        border-radius: 30px 30px 0px 0px;
+    
+}
+.email label {
+  color:#130f40;
+}
+.email{
+  text-align: right;
+  color:#130f40;
+  margin-right: 10%;
+
+}
+</style>
 
 <script>
 export default {
@@ -126,22 +184,3 @@ export default {
 };
 </script>
 
-<style>
-/* #emailNotify {
-  background-color: #66a3c7;
-  padding: 2%;
-  width: 80%;
-  text-align: center;
-  font-family: "Muli", sans-serif;
-  border-radius: 10px;
-  border: 3px solid white;
-  box-shadow: 2px 2px 5px #588aa7 inset, -2px -2px 5px #85cbf3 inset;
-} */
-/* #emailRegister {
-  width: 95%;
-} */
-
-#submitEmailRegistration:hover {
-  box-shadow: 1px 1px 3px #588aa7 inset, -1px -1px 3px #85cbf3 inset;
-}
-</style>
