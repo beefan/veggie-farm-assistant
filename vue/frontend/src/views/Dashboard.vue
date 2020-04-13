@@ -2,24 +2,28 @@
 <template>  
 <body>
   <Header></Header>
-  <div class="dashboardWrapper">
-    <br>
-    <div class="dashboardContent">
-      Welcome Registered User!
-      This is your dashboard.
-    </div>
-  </div>
-  <Footer></Footer>
-  </body>
+    <section>
+<div>
+  <email-notify></email-notify>
+</div>
+</section>
+<Footer></Footer>
+</body>
+
 </template>
 
 
 <script>
-import Header from '../components/header.vue';
-import Footer from "../components/footer.vue";
+import Header from '../components/header.vue'
+import Notify from "../components/notify.vue"
+import Footer from "../components/footer.vue"
 
 export default {
-  components: {Header: Header, Footer: Footer,}
+    components: { 
+      Header, 
+      Footer,
+      'email-notify': Notify
+  }
 }
 
 </script>

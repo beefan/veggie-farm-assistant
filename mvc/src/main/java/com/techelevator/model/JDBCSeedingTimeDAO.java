@@ -23,39 +23,57 @@ public class JDBCSeedingTimeDAO implements SeedingTimesDAO{
 
 	@Override
 	public void save(String cropName, int directSeedToHarvestInDays) {
+	int cropId;
 		String sql = "select id from crop where crop_name = ?";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, cropName);
-		if (result.next()) {
-			int cropId = result.getInt("id");
-			sql = "update seeding_times set direct_seed_to_harvest = ? where crop_id = ?";
-			jdbcTemplate.update(sql, directSeedToHarvestInDays, cropId);
-		} else {
+		
+		if (!result.next()) {
 			sql = "insert into crop (crop_name) values (?) returning id";
-			SqlRowSet result2 = jdbcTemplate.queryForRowSet(sql, cropName);
-			result2.next();
-			int cropId = result2.getInt("id");
+			result = jdbcTemplate.queryForRowSet(sql, cropName);
+			result.next();	
+		}
+		
+		cropId = result.getInt("id");
+		
+		
+		sql = "select id from seeding_times where crop_id = ?";
+		result = jdbcTemplate.queryForRowSet(sql, cropId);
+		
+		if (!result.next()) {
 			sql = "insert into seeding_times (crop_id, direct_seed_to_harvest) values (?, ?)";
 			jdbcTemplate.update(sql, cropId, directSeedToHarvestInDays);
-		}
+		}else {
+			sql = "update seeding_times set direct_seed_to_harvest = ? where crop_id = ?";
+			jdbcTemplate.update(sql, directSeedToHarvestInDays, cropId);
+		} 
 		
 	}
 
 	@Override
 	public void save(String cropName, int directSeedToTransplantInDays, int transplantToHarvestInDays) {
+		int cropId;
 		String sql = "select id from crop where crop_name = ?";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, cropName);
-		if (result.next()) {
-			int cropId = result.getInt("id");
-			sql = "update seeding_times set direct_seed_to_transplant = ?, transplant_to_harvest = ? where crop_id = ?;";
-			jdbcTemplate.update(sql, directSeedToTransplantInDays, transplantToHarvestInDays, cropId);
-		} else {
+		
+		if (!result.next()) {
 			sql = "insert into crop (crop_name) values (?) returning id";
-			SqlRowSet result2 = jdbcTemplate.queryForRowSet(sql, cropName);
-			result2.next();
-			int cropId = result2.getInt("id");
+			result = jdbcTemplate.queryForRowSet(sql, cropName);
+			result.next();	
+		}
+		
+		cropId = result.getInt("id");
+		
+		
+		sql = "select id from seeding_times where crop_id = ?";
+		result = jdbcTemplate.queryForRowSet(sql, cropId);
+		
+		if (!result.next()) {
 			sql = "insert into seeding_times (crop_id, direct_seed_to_transplant, transplant_to_harvest) values (?, ?, ?)";
 			jdbcTemplate.update(sql, cropId, directSeedToTransplantInDays, transplantToHarvestInDays);
-		}
+		}else {
+			sql = "update seeding_times set direct_seed_to_transplant = ?, transplant_to_harvest = ? where crop_id = ?;";
+			jdbcTemplate.update(sql, directSeedToTransplantInDays, transplantToHarvestInDays, cropId);
+		} 
 		
 	}
 
