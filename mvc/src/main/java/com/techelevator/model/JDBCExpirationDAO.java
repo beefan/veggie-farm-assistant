@@ -22,21 +22,30 @@ public class JDBCExpirationDAO implements ExpirationDAO{
 	
 	@Override
 	public void save(String cropName, int daysToExpiration) {
+		int cropId;
+		
 		String sql = "select id from crop where crop_name = ?";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, cropName);
-		if (result.next()) {
-			int cropId = result.getInt("id");
-			sql = "update expiration set days_until_expire = ? where crop_id = ?";
-			jdbcTemplate.update(sql, daysToExpiration, cropId);
-		} else {
+		
+		if (!result.next()) {
 			sql = "insert into crop (crop_name) values (?) returning id";
-			SqlRowSet result2 = jdbcTemplate.queryForRowSet(sql, cropName);
-			result2.next();
-			int cropId = result2.getInt("id");
-			sql = "insert into expiration (crop_id, days_until_expire) values (?, ?)";
-			jdbcTemplate.update(sql, cropId, daysToExpiration);
+			result = jdbcTemplate.queryForRowSet(sql, cropName);
+			result.next();	
 		}
 		
+		cropId = result.getInt("id");
+		
+		
+		sql = "select id from expiration where crop_id = ?";
+		result = jdbcTemplate.queryForRowSet(sql, cropId);
+		
+		if (!result.next()) {
+			sql = "insert into expiration (crop_id, days_until_expire) values (?, ?)";
+			jdbcTemplate.update(sql, cropId, daysToExpiration);	
+		}else {
+			sql = "update expiration set days_until_expire = ? where crop_id = ?";
+			jdbcTemplate.update(sql, daysToExpiration, cropId);
+		} 
 	}
 
 	@Override

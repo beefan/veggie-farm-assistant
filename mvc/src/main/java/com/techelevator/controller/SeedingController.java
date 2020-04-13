@@ -1,5 +1,4 @@
 package com.techelevator.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import com.techelevator.model.SeedingTimesDAO;
 @RequestMapping("/api/seedingtimes")
 @CrossOrigin 
 public class SeedingController {
-
+ 
 	@Autowired
 	private SeedingTimesDAO seedingTimeDao;
 	

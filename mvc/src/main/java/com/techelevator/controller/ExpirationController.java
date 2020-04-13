@@ -31,12 +31,11 @@ public class ExpirationController {
 	
 	@PostMapping()
 	public void saveExpirationTimes(@RequestBody List<Expiration> expirationtime) {
-		
 		for(Expiration ex : expirationtime) {
 			expirationDao.save(ex.getCropName(), ex.getDaysToExpiration()); 
 		}
 		
-	}
+	}  
 	
 	@DeleteMapping("{cropName}")
 	public void deleteExpirationTime(@PathVariable String cropName) {

@@ -1,7 +1,11 @@
 <template>
 <body>
   <Header></Header>
+<<<<<<< HEAD
   <br><br>
+=======
+  <!-- <email-notify></email-notify> -->
+>>>>>>> 88738f836c0df0121d2f69f9708dcc97df8bbbaa
   <div id="log">
     <div class="logEntry">
       <h1>Log Harvest</h1>
@@ -53,9 +57,18 @@
 
 <script>
 import Header from "../components/header.vue";
+<<<<<<< HEAD
 import Footer from "../components/footer.vue"
 export default {
   components: { Header: Header, Footer: Footer, },
+=======
+// import Notify from "../components/notify.vue"
+export default {
+  components: { 
+      Header, 
+//   'email-notify':Notify
+  },
+>>>>>>> 88738f836c0df0121d2f69f9708dcc97df8bbbaa
   data() {
     return {
       beds: [],
@@ -168,7 +181,6 @@ export default {
     },
     showInput(event) {
       let bed = event.target.value;
-      console.log(bed);
       if (bed) {
         this.bedSelected = true;
       } else {
@@ -183,7 +195,6 @@ export default {
         })
         .then(data => {
           this.fields = data;
-          console.log(data);
         })
         .catch(err => {
           console.error(err);
@@ -196,7 +207,6 @@ export default {
         })
         .then(data => {
           this.crops = data;
-          console.log(data);
         })
         .catch(err => {
           console.error(err);
