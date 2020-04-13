@@ -32,15 +32,18 @@
 <style>
    .hidden {
         visibility: hidden;
+        z-index: 999;
     }
 
     button {
         cursor: pointer;
+        z-index: 999;
     }
 
     /* remove blue outline */
     button:focus {
         outline: 0;
+        z-index: 999;
     }
 
     .burger-button {
@@ -54,13 +57,15 @@
         background-color: transparent;
         pointer-events: all;
         transition: transform .6s cubic-bezier(.165,.84,.44,1);
+        z-index: 999;
     }
 
     .burger-bar {
         background-color: #130f40;
         position: absolute;
         top: 95%;
-        right: 1px;
+        z-index: 999;
+        right: 5px;
         left: 8px;
         height: 3px;
         width: auto;
@@ -74,8 +79,8 @@
     }
 
     .burger-bar--2 {
-        transform-origin: 100s% 50%;
-        transform: scaleX(.4);
+        transform-origin: 100% 30%;
+        transform: scaleX(.6);
     }
 
     .burger-button:hover .burger-bar--2 {
@@ -91,22 +96,27 @@
     }
 
     #burger.active .burger-button {
-        transform: rotate(-45deg);
+        transform: rotate(0deg);
+        z-index: 999;
     }
 
     #burger.active .burger-bar {
         background-color: #fff;
+        z-index: 999;
     }
 
     #burger.active .burger-bar--1 {
-        transform: rotate(45deg)
+        transform: rotate(45deg);
+        z-index: 999;
     }
 
     #burger.active .burger-bar--2 {
         opacity: 0;
+        z-index: 999;
     }
 
     #burger.active .burger-bar--3 {
-        transform: rotate(-45deg)
+        transform: rotate(-45deg);
+        z-index: 999;
     }
 </style>

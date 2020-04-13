@@ -1,6 +1,7 @@
 <template>
 <body>
   <Header></Header>
+  <br><br>
   <div id="log">
     <div class="logEntry">
       <h1>Log Harvest</h1>
@@ -46,13 +47,15 @@
       <button v-if="cropSelected" @click="submitSale">Log Sale</button>
     </div>
   </div>
+  <Footer></Footer>
 </body>
 </template>
 
 <script>
 import Header from "../components/header.vue";
+import Footer from "../components/footer.vue"
 export default {
-  components: { Header },
+  components: { Header: Header, Footer: Footer, },
   data() {
     return {
       beds: [],

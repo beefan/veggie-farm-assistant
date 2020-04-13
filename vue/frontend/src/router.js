@@ -9,6 +9,7 @@ import Expiration from './views/Expiration.vue'
 import CropPlanner from './views/CropPlanner.vue'
 import Homepage from './views/Homepage.vue'
 import FarmLog from './views/FarmLog.vue'
+import Contact from './views/Contact.vue'
 
 Vue.use(Router)
 
@@ -62,6 +63,11 @@ const router = new Router({
             path: "/cropplanner",
             name: 'cropplanner',
             component: CropPlanner
+        },
+        {
+            path: "/contact",
+            name: "contact",
+            component: Contact
         },
         {
             path: "/dashboard",
