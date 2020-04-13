@@ -1,15 +1,18 @@
 <template>
 <body class="wasteTimesBody">
   <Header></Header>
-  <br><br><br><br><br>
+  <br><br>
   <div class="wasteContainer">
     <div class="wasteTimesUpload">
+      <div class="sectionHeader">
+          Upload Expiration Times
+          </div>
       <div class="csvUpload">
         <upload
         class="csvUploadClickBox"
           :verifyUploadFormat="uploadVerify"
           :uploadDocument="uploadExpirationTimes"
-          title="Upload Expiration Times" 
+          
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
       </div>

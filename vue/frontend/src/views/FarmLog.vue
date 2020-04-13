@@ -1,42 +1,51 @@
 <template>
 <body>
   <Header></Header>
-<<<<<<< HEAD
-  <br><br>
-=======
-  <!-- <email-notify></email-notify> -->
->>>>>>> 88738f836c0df0121d2f69f9708dcc97df8bbbaa
+  <br />
+  <br />
   <div id="log">
     <div class="logEntry">
-      <h1>Log Harvest</h1>
-      <select id="field" name="fields" @change="showCrops($event)">
-        <option value>-------- select a field --------</option>
-        <option v-for="field in fields" :value="field.id" v-bind:key="field.id">{{ field.name }}</option>
-      </select>
-      <select v-if="fieldSelected && beds" id="crop" name="crops" @change="showInput($event)">
-        <option value>-------- select a bed/crop --------</option>
-        <option
-          v-for="bed in beds"
-          :value="beds.indexOf(bed)"
-          v-bind:key="bed.bedId"
-        >{{ '(' + String(beds.indexOf(bed) + 1) + ') ' + bed.cropName }}</option>
-      </select>
-      <div v-if="bedSelected">
-        <label for="harvestWeight">Weight:</label>
-        <input type="text" id="harvestWeight" placeholder="harvest weight (lbs)" />
+      <div class="sectionHeader">Harvest Log</div>
+      <div class="farmLogContent">
+        <br><br>
+        <select id="field" name="fields" @change="showCrops($event)">
+          <option value>-------- select a field --------</option>
+          <option v-for="field in fields" :value="field.id" v-bind:key="field.id">{{ field.name }}</option>
+        </select>
+        <div class="farmLogContent">
+        <select v-if="fieldSelected && beds" id="crop" name="crops" @change="showInput($event)">
+          <option value>-------- select a bed/crop --------</option>
+          <option
+            v-for="bed in beds"
+            :value="beds.indexOf(bed)"
+            v-bind:key="bed.bedId"
+          >{{ '(' + String(beds.indexOf(bed) + 1) + ') ' + bed.cropName }}</option>
+        </select>
+        <div class="farmLogContent">
+        <div class="farmLogContent" v-if="bedSelected">
+          <label for="harvestWeight">Weight:</label>
+          <input type="text" id="harvestWeight" placeholder="harvest weight (lbs)" />
+        </div>
+        <div class="farmLogContent" v-if="bedSelected">
+          <label for="harvestCount">Count:</label>
+          <input type="text" id="harvestCount" placeholder="          (optional)" />
+        </div>
+        <button v-if="bedSelected" @click="submitHarvest">Log Harvest</button>
       </div>
-      <div v-if="bedSelected">
-        <label for="harvestCount">Count:</label>
-        <input type="text" id="harvestCount" placeholder="          (optional)" />
-      </div>
-      <button v-if="bedSelected" @click="submitHarvest">Log Harvest</button>
+      <br><br>
     </div>
+    </div>
+    </div>
+
     <div class="logEntry">
-      <h1>Log Sales</h1>
+      <div class="sectionHeader">Sales Log</div>
+      <div class="farmLogContent">
+        <br><br>
       <select id="salesCrop" name="salesCrop" @change="showSalesInput($event)">
         <option value>-------- select a crop --------</option>
         <option v-for="crop in crops" :value="crop" v-bind:key="crop">{{ crop }}</option>
       </select>
+      <div class="farmLogContent">
       <select id="salesType" v-if="cropSelected">
         <option value>-------- type of sale --------</option>
         <option value="market">Farmer's Market</option>
@@ -44,31 +53,27 @@
         <option value="csa">CSA</option>
         <option value="other">Other</option>
       </select>
-      <div v-if="cropSelected">
+      <div class="farmLogContent" v-if="cropSelected">
         <label for="salesAmount">Sales: $</label>
         <input type="text" id="salesAmount" placeholder="12.39" />
       </div>
       <button v-if="cropSelected" @click="submitSale">Log Sale</button>
     </div>
+    <br><br>
+    </div>
+    </div>
+    
   </div>
+  <br><br>
   <Footer></Footer>
 </body>
 </template>
 
 <script>
 import Header from "../components/header.vue";
-<<<<<<< HEAD
-import Footer from "../components/footer.vue"
+import Footer from "../components/footer.vue";
 export default {
-  components: { Header: Header, Footer: Footer, },
-=======
-// import Notify from "../components/notify.vue"
-export default {
-  components: { 
-      Header, 
-//   'email-notify':Notify
-  },
->>>>>>> 88738f836c0df0121d2f69f9708dcc97df8bbbaa
+  components: { Header: Header, Footer: Footer },
   data() {
     return {
       beds: [],
@@ -142,7 +147,7 @@ export default {
       document.getElementById("salesCrop").value = "";
     },
     sendSaleToJava(sale) {
-      fetch(this.harvestApiUrl + '/sale', {
+      fetch(this.harvestApiUrl + "/sale", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -221,4 +226,8 @@ export default {
 </script>
 
 <style>
+.farmLogContent{
+  margin-left:auto;
+  margin-right:auto;
+}
 </style>

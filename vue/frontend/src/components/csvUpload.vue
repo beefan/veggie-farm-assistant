@@ -1,20 +1,64 @@
 <template>
-  <div class="csvContainer">
-        <h2>{{title}}</h2>
-      <div class="csvUploadData">
-        <br>
-            <input
-              type="file"
-              id="csv_file"
-              name="csv_file"
-              class="form-control"
-              @change="loadCSV($event)"
-            />
-            
-          </div>
-        </div>
-      
+<div class="csvContainer">
+<input type="file"
+       name="file"
+       id="file"
+       class="inputfile "
+       @change="loadCSV($event)" />
+       <label for="file" class="neumorphic"><img class="uploadIcon" :src="upload" />Choose a file... </label>
+</div>
 </template>
+
+<style>
+    .csvContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    div.csvUpload {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .neumorphic {
+        margin: 10px; 
+        box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 0rem;
+        display: flex;
+        font-family: 'Lato', sans-serif;
+        text-align:center;
+    }
+    .uploadIcon {
+      width: 7%;
+      margin-right:10px;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+        
+    }
+    .inputfile + label {
+      background-color: #282451;
+      width: 100%;
+      height: 120%;
+    font-size: 1.2rem;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 #A9A7B9;
+}
+    
+</style>
 
 <script>
 export default {
@@ -33,6 +77,7 @@ data() {
       sortOrders: {},
       sortKey: "",
       apiUrl: process.env.VUE_APP_REMOTE_API,
+      upload: require('../images/upload.png')
     };
   },
   methods: {
@@ -109,6 +154,4 @@ data() {
 }
 </script>
 
-<style>
 
-</style>
