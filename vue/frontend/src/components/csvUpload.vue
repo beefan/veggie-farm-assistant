@@ -5,7 +5,7 @@
        id="file"
        class="inputfile "
        @change="loadCSV($event)" />
-       <label for="file" class="neumorphic"><img class="uploadIcon" :src="upload" />Choose a file... </label>
+       <label for="file" class="neumorphic"><img class="uploadIcon" :src="upload" /><span class="uploadText">Choose a file... </span></label>
 </div>
 </template>
 
@@ -13,10 +13,12 @@
     .csvContainer {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items:baseline;
     }
     div.csvUpload {
-        margin-left: auto;
-        margin-right: auto;
+        padding:0;
+        margin: auto;
     }
     .neumorphic {
         margin: 10px; 
@@ -29,8 +31,12 @@
         text-align:center;
     }
     .uploadIcon {
-      width: 7%;
-      margin-right:10px;
+      position:relative;
+      width: 10%;
+      top:20%;
+      bottom:20%;
+      margin: 5px 5px 0px 5px;
+      padding:0;
     }
 
     .inputfile {
@@ -41,13 +47,14 @@
         position: absolute;
         z-index: -1;
         
+        
     }
     .inputfile + label {
-      background-color: #282451;
+      background-color: #f7b254;
       width: 100%;
-      height: 120%;
+      height: 130%;
     font-size: 1.2rem;
-    color: white;
+    color: black;
     display: inline-block;
     cursor: pointer;
 }
@@ -55,7 +62,8 @@
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 #A9A7B9;
+  opacity: 70%;
+  box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
 }
     
 </style>
