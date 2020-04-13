@@ -1,7 +1,7 @@
 <template>
   <div id="emailNotify">
       <div v-if="!registered">
-      <h5>Enter your email to register for Harvest Assist Daily Notifcations</h5>
+      <p>Enter your email to register for Harvest Assist Daily Notifcations</p>
       <input id="emailRegister" placeholder="email@harvestassistapp.com"/>
       <button id="submitEmailRegistration" @click="registerForNotifications">Register for Daily Notifcations!</button>
       </div>
