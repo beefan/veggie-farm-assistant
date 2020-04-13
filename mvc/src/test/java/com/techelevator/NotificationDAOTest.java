@@ -8,6 +8,8 @@ import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.JDBCBedDAO;
+import com.techelevator.model.JDBCExpirationDAO;
+import com.techelevator.model.JDBCHarvestDAO;
 import com.techelevator.model.JDBCNotificationDAO;
 import com.techelevator.model.JDBCSeedingTimeDAO;
 
@@ -18,6 +20,8 @@ public class NotificationDAOTest extends DAOIntegrationTest{
 	private JdbcTemplate jdbcTemplate;
 	private JDBCBedDAO bed;
 	private JDBCSeedingTimeDAO st;
+	private JDBCHarvestDAO harvest;
+	private JDBCExpirationDAO expiration;
 	private int fieldId;
 	private int bedId;
 	
@@ -28,6 +32,8 @@ public class NotificationDAOTest extends DAOIntegrationTest{
 		dao = new JDBCNotificationDAO(dataSource);
 		bed = new JDBCBedDAO(dataSource);
 		st = new JDBCSeedingTimeDAO(dataSource);
+		harvest = new JDBCHarvestDAO(dataSource);
+		expiration = new JDBCExpirationDAO(dataSource);
 		jdbcTemplate=new JdbcTemplate(dataSource);
 		truncate();
 		jdbcTemplate.update("INSERT INTO users (\"username\", \"password\", \"salt\", \"role\") VALUES ('user', 'FjZDm+sndmsdEDwNtfr6NA==', 'kidcasB0te7i0jK0fmRIGHSm0mYhdLTaiGkEAiEvLp7dAEHWnuT8n/5bd2V/mqjstQ198iImm1xCmEFu+BHyOz1Mf7vm4LILcrr17y7Ws40Xyx4FOCt8jD03G+jEafpuVJnPiDmaZQXJEpEfekGOvhKGOCtBnT5uatjKEuVWuDA=', 'user')");
@@ -74,6 +80,26 @@ public class NotificationDAOTest extends DAOIntegrationTest{
 		System.out.println(dao.getTodaysHarvests());
 	}
 	
+	@Test
+	public void expiration_date_check_thing() {
+		expiration.save("Apples", 1);
+		harvest.saveHarvest("Apples", bedId, 1);
+		System.out.print(dao.getTomorrowsExpirations());
+	}
+	
+	@Test
+	public void testing_final_message() {
+		bed.saveBed(fieldId, "Bananas", LocalDate.now(), LocalDate.now());
+		st.save("Dong", 1);
+		bed.saveBed(fieldId, "Dong", LocalDate.now().minusDays(1));
+		st.save("Apples", 1, 1);
+		st.save("Apples", 1);
+		expiration.save("Apples", 1);
+		harvest.saveHarvest("Apples", bedId, 1);
+		System.out.println("");
+		System.out.println(dao.compileNotification());
+	}
+	
 	private void truncate() {
 		String sql = "truncate harvest cascade";
 		jdbcTemplate.update(sql);
@@ -84,6 +110,8 @@ public class NotificationDAOTest extends DAOIntegrationTest{
 		sql = "truncate users cascade";
 		jdbcTemplate.update(sql);
 		sql = "truncate field cascade";
+		jdbcTemplate.update(sql);
+		sql = "truncate expiration cascade";
 		jdbcTemplate.update(sql);
 	}
 	

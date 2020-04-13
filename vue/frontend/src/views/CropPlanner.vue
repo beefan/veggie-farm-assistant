@@ -109,7 +109,6 @@
           <upload
             :parentData="field['id']"
             :verifyUploadFormat="uploadVerify"
-            title
             @uploadSuccess="onUploadSuccess($event)"
             :uploadDocument="uploadBeds"
           ></upload>
@@ -157,22 +156,12 @@ export default {
       }
 
       for (let item of this.parse_csv) {
-        console.log(item["cropName"]);
-
-        if (
-          !item["cropName"].match(/[a-z]/i) ||
-          !item["transplantDate"].match(
-            /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
-          ) ||
-          !item["plantingDate"].match(
-            /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
-          )
-        ) {
-          return false;
-        }
-      }
-
-      return true;
+        if (!item["cropName"].match(/[a-z]/i)
+        || (item["transplantDate"] && 
+        !item["transplantDate"].match(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i) )
+        ||!item["plantingDate"].match(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i)) 
+        {return false;}}
+        return true;
     },
     deleteEntry(bedId) {
       fetch(this.apiUrl + "/beds/" + bedId, {

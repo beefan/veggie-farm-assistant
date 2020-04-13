@@ -22,8 +22,15 @@ private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public String compileNotification() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String message = "=====DAILY HARVEST-ASSIST NOTIFICATION=====\n\n";
+		message += getAllOfTodaysPlantings();
+		message += getAllOfTodaysTransplants();
+		message += getTodaysHarvests();
+		message += getTomorrowsExpirations();
+		
+		
+		return message;
 	}
 
 	@Override
@@ -35,16 +42,9 @@ private JdbcTemplate jdbcTemplate;
 				"where planting_date = current_date;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
-			if (results.isLast() && !results.isFirst()) {
-				x += ", and you need to plant " + results.getString("crop_name") + " in " + results.getString("name") + " today";
-			} else if (results.isFirst()) {
-				x += "You need to plant " + results.getString("crop_name") + " in " + results.getString("name") + " today";
-			}
-			else {
-			x += ", you need to plant " + results.getString("crop_name") + " in " + results.getString("name") + " today";
-			}
+				x += "-> Plant " + results.getString("crop_name") + " in " + results.getString("name") + ". \n";
 		}
-		x += ". \n";
+		x += "\n";
 		
 		
 		return x;
@@ -59,16 +59,9 @@ private JdbcTemplate jdbcTemplate;
 				"where transplant_date = current_date;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
-			if (results.isLast() && !results.isFirst()) {
-				x += ", and you need to seed " + results.getString("crop_name") + " for " + results.getString("name") + " today";
-			} else if (results.isFirst()) {
-				x += "You need to seed " + results.getString("crop_name") + " for " + results.getString("name") +  " today";
-			}
-			else {
-			x += ", you need to seed " + results.getString("crop_name") + " for " + results.getString("name") +  " today";
-			}
+				x += "-> The " + results.getString("crop_name") + " for " + results.getString("name") +  ". \n";
 		}
-		x += ".";
+		x += "\n";
 		return x;
 	}
 
@@ -84,23 +77,27 @@ private JdbcTemplate jdbcTemplate;
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		String x = "Here are the crops that need harvesting today: \n";
 		while (results.next()) {
-			if (results.isLast() && !results.isFirst()) {
-				x += ", and you need to harvest the " + results.getString("crop_name") + " that you planted in " + results.getString("name") +  " on " + results.getDate("planting_date").toString();
-			} else if (results.isFirst()) {
-				x += "You need to harvest the " + results.getString("crop_name") + " that you planted in " + results.getString("name") +  " on " + results.getDate("planting_date").toString();
-			}
-			else {
-			x += ", you need to harvest the " + results.getString("crop_name") + " that you planted in " + results.getString("name") +  " on " + results.getDate("planting_date").toString();
-			}
+				x += "-> The " + results.getString("crop_name") + " that you planted in " + results.getString("name") +  " on " + results.getDate("planting_date").toString() + ". \n";
 		}
-		x += ".";
+		x += "\n";
 		return x;
 	}
 
 	@Override
 	public String getTomorrowsExpirations() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select crop.crop_name, field.name, harvest_date from harvest " + 
+				"join crop on crop.id = harvest.crop_id  " + 
+				"join expiration on crop.id = expiration.crop_id " + 
+				"join bed on harvest.bed_id = bed.id " + 
+				"join field on bed.field_id = field.id " + 
+				"where age(harvest_date - days_until_expire, current_date - interval '1 days') = '00:00:00';";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		String x = "Here are the crops that expire tomorrow if you haven't sold them: \n";
+		while (results.next()) {
+				x += "-> The " + results.getString("crop_name") + " that you harvested from " + results.getString("name") + " on " + results.getDate("harvest_date").toString() + ". \n";	
+		}
+		x += "\n";
+		return x;
 	}
 
 }

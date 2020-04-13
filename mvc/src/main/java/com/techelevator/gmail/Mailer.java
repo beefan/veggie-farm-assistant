@@ -1,6 +1,8 @@
 package com.techelevator.gmail;
 
 import java.io.ByteArrayOutputStream;
+
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +16,8 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -31,6 +35,7 @@ import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Label;
 import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.Message;
+import com.techelevator.model.NotificationDAO;
 
 public class Mailer {
 	private static final String APPLICATION_NAME = "notify";
@@ -43,7 +48,8 @@ public class Mailer {
 	 */
 	private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_SEND);
 	private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-
+	
+	
 	/**
 	 * Creates an authorized Credential object.
 	 * 
@@ -104,7 +110,7 @@ public class Mailer {
 		return message;
 	}
 
-	public void sendDailyNotification(String recipientEmailAddress) throws GeneralSecurityException, IOException, MessagingException {
+	public void sendDailyNotification(String recipientEmailAddress, String body) throws GeneralSecurityException, IOException, MessagingException {
 
 		// AUTHENTICATE APPLICATION
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -112,8 +118,7 @@ public class Mailer {
 				.setApplicationName(APPLICATION_NAME).build();
 
 		// TODO String body = COMPILE DAILY NOTIFICATIONS
-		String body = "This message sent from Harvest App Eclipse Server";
-
+		
 		// CREATE EMAIL
 		MimeMessage email = createEmail(recipientEmailAddress, body);
 		
