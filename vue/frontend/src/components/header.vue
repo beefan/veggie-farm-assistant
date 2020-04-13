@@ -10,7 +10,7 @@
       <router-link class="spacing" :to = "{name: 'cropplanner'}">Crop Planner</router-link>
       <router-link class="spacing" :to = "{name:'harvesttimes'}">Upload/Edit Harvest Times</router-link>
       <router-link class="spacing" :to = "{name: 'farmlog'}">Farm Log</router-link>
-      <router-link class="spacing" :to = "{name: 'expiration'}">Waste Info</router-link> 
+      <router-link class="spacing1" :to = "{name: 'expiration'}">Waste Info</router-link> 
       
       
       </div>
@@ -41,12 +41,12 @@ data () {
   background-color:#175676;
 }
 .space {
-  width: 7rem;
+  width: 9rem;
   margin:0;
   padding:0;
 }
 .space1 {
-  width: 10rem;
+  width: 12rem;
   margin:0;
   padding:0;
 }

@@ -1,21 +1,18 @@
 <template>
-<body class="cropPlanner">
+<div class="cropPlanner">
   <Header></Header>
 
   <section class="newFieldContainer">
     <div class="newFieldCreate">
-      <h2>Add New Field:</h2>
+      <span class="textNew">Add New Field</span>
       <input class="input btn" type="text" placeholder="Enter New Field Name" />
       <button class="addNewField btn" @click="addField($event)">Create</button>
     </div>
   </section>
 
-  <section class="fields">
+  
     <div class="fieldsWrapper">
       <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
-        <span class="deleteField">Delete Field:</span>
-        <span class="spaceBetween"></span>
-        <img :src="deleteImg" class="deleteImg" @click="deleteField(field.id);" />
         <div class="fieldName">
           <input
             class="fieldNamebtn"
@@ -23,8 +20,9 @@
             :value="field['name']"
             @change="updateField($event, field)"
           />
+          <img :src="deleteImg" class="deleteImg" @click="deleteField(field.id);" />
         </div>
-
+        <br>
         <table class="addNewCropFieldTable">
           <thead>
             <tr>
@@ -119,11 +117,209 @@
       <br />
       <br />
     </div>
-  </section>
+  
   <br />
   <Footer></Footer>
-</body>
+</div>
 </template>
+
+<style>
+span.textNew{
+  margin-top:10px;
+  margin-left: .5vw;
+}
+
+.deleteImg:hover{
+  opacity: 60%;
+  
+}
+
+ div.fieldName > img {
+  width: 1.2%;
+  margin-left:6%;
+  margin-right: 1%;
+  padding:0;
+}
+
+div.fieldName{
+  width:100%;
+  height:100%;
+  background-color:#130f40;
+  border-radius: 30px 30px 0px 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+div.fieldName > input {
+  width:80%;
+  margin-left:10%;
+}
+
+.newFieldContainer {
+  position: fixed;
+  top: 85%;
+  border-radius: 0 30px 30px 0px;
+  width: 15vw;
+  margin-left:0;
+  background-color:#130f40;
+  z-index:999;
+  font-family: 'Lato', sans-serif;
+  font-size: 2vw;
+  padding:0;
+  color: white;
+}
+
+.newFieldCreate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fieldName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.csvUploadFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+div.fieldLoaded {
+  position: relative;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 50px;
+  width: 95%;
+  background: transparent;
+  box-shadow: 20px 20px 50px rgb(180, 180, 180),
+    -30px -30px 60px rgb(255, 255, 255);
+}
+
+
+
+.addNewCropFieldTable {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 70%;
+  color: #130f40;
+  border: none;
+  background-color: transparent;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  
+}
+
+.addedCropsFieldTable {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 90%;
+  color: #130f40;
+  border: none;
+  background-color: transparent;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.fieldNamebtn {
+  background: #130f40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  color: White;
+  font-family: "Lato", sans-serif;
+  padding: 0;
+  cursor: pointer;
+  font-size: 3rem;
+  width: 1000%;
+  text-align: center;
+}
+
+.fieldNamebtn:hover {
+  opacity: 70%;
+}
+
+.fieldName.btn {
+  width: 400px;
+  height: 1.8rem;
+}
+
+.newFieldContainer .btn:last-of-type {
+  margin-right: 1rem;
+  margin-left: .5rem;
+  height: 30px;
+  margin-bottom: .5vw;
+}
+
+#app > div > section.newFieldContainer > div > button{
+  margin-left: 30%;
+  margin-right: auto;
+  width: 5vw;
+  color: black;
+  background-color:#f7b254
+}
+#app > div > section.newFieldContainer > div > button:hover{
+opacity: 70%;
+  box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
+}
+.newFieldContainer .btn {
+  font-size: 1rem;
+  transition: background-color 150ms;
+  padding: 0 0.6rem;
+  border-radius: 0.3rem;
+  height: 3rem;
+  font-family: "Lato", sans-serif;
+}
+
+.addNewFieldCreate > button {
+  margin-left: auto;
+  margin-right: auto;
+  width: 10px;
+  
+}
+
+.fieldsWrapper {
+  position: relative;
+  top: 50px;
+  margin: auto;
+  border-radius:30%;
+}
+
+.fieldTable {
+        border-collapse: collapse;
+        font-size: 1.1rem;
+        width: 100%;
+        color: #130f40;
+        border: none;
+        background-color: transparent;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+</style>
+
+
+
+
 
 <script>
 import Upload from "../components/csvUpload.vue";
@@ -403,5 +599,3 @@ export default {
 };
 </script>
 
-<style>
-</style>

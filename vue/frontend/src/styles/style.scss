@@ -66,10 +66,10 @@
     //nav bar links (all except last link(see a.spacing1))
     p.spacing {
         text-decoration: none;
-        margin-right: 5%;
+        margin-right: 1%;
         font-family: 'Baloo Paaji 2', cursive;
-        color: #ffffff;
-        font-size: 1.5vw;
+        color: #f7b254;
+        font-size: 2vw;
     }
     
     a.spacing {
@@ -90,11 +90,11 @@
     
     //nav bar links on hover
     a.spacing:hover {
-        opacity: 70%;
+        color: #f7b254;
     }
     
     a.spacing1:hover {
-        opacity: 70%;
+        color: #f7b254;
     }
     
     //paragraph text
@@ -111,28 +111,6 @@
         margin: 0;
         color: #130f40;
         align-self: center;
-    }
-    
-    //h2 is used in upload fields
-    h2 {
-        font-family: 'Lato', sans-serif;
-        font-size: 4vw;
-        font-weight: bold;
-        padding: 0;
-        margin: 0;
-        color: #130f40;
-        align-self: center;
-    }
-    
-    //h3 is used in field tables
-    h3 {
-        font-family: 'Lato', sans-serif;
-        font-size: 2vw;
-        font-weight: bold;
-        padding: 0;
-        margin: 0 0 0 15px;
-        color: #130f40;
-        align-self: left;
     }
     
     //text instructions for page
@@ -192,20 +170,6 @@
         width: 99%;
         margin-left: auto;
         margin-right: auto;
-    }
-    
-    //fields table css
-    .fieldTable {
-        border-collapse: collapse;
-        font-size: 1.1rem;
-        width: 100%;
-        color: #130f40;
-        border: none;
-        background-color: transparent;
-        font-family: 'Lato', sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
     }
     
     //harvest table css
@@ -272,13 +236,6 @@
     
     tr:nth-child(even) {
         background-color: #BEBDCA;
-    }
-    
-    div.fieldName>img {
-        width: 2%;
-        padding: 8px 0 0 0;
-        margin: 0;
-        border: 0;
     }
     
     //trash can cell and logo css
@@ -351,176 +308,6 @@
         cursor: pointer;
     }
     
-    //fields page
-    //div setion for new fields
-    .newFieldContainer {
-        flex-basis: 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        margin: 0.8rem 0;
-        padding: 0 1rem;
-        color: #f6f6f6;
-        background: #fcead0;
-        border-top: 2px solid #282451;
-        border-bottom: 2px solid #282451;
-        height: 4rem;
-    }
-    
-    .newFieldCreate {
-        display: flex;
-        align-items: center;
-    }
-    
-    .fieldName {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .csvUploadFields {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    
-    .fieldName.btn {
-        width: 400px;
-        height: 1.8rem;
-    }
-    
-    .newFieldContainer h2 {
-        font-size: 1.8rem;
-        white-space: nowrap;
-        border: none;
-        font-family: 'Lato', sans-serif;
-        margin-right: 1rem;
-    }
-    
-    .newFieldContainer .btn:last-of-type {
-        margin-right: 1rem;
-        margin-left: 0rem;
-        height: 30px;
-    }
-    
-    .newFieldContainer .btn {
-        font-size: 1.4rem;
-        transition: background-color 150ms;
-        padding: 0 0.6rem;
-        border-radius: 0.3rem;
-        height: 3rem;
-        font-family: 'Lato', sans-serif;
-    }
-    
-    .addNewFieldCreate>button {
-        margin-left: auto;
-        margin-right: auto;
-        width: 10px;
-    }
-    
-    .fieldsWrapper {
-        position: relative;
-        top: 50px;
-        margin: auto;
-    }
-    
-    .fieldsLoaded {
-        flex-basis: 40%;
-        align-self: center;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-        align-content: space-around;
-    }
-    
-    //div secition for added fields
-    div.fieldLoaded {
-        border: 2px solid #282451;
-        border-radius: 10px;
-        width: 90%;
-        margin-left: auto;
-        margin-right: 10px;
-        background: #fcead0;
-        margin-bottom: 20px;
-    }
-    
-    div.fieldLoaded {
-        border: 2px solid #282451;
-        border-radius: 10px;
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        background: #fcead0;
-    }
-    
-    .addNewCropFieldTable {
-        border-collapse: collapse;
-        font-size: 1.1rem;
-        width: 90%;
-        color: #130f40;
-        border: none;
-        background-color: transparent;
-        font-family: 'Lato', sans-serif;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0;
-    }
-    
-    .addedCropsFieldTable {
-        border-collapse: collapse;
-        font-size: 1.1rem;
-        width: 90%;
-        color: #130f40;
-        border: none;
-        background-color: transparent;
-        font-family: 'Lato', sans-serif;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0;
-    }
-    
-    .fields::-webkit-scrollbar {
-        height: 2.4rem;
-    }
-    
-    .fields::-webkit-scrollbar-thumb {
-        background-color: #66a3c7;
-        border: 0.8rem solid #0079bf;
-        border-top-width: 0;
-    }
-    
-    .fieldNamebtn {
-        background: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 0;
-        color: #130f40;
-        font-family: 'Lato', sans-serif;
-        padding: 0;
-        cursor: pointer;
-        font-size: 3rem;
-        width: 80%;
-        text-align: center;
-    }
-    
-    .fieldNamebtn:hover {
-        opacity: 70%;
-    }
-    
-    //hidden tables in field page
-    .hide {
-        visibility: hidden;
-    }
-    
-    .fieldNamebtn:hover {
-        opacity: 70%;
-    }
-    
     //farm log css
     #log {
         display: flex;
@@ -554,19 +341,6 @@
         top: 0;
         background: #a9e4f7;
         z-index: 999;
-    }
-    
-    body>section.fields>div>div>div.fieldName>img {
-        width: 12px;
-        padding: 0;
-        margin: 0;
-    }
-    
-    body>section.fields>div>div>div.fieldName>img:hover {
-        width: 13px;
-        opacity: 80%;
-        padding: 0;
-        margin: 0;
     }
     
     .spaceBetween {
