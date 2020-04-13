@@ -1,19 +1,6 @@
 <template>
-<div id="app">
-   <nav class="main-nav">
-     <div class="logo">
-       <img class="mainLogo" :src="logo" />
-     </div>
-     <Burger></Burger>
-   </nav>
-
-   <Sidebar>
-     <ul class="sidebar-panel-nav">
-       <li><router-link :to="{ name: 'home' }" >Home</router-link></li>
-       <li><router-link :to="{ name: 'login' }">Login</router-link></li>
-       <li><a href="#contact">Contact</a></li>
-     </ul>
-   </Sidebar>
+<div class="min-h-screen bg-grey bg-cover flex items-end block md:fixed w-full md:w-1/2 shadow-md" :style="{ backgroundImage: `url(${coverImage})` }">
+   <homepageHeader />
    <div class="registerWrapper">
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
@@ -67,18 +54,15 @@
 </template>
 
 <script>
-import Burger from '../components/Burger.vue';
-import Sidebar from '../components/Sidebar.vue';
-
+import homepageHeader from "../components/homepageHeader.vue";
 export default {
   name: 'register',
   components: {
-    Burger,
-   Sidebar,
+    homepageHeader: homepageHeader,
   },
   data() {
     return {
-      logo: require('../images/harvestassistlogo.png'),
+      coverImage: require('../images/background.jpg'),
       user: {  
         username: '',
         password: '',
@@ -116,7 +100,7 @@ export default {
 .registerWrapper{
      margin-right:auto;
      margin-left:auto;
-     background: rgba(12,12,12,.6);
+     background: rgba(12,12,12,.7);
      border: 2px solid #f7b254;
      border-radius: 6px;
      width: 30vw;
@@ -150,13 +134,13 @@ export default {
     label {
       color: white;
       margin-left: 15%;
-      font-family: 'Muli', sans-serif;
+      font-family: 'Baloo Paaji 2', cursive;
     }
     h4{
       color: #f7b254;
       font-size: 2rem;
       text-align: center;
-      font-family: 'Muli', sans-serif;
+      font-family: 'Baloo Paaji 2', cursive;
       margin:10px;
       padding:0;
     }
@@ -164,7 +148,7 @@ export default {
       margin-left: auto;
       margin-right:auto;
       height: 2rem;
-      width: 6rem;
+      width: 8rem;
       background: #f7b254;
       border-radius: 6px;
       border: .05rem solid black;
@@ -172,18 +156,18 @@ export default {
       font-weight: bolder;
       padding: 0;
       cursor: pointer;
-      font-family: 'Muli', sans-serif;
+      font-family: 'Baloo Paaji 2', cursive;
     }
     a.registered{
       display:flex;
       color:white;
       text-decoration: none;
-      font-family: 'Muli', sans-serif;
+      font-family: 'Baloo Paaji 2', cursive;
       justify-self:center;
 
     }
     
       
-  
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 </style>

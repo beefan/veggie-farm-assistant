@@ -1,8 +1,7 @@
 <template>
 <body class="wasteTimesBody">
   <Header></Header>
-  <br>
-    <br>
+  <br><br><br><br><br>
   <div class="wasteContainer">
     <div class="wasteTimesUpload">
       <div class="csvUpload">
@@ -74,16 +73,19 @@
     </div>
     </div>
  <br><br><br>
+ <Footer></Footer>
     </body>
 </template>
 
 <script>
 import Upload from "../components/csvUpload.vue";
-import Header from "../components/header.vue"
+import Header from "../components/header.vue";
+import Footer from "../components/footer.vue"
 export default {
   components: { 
     Upload: Upload,
-    Header: Header
+    Header: Header,
+    Footer : Footer
    },
 
   data() {

@@ -1,12 +1,14 @@
 
-<style>
-</style>
-
-
-<template>
-  
-<body>
+<template>  
+<body class="dashboard">
+  <section>
   <Header></Header>
+  </section>
+    <section>
+<div>
+  
+</div>
+</section>
 </body>
 
 </template>

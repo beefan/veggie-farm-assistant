@@ -2,7 +2,7 @@
 <body class="harvestTimesBody">
   <Header></Header>
   <br>
-    <br>
+    <br><br><br><br>
   <div class="harvestTimesContainer">
     <div class="havestTimesUpload">
       <div class="csvUpload">
@@ -115,18 +115,20 @@
 
   </div>
   <br><br><br>
-
+<Footer></Footer>
   </body>
 </template>
 
 <script>
 import Upload from "../components/csvUpload.vue";
 import Header from "../components/header.vue";
+import Footer from "../components/footer.vue";
+
 export default {
   props: {
     // apiUrl: String
   },
-  components: { Upload: Upload, Header: Header },
+  components: { Upload: Upload, Header: Header, Footer: Footer },
   data() {
     return {
       parse_header: [],
