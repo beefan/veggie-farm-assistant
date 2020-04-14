@@ -1,12 +1,8 @@
 <template>
 <body>
   <Header></Header>
-<<<<<<< HEAD
-  <!-- <email-notify></email-notify> -->
-=======
   <br />
   <br />
->>>>>>> c8f6331a86880a282a01cf3e176d0d1d9d2897ce
   <div id="log">
     <div class="logEntry">
       <div class="sectionHeader">Harvest Log</div>
@@ -75,12 +71,8 @@
 
 <script>
 import Header from "../components/header.vue";
-<<<<<<< HEAD
-// import Notify from "../components/notify.vue"
-=======
 import Footer from "../components/footer.vue"
 
->>>>>>> c8f6331a86880a282a01cf3e176d0d1d9d2897ce
 export default {
   components: { 
       Header, 
