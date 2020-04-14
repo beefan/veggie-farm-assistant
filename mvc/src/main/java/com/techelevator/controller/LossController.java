@@ -21,11 +21,12 @@ public class LossController {
 	
 	@PostMapping
 	public void saveLoss(@RequestBody Loss loss) {
+		System.out.print(loss.getCropName());
+		System.out.print(loss.getDollarAmount());
+		System.out.print(loss.getWeightAmount());
+		System.out.print(loss.getLossType());
 	 lossDao.saveLossInfo(loss.getCropName(), loss.getDollarAmount(), loss.getWeightAmount(), loss.getLossType());
-	System.out.print(loss.getCropName());
-	System.out.print(loss.getDollarAmount());
-	System.out.print(loss.getWeightAmount());
-	System.out.print(loss.getLossType());
+	
 	
 	}
 	

@@ -101,7 +101,7 @@
 export default {
   data() {
     return {
-      demoEmail: "noahwalcher@gmail.com",
+      demoEmail: "bfannin13@gmail.com",
       notifyApi: process.env.VUE_APP_REMOTE_API_NOTIFY,
       checked: false,
       dailies: ""
