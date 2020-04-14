@@ -2,15 +2,16 @@
 <body class="harvestTimesBody">
   <Header></Header>
   <br>
-    <br><br><br><br>
+    <br>
   <div class="harvestTimesContainer">
     <div class="havestTimesUpload">
+      <div class="sectionHeader">
+          Upload Harvest Times
+          </div>
       <div class="csvUpload">
         <upload
-        class="csvUploadClickBox"
           :verifyUploadFormat="uploadVerify"
           :uploadDocument="uploadSeedingTimes"
-          title="Upload Your Harvest Times" 
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
       </div>

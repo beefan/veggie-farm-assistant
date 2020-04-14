@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.time.LocalDate;
+
 public class Sale {
 
 		private String cropName;
@@ -7,6 +9,16 @@ public class Sale {
 		private double dollarAmount;
 		
 		private String saleType;
+		
+		private LocalDate saleDate;
+
+		public LocalDate getSaleDate() {
+			return saleDate;
+		}
+
+		public void setSaleDate(LocalDate saleDate) {
+			this.saleDate = saleDate;
+		}
 
 		public String getCropName() {
 			return cropName;

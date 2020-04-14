@@ -1,20 +1,72 @@
 <template>
-  <div class="csvContainer">
-        <h2>{{title}}</h2>
-      <div class="csvUploadData">
-        <br>
-            <input
-              type="file"
-              id="csv_file"
-              name="csv_file"
-              class="form-control"
-              @change="loadCSV($event)"
-            />
-            
-          </div>
-        </div>
-      
+<div class="csvContainer">
+<input type="file"
+       name="file"
+       id="file"
+       class="inputfile "
+       @change="loadCSV($event)" />
+       <label for="file" class="neumorphic"><img class="uploadIcon" :src="upload" /><span class="uploadText">Choose a file... </span></label>
+</div>
 </template>
+
+<style>
+    .csvContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:baseline;
+    }
+    div.csvUpload {
+        padding:0;
+        margin: auto;
+    }
+    .neumorphic {
+        margin: 10px; 
+        box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        padding: 0rem;
+        display: flex;
+        font-family: 'Lato', sans-serif;
+        text-align:center;
+    }
+    .uploadIcon {
+      position:relative;
+      width: 10%;
+      top:20%;
+      bottom:20%;
+      margin: 5px 5px 0px 5px;
+      padding:0;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+        
+        
+    }
+    .inputfile + label {
+      background-color: #f7b254;
+      width: 100%;
+      height: 130%;
+    font-size: 1.2rem;
+    color: black;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  opacity: 70%;
+  box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
+}
+    
+</style>
 
 <script>
 export default {
@@ -33,6 +85,7 @@ data() {
       sortOrders: {},
       sortKey: "",
       apiUrl: process.env.VUE_APP_REMOTE_API,
+      upload: require('../images/upload.png')
     };
   },
   methods: {
@@ -109,6 +162,4 @@ data() {
 }
 </script>
 
-<style>
 
-</style>

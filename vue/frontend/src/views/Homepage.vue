@@ -53,7 +53,7 @@ export default {
   background-repeat: no-repeat;
 }
 body {
-  background-color: #e1faff;
+  
   border: 0;
   margin: 0;
   padding: 0;
