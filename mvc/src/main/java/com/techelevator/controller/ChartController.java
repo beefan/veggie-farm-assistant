@@ -33,12 +33,12 @@ public class ChartController {
 	}
 	
 	@GetMapping("/sales/{id}")
-	public List<Sale> getSalesById(@PathVariable int id) {
+	public double[] getSalesById(@PathVariable int id) {
 		return chartDao.sevenDaySalesByCrop(id);
 	}
 	
 	@GetMapping("/harvest/{id}")
-	public List<Harvest> getHarvestById(@PathVariable int id) {
+	public double[] getHarvestById(@PathVariable int id) {
 		return chartDao.sevenDayHarvestByCrop(id);
 	}
 	

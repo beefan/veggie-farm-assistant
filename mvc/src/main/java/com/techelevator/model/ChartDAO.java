@@ -5,9 +5,9 @@ import java.util.Map;
 
 public interface ChartDAO {
 	
-	public List<Double> sevenDaySalesByCrop(int cropId);
+	public double[] sevenDaySalesByCrop(int cropId);
 	
-	public List<Double> sevenDayHarvestByCrop(int cropId);
+	public double[] sevenDayHarvestByCrop(int cropId);
 	
 	public Map<Integer, String> getCropsWithSalesData();
 	
