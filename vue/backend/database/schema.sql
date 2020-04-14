@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+drop table if exists loss;
 drop table if exists sales;
 drop table if exists harvest;
 drop table if exists bed;
@@ -75,6 +76,16 @@ create table expiration(
  sale_date date not null,
 constraint fk_crop_name foreign key (crop_id) references crop(id)
 );
+
+create Table loss(
+id serial primary key,
+crop_id int not null,
+weight_info numeric not null,
+loss_type varchar(64) not null,
+dollar_amount decimal,
+constraint fk_crop_name foreign key (crop_id) references crop(id)
+); 
+
 
 
 COMMIT TRANSACTION;
