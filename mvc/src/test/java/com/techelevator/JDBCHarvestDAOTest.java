@@ -16,12 +16,12 @@ import junit.*;
 
 public class JDBCHarvestDAOTest extends DAOIntegrationTest{
 
-	private static SingleConnectionDataSource dataSource;
-	private JDBCHarvestDAO dao;
-	private JdbcTemplate jdbcTemplate;
-	private JDBCBedDAO bed;
-	private int fieldId;
-	private int bedId;
+	protected static SingleConnectionDataSource dataSource;
+	protected JDBCHarvestDAO dao;
+	protected JdbcTemplate jdbcTemplate;
+	protected JDBCBedDAO bed;
+	protected int fieldId;
+	protected int bedId;
 	
 	@Before
 	public void setup() {
@@ -81,6 +81,8 @@ public class JDBCHarvestDAOTest extends DAOIntegrationTest{
 	
 	private void truncate() {
 		String sql = "truncate harvest cascade";
+		jdbcTemplate.update(sql);
+		sql = "truncate loss cascade";
 		jdbcTemplate.update(sql);
 		sql = "truncate bed cascade";
 		jdbcTemplate.update(sql);

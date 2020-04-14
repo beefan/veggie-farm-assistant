@@ -63,7 +63,7 @@ create table expiration(
  crop_count int,
  username varchar(255) not null,
  harvest_date date not null,
- constraint fk_bed_id foreign key (bed_id) references bed(id),
+ 
  constraint fk_crop_id foreign key (crop_id) references crop(id),
  constraint fk_username foreign key (username) references users(username)
  );
@@ -80,7 +80,7 @@ constraint fk_crop_name foreign key (crop_id) references crop(id)
 create Table loss(
 id serial primary key,
 crop_id int not null,
-weight_info numeric not null,
+weight_info decimal not null,
 loss_type varchar(64) not null,
 dollar_amount decimal,
 constraint fk_crop_name foreign key (crop_id) references crop(id)
