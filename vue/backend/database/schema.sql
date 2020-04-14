@@ -69,9 +69,10 @@ create table expiration(
  
  create table sales(
  id serial primary key,
- crop_id int not null unique,
+ crop_id int not null,
  dollar_amount decimal not null,
  sale_type varchar(255) not null,
+ sale_date date not null,
 constraint fk_crop_name foreign key (crop_id) references crop(id)
 );
 

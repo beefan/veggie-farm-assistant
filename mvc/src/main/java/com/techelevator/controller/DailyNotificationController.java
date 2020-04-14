@@ -23,7 +23,7 @@ import com.techelevator.model.NotificationDAO;
 public class DailyNotificationController {
 
 	private boolean isRegisteredForEmail = false;
-	
+
 	@Autowired
 	private NotificationDAO notificationDao;
 
