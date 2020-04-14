@@ -6,25 +6,29 @@
       <div>
         <br />
         <email-notify></email-notify>
+        </div>
+      
+      <div class="harvestTimesUpload">
+      <div class="sectionHeader">Harvest and Sales Data</div>
 
-      </div>
-       <div class="sectionHeader">Harvest and Sales Data</div>
-    <div class="dailies">
-      <div class="chartSmall" v-if="showCharOptions">
-        <select
-          id="field"
-          name="cropChartDropdown"
-          @change="refreshChart($event)"
-          v-model="selectedCrop"
-        >
-          <option value></option>
-          <option v-for="crop in harvestData" v-bind:key="crop">{{crop}}</option>
-        </select>
-        <line-chart :chart-data="chartData" />
-      </div>
+      <div class="dailies">
+        <div class="chartSmall" v-if="showCharOptions">
+          <select
+            id="field"
+            name="cropChartDropdown"
+            @change="refreshChart($event)"
+            v-model="selectedCrop"
+          >
+            <option value></option>
+            <option v-for="crop in harvestData" v-bind:key="crop">{{crop}}</option>
+          </select>
+          <line-chart :chart-data="chartData" />
+        </div>
+        </div>
+        </div>
       </div>
     </div>
-  </div>
+ 
   <br />
   <br />
   <Footer></Footer>
@@ -77,7 +81,6 @@ export default {
           return response.json();
         })
         .then(data => {
-      
           this.harvestData = data;
           fetch(this.apiUrl + "/sales")
             .then(response => {
@@ -106,8 +109,8 @@ export default {
         }
       }
       if (selectedId) {
-      this.getSevenDayHarvestData(selectedId);
-      this.getSevenDaySalesData(selectedId);
+        this.getSevenDayHarvestData(selectedId);
+        this.getSevenDaySalesData(selectedId);
       }
     },
 
@@ -117,7 +120,7 @@ export default {
           return response.json();
         })
         .then(data => {
-         this.cropHarvestData = data;
+          this.cropHarvestData = data;
           console.log("check yoself");
           console.log(this.cropHarvestData);
           this.fillData();
@@ -135,7 +138,7 @@ export default {
         .then(data => {
           this.cropSalesData = data;
           this.fillData();
-       
+
           console.log("schmeck yoself");
           console.log(this.cropSalesData);
           console.log(this.cropSalesData[6] + "<------------------------");
@@ -147,27 +150,31 @@ export default {
 
     fillData() {
       let mv = this;
+      //let today = new Date();
+      let yesterday = x => {
+       return new Date(new Date().setDate(new Date().getDate() - x)).toString().substring(0, 10);
+      };
       this.chartData = {
         options: {
-          title: {display: true, text: 'hardcoded'},
+          title: { display: true, text: "hardcoded" },
           responsive: true,
           maintainAspectRatio: false
         },
-        labels: [1, 2, 3, 4, 5, 6, 7],
+        labels: [yesterday(6), yesterday(5),yesterday(4),yesterday(3),yesterday(2), yesterday(1), "Today"],
         datasets: [
           {
             label: "SALES",
-            borderColor: '#130f40',
+            borderColor: "#130f40",
+            backgroundColor: "RGBA(19,15,64,1)",
             data: mv.cropSalesData
           },
           {
             label: "Harvest",
             borderColor: "#f7b254",
-            backgroundColor: "#f7b254",
-            background: 'transparent',
+            backgroundColor: "RGBA(247,178,84,1)",
+            fillOpacity: 0,
             data: mv.cropHarvestData
           }
-       
         ]
       };
     },
