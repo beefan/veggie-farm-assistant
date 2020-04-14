@@ -139,6 +139,8 @@
         flex-direction: column;
         justify-content: center;
         width: 95%;
+        height: auto;
+        overflow: scroll;
         margin-left: auto;
         margin-right: auto;
         background: transparent;
@@ -161,6 +163,8 @@
     //sets width for tables inside container on harvest times page
     div.harvestTables {
         width: 99%;
+        height: 25vw;
+        overflow: scroll;
         margin-left: auto;
         margin-right: auto;
     }

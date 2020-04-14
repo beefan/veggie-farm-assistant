@@ -53,7 +53,7 @@
         <br>
         <table class ="existingCrops">
           <thead>
-            <tr>
+            <tr class="sticky">
               <th>Crop Name</th>
               <th>Direct Seed to Harvest Time</th>
               <th>Direct Seed to Transplant Time</th>
