@@ -6,8 +6,11 @@
       <div>
         <br />
         <email-notify></email-notify>
+
       </div>
-      <div class="small" v-if="true">
+       <div class="sectionHeader">Harvest and Sales Data</div>
+    <div class="dailies">
+      <div class="chartSmall" v-if="showCharOptions">
         <select
           id="field"
           name="cropChartDropdown"
@@ -17,7 +20,8 @@
           <option value></option>
           <option v-for="crop in harvestData" v-bind:key="crop">{{crop}}</option>
         </select>
-        <line-chart :chart-data="chartData" :options="chartOptions" />
+        <line-chart :chart-data="chartData" />
+      </div>
       </div>
     </div>
   </div>
@@ -39,8 +43,7 @@ export default {
     Header,
     Footer,
     "email-notify": Notify,
-    LineChart,
-    
+    LineChart
   },
 
   data() {
@@ -54,17 +57,14 @@ export default {
       chartData: null,
       selectedCrop: null,
       cropSalesData: [],
-      cropHarvestData: []
+      cropHarvestData: [],
+      showCharOptions: false
     };
   },
-  
-
-
-
 
   mounted() {
     this.fillData();
-    this.renderChart(this.chartdata, this.options)
+    this.renderChart(this.chartdata, this.options);
   },
 
   created() {
@@ -77,19 +77,20 @@ export default {
           return response.json();
         })
         .then(data => {
+      
           this.harvestData = data;
-        })
-        .catch(err => {
-          console.error(err);
-        });
+          fetch(this.apiUrl + "/sales")
+            .then(response => {
+              return response.json();
+            })
 
-      fetch(this.apiUrl + "/sales")
-        .then(response => {
-          return response.json();
-        })
-
-        .then(data => {
-          this.harvestData = Object.assign(this.harvestData, data);
+            .then(data => {
+              this.harvestData = Object.assign(this.harvestData, data);
+              this.showCharOptions = true;
+            })
+            .catch(err => {
+              console.error(err);
+            });
         })
         .catch(err => {
           console.error(err);
@@ -104,9 +105,10 @@ export default {
           selectedId = key;
         }
       }
+      if (selectedId) {
       this.getSevenDayHarvestData(selectedId);
       this.getSevenDaySalesData(selectedId);
-      this.fillData();
+      }
     },
 
     getSevenDayHarvestData(cropId) {
@@ -115,17 +117,10 @@ export default {
           return response.json();
         })
         .then(data => {
-          this.cropHarvestData[0] = data.map(x=>{
-            return x.cropWeight;
-          });
-          this.cropHarvestData[1] = data.map(x=>{
-             return x.harvestDate;
-          })
-          this.cropHarvestData[2] = data.map(x=>{
-            return x.cropCount;
-          })
+         this.cropHarvestData = data;
           console.log("check yoself");
           console.log(this.cropHarvestData);
+          this.fillData();
         })
         .catch(err => {
           console.error(err);
@@ -138,17 +133,12 @@ export default {
           return response.json();
         })
         .then(data => {
-          this.cropSalesData[0] = data.map(x=>{
-            return x.dollarAmount;
-          });
-          this.cropSalesData[1] = data.map(x=>{
-             return x.saleType;
-          })
-          this.cropSalesData[2] = data.map(x=>{
-            return x.saleDate;
-          })
+          this.cropSalesData = data;
+          this.fillData();
+       
           console.log("schmeck yoself");
           console.log(this.cropSalesData);
+          console.log(this.cropSalesData[6] + "<------------------------");
         })
         .catch(err => {
           console.error(err);
@@ -156,33 +146,32 @@ export default {
     },
 
     fillData() {
+      let mv = this;
       this.chartData = {
         options: {
-        responsive: true,
-        maintainAspectRatio: false
+          title: {display: true, text: 'hardcoded'},
+          responsive: true,
+          maintainAspectRatio: false
         },
-        labels: [1, 2, 3, 4, 5, 6, 7 ],
+        labels: [1, 2, 3, 4, 5, 6, 7],
         datasets: [
           {
-            label: 'SALES',
-            backgroundColor: "red",
-            data: this.cropSalesData[0],
+            label: "SALES",
+            borderColor: '#130f40',
+            data: mv.cropSalesData
           },
           {
-            label: this.cropSalesData[1],
-            backgroundColor: "blue",
-            data: [this.cropSalesData[1]]
-          },
-          {
-            label: this.cropSalesData[2],
-            backgroundColor: "green",
-            data: [this.cropSalesData[2]]
+            label: "Harvest",
+            borderColor: "#f7b254",
+            backgroundColor: "#f7b254",
+            background: 'transparent',
+            data: mv.cropHarvestData
           }
+       
         ]
       };
-
     },
-    
+
     getRandomInt() {
       this.cropSalesData[0];
     }
@@ -259,6 +248,12 @@ export default {
   height: 100%;
   margin-right: auto;
   margin-left: auto;
+}
+
+.chartSmall {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dashboardContent {

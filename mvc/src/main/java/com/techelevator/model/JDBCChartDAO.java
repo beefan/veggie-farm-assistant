@@ -24,7 +24,7 @@ public class JDBCChartDAO implements ChartDAO{
 	}
 	
 	@Override
-	public List<Double> sevenDaySalesByCrop(int cropId) {
+	public double[] sevenDaySalesByCrop(int cropId) {
 		List<Sale> sales = new ArrayList<Sale>();
 		String sql = "select crop_name, dollar_amount, sale_date, sale_type from sales " + 
 				"join crop on crop.id = sales.crop_id " + 
@@ -38,11 +38,22 @@ public class JDBCChartDAO implements ChartDAO{
 			sale.setSaleType(results.getString("sale_type"));
 			sales.add(sale);
 		}
-		return sales;
+		double[] result = new double[7];
+		for(int i = 6; i >= 0; i--) {
+			LocalDate day = LocalDate.now().minusDays(i);
+			double counter = 0.0;
+			for (Sale current : sales) {
+				if (current.getSaleDate().compareTo(day) == 0) {
+					counter += current.getDollarAmount();
+				}
+			}
+			result[6-i] = counter;
+		}
+		return result;
 	}
 
 	@Override
-	public List<Double> sevenDayHarvestByCrop(int cropId) {
+	public double[] sevenDayHarvestByCrop(int cropId) {
 		List<Harvest> harvests = new ArrayList<Harvest>();
 		String sql = "select crop_name, crop_weight, crop_count, harvest_date from harvest " + 
 				"join crop on crop.id = harvest.crop_id " + 
@@ -56,7 +67,18 @@ public class JDBCChartDAO implements ChartDAO{
 			harvest.setCropCount(results.getInt("crop_count"));
 			harvests.add(harvest);	
 		}	
-		return harvests;
+		double[] result = new double[7];
+		for(int i = 6; i >= 0; i--) {
+			LocalDate day = LocalDate.now().minusDays(i);
+			double counter = 0.0;
+			for (Harvest current : harvests) {
+				if (current.getHarvestDate().compareTo(day) == 0) {
+					counter += current.getCropWeight();
+				}
+			}
+			result[6-i] = counter;
+		}
+		return result;
 	}
 
 	@Override
