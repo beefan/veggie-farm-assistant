@@ -24,7 +24,7 @@ public class JDBCChartDAO implements ChartDAO{
 	}
 	
 	@Override
-	public List<Sale> sevenDaySalesByCrop(int cropId) {
+	public List<Double> sevenDaySalesByCrop(int cropId) {
 		List<Sale> sales = new ArrayList<Sale>();
 		String sql = "select crop_name, dollar_amount, sale_date, sale_type from sales " + 
 				"join crop on crop.id = sales.crop_id " + 
@@ -42,7 +42,7 @@ public class JDBCChartDAO implements ChartDAO{
 	}
 
 	@Override
-	public List<Harvest> sevenDayHarvestByCrop(int cropId) {
+	public List<Double> sevenDayHarvestByCrop(int cropId) {
 		List<Harvest> harvests = new ArrayList<Harvest>();
 		String sql = "select crop_name, crop_weight, crop_count, harvest_date from harvest " + 
 				"join crop on crop.id = harvest.crop_id " + 
