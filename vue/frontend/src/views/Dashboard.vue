@@ -7,7 +7,7 @@
         <br />
         <email-notify></email-notify>
       </div>
-      <div class="small" v-if="true">
+      <div class="chartSmall" v-if="true">
         <select
           id="field"
           name="cropChartDropdown"
