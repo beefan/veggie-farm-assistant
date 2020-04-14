@@ -6,8 +6,11 @@
       <div>
         <br />
         <email-notify></email-notify>
-      </div>
+        </div>
+      
+      <div class="harvestTimesUpload">
       <div class="sectionHeader">Harvest and Sales Data</div>
+
       <div class="dailies">
         <div class="chartSmall" v-if="showCharOptions">
           <select
@@ -21,9 +24,11 @@
           </select>
           <line-chart :chart-data="chartData" />
         </div>
+        </div>
+        </div>
       </div>
     </div>
-  </div>
+ 
   <br />
   <br />
   <Footer></Footer>
