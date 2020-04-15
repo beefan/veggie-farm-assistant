@@ -10,23 +10,23 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JDBCLossDAO  implements LossDAO{
+public class JDBCSaleDAO implements SaleDAO{
 
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public JDBCLossDAO(DataSource dataSource) {
+	public JDBCSaleDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	@Override
-	public void saveLossInfo(String cropName, double dollarAmount, double weightAmount, String lossType) {
-		String sql = "Select id from crop where crop_name =?";
+	public void saveSale(String cropName, double dollarAmount, String saleType) {
+		String sql = "SELECT id FROM crop WHERE crop_name = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cropName);
 		results.next();
 		int cropId = results.getInt("id");
-		sql = "Insert into loss (crop_id,weight_info,loss_type,dollar_amount, loss_date) values (?,?,?,?, ?);";
-		jdbcTemplate.update(sql, cropId, weightAmount, lossType, dollarAmount, LocalDate.now());
+		sql = "INSERT INTO sales (crop_id, dollar_amount, sale_type, sale_date) VALUES (?,?,?,?)";
+		jdbcTemplate.update(sql, cropId, dollarAmount, saleType, LocalDate.now());
 		
 	}
 

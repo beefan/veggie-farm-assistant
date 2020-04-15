@@ -83,6 +83,7 @@ crop_id int not null,
 weight_info decimal not null,
 loss_type varchar(64) not null,
 dollar_amount decimal,
+loss_date date not null,
 constraint fk_crop_name foreign key (crop_id) references crop(id)
 ); 
 

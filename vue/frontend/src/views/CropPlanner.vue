@@ -1,16 +1,15 @@
 <template>
-<div class="cropPlanner">
-  <Header></Header>
+  <div class="cropPlanner">
+    <Header></Header>
 
-  <section class="newFieldContainer">
-    <div class="newFieldCreate">
-      <span class="textNew">Add New Field</span>
-      <input class="input btn" type="text" placeholder="Enter New Field Name" />
-      <button class="addNewField btn" @click="addField($event)">Create</button>
-    </div>
-  </section>
+    <section class="newFieldContainer">
+      <div class="newFieldCreate">
+        <span class="textNew">Add New Field</span>
+        <input class="input btn" type="text" placeholder="Enter New Field Name" />
+        <button class="addNewField btn" @click="addField($event)">Create</button>
+      </div>
+    </section>
 
-  
     <div class="fieldsWrapper">
       <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
         <div class="fieldName">
@@ -22,7 +21,7 @@
           />
           <img :src="deleteImg" class="deleteImg" @click="deleteField(field.id);" />
         </div>
-        <br>
+        <br />
         <table class="addNewCropFieldTable">
           <thead>
             <tr>
@@ -42,7 +41,7 @@
             <td>
               <input class="fieldTable pd" type="date" value="Planting Date" />
             </td>
-            <td class="submit">
+            <td class="plannerSubmit">
               <a href="cropplanner">
                 <img :src="submitUrl" @click="addNewEntry($event);" />
               </a>
@@ -116,42 +115,41 @@
       <br />
       <br />
     </div>
-  
-  <br />
-  <Footer></Footer>
-</div>
+
+    <br />
+    <Footer></Footer>
+  </div>
 </template>
 
 <style>
-span.textNew{
-  margin-top:10px;
-  margin-left: .5vw;
+span.textNew {
+  margin-top: 10px;
+  margin-left: 0.5vw;
 }
 
-.deleteImg:hover{
+.deleteImg:hover {
   opacity: 60%;
-  
 }
 
- div.fieldName > img {
+div.fieldName > img {
   width: 1.2%;
-  margin-left:6%;
+  margin-left: 6%;
   margin-right: 1%;
-  padding:0;
+  padding: 0;
 }
 
-div.fieldName{
-  width:100%;
-  height:100%;
-  background-color:#130f40;
+div.fieldName {
+  width: 100%;
+  height: 100%;
+  background-color: #130f40;
   border-radius: 30px 30px 0px 0;
   margin-right: auto;
   margin-left: auto;
 }
 
 div.fieldName > input {
-  width:80%;
-  margin-left:10%;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .newFieldContainer {
@@ -159,12 +157,12 @@ div.fieldName > input {
   top: 85%;
   border-radius: 0 30px 30px 0px;
   width: 15vw;
-  margin-left:0;
-  background-color:#130f40;
-  z-index:999;
-  font-family: 'Lato', sans-serif;
+  margin-left: 0;
+  background-color: #130f40;
+  z-index: 999;
+  font-family: "Lato", sans-serif;
   font-size: 2vw;
-  padding:0;
+  padding: 0;
   color: white;
 }
 
@@ -197,15 +195,13 @@ div.fieldLoaded {
   flex-direction: column;
   justify-content: center;
   margin-left: auto;
-  margin-right:auto;
+  margin-right: auto;
   margin-bottom: 50px;
   width: 95%;
   background: transparent;
   box-shadow: 20px 20px 50px rgb(180, 180, 180),
     -30px -30px 60px rgb(255, 255, 255);
 }
-
-
 
 .addNewCropFieldTable {
   border-collapse: collapse;
@@ -219,7 +215,6 @@ div.fieldLoaded {
   margin-left: auto;
   margin-right: auto;
   padding: 0;
-  
 }
 
 .addedCropsFieldTable {
@@ -262,20 +257,20 @@ div.fieldLoaded {
 
 .newFieldContainer .btn:last-of-type {
   margin-right: 1rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   height: 30px;
-  margin-bottom: .5vw;
+  margin-bottom: 0.5vw;
 }
 
-#app > div > section.newFieldContainer > div > button{
+#app > div > section.newFieldContainer > div > button {
   margin-left: 30%;
   margin-right: auto;
   width: 5vw;
   color: black;
-  background-color:#f7b254
+  background-color: #f7b254;
 }
-#app > div > section.newFieldContainer > div > button:hover{
-opacity: 70%;
+#app > div > section.newFieldContainer > div > button:hover {
+  opacity: 70%;
   box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2);
 }
 .newFieldContainer .btn {
@@ -291,29 +286,122 @@ opacity: 70%;
   margin-left: auto;
   margin-right: auto;
   width: 10px;
-  
 }
 
 .fieldsWrapper {
   position: relative;
   top: 50px;
   margin: auto;
-  border-radius:30%;
+  border-radius: 30%;
 }
 
 .fieldTable {
-        border-collapse: collapse;
-        font-size: 1.1rem;
-        width: 100%;
-        color: #130f40;
-        border: none;
-        background-color: transparent;
-        font-family: 'Lato', sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-    
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 100%;
+  color: #130f40;
+  border: none;
+  background-color: transparent;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#app
+  > div
+  > div.fieldsWrapper
+  > div
+  > table.addedCropsFieldTable
+  > thead
+  > tr
+  > th:nth-child(1) {
+  width: 8vw;
+}
+#app
+  > div
+  > div.fieldsWrapper
+  > div
+  > table.addedCropsFieldTable
+  > thead
+  > tr
+  > th:nth-child(2) {
+  width: 20vw;
+}
+#app
+  > div
+  > div.fieldsWrapper
+  > div
+  > table.addedCropsFieldTable
+  > thead
+  > tr
+  > th:nth-child(3) {
+  width: 20vw;
+}
+#app
+  > div
+  > div.fieldsWrapper
+  > div
+  > table.addedCropsFieldTable
+  > thead
+  > tr
+  > th:nth-child(4) {
+  width: 20vw;
+}
+#app
+  > div
+  > div.fieldsWrapper
+  > div
+  > table.addedCropsFieldTable
+  > thead
+  > tr
+  > th:nth-child(5) {
+  width: 8vw;
+}
+table.addNewCropFieldTable > thead > tr > th:nth-child(1) {
+  width: 20vw;
+}
+table.addNewCropFieldTable > thead > tr > th:nth-child(2) {
+  width: 20vw;
+}
+table.addNewCropFieldTable > thead > tr > th:nth-child(3) {
+  width: 20vw;
+}
+table.addNewCropFieldTable > thead > tr > th:nth-child(4) {
+  width: 8vw;
+}
+
+td.plannerSubmit > a > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 70%;
+  width: 25%;
+  padding: 8px 0 8px 0;
+  cursor: pointer;
+}
+td.plannerSubmit > a > img:hover {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 70%;
+  width: 26%;
+  padding: 8px 0 8px 0;
+  cursor: pointer;
+}
+
+body.cropPlanner {
+  white-space: nowrap;
+}
+body.cropPlanner {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 </style>
 
 
@@ -352,12 +440,20 @@ export default {
       }
 
       for (let item of this.parse_csv) {
-        if (!item["cropName"].match(/[a-z]/i)
-        || (item["transplantDate"] && 
-        !item["transplantDate"].match(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i) )
-        ||!item["plantingDate"].match(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i)) 
-        {return false;}}
-        return true;
+        if (
+          !item["cropName"].match(/[a-z]/i) ||
+          (item["transplantDate"] &&
+            !item["transplantDate"].match(
+              /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
+            )) ||
+          !item["plantingDate"].match(
+            /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
+          )
+        ) {
+          return false;
+        }
+      }
+      return true;
     },
     deleteEntry(bedId) {
       fetch(this.apiUrl + "/beds/" + bedId, {

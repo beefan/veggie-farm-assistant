@@ -1,40 +1,85 @@
 <template>
 <body>
   <Header></Header>
-  <div class="harvestTimesContainer">
-    <div class="havestTimesUpload">
-      <div>
-        <br />
+  <div class = "dashboardWrapper">
+  <div class="notificationsContainer">
         <email-notify></email-notify>
-        </div>
-      
-      <div class="harvestTimesUpload">
-      <div class="sectionHeader">Harvest and Sales Data</div>
-
-      <div class="dailies">
-        <div class="chartSmall" v-if="showCharOptions">
-          <select
-            id="field"
-            name="cropChartDropdown"
-            @change="refreshChart($event)"
-            v-model="selectedCrop"
-          >
-            <option value></option>
-            <option v-for="crop in harvestData" v-bind:key="crop">{{crop}}</option>
-          </select>
-          <line-chart :chart-data="chartData" />
-        </div>
-        </div>
+      </div>
+</div>
+      <div class="chartWrapper">
+        <div class="sectionHeader">Harvest and Sales Data</div>
+        <div class="dailies">
+          <br>
+          <div class="chartSmall" v-if="showCharOptions">
+            <select
+              id="field"
+              name="cropChartDropdown"
+              @change="refreshChart($event)"
+              v-model="selectedCrop"
+            >
+              <option value></option>
+              <option v-for="crop in cropsWithChartData" v-bind:key="crop">{{crop}}</option>
+            </select>
+            <line-chart :chart-data="chartData" />
+          </div>
+          <br><br>
         </div>
       </div>
-    </div>
- 
+    
+
   <br />
   <br />
   <Footer></Footer>
 </body>
 </template>
 
+<style>
+.notificationsContainer{
+  margin:0;
+  padding:0;
+}
+.dashboardWrapper {
+  border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 95%;
+        margin-bottom: 40px;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background: transparent;
+        box-shadow: 20px 20px 50px rgb(180, 180, 180), -30px -30px 60px rgb(255, 255, 255);
+    }
+
+.chartWrapper{
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  box-shadow: 20px 20px 50px rgb(180, 180, 180),
+    -30px -30px 60px rgb(255, 255, 255);
+}
+.chartSmall {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboardContent {
+  width: 90%;
+  height: 100%;
+  background-color: gainsboro;
+  border: 0.05rem solid #130f40;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 <script>
 import Header from "../components/header.vue";
@@ -54,21 +99,20 @@ export default {
     return {
       datacollection: null,
       apiUrl: process.env.VUE_APP_REMOTE_API_CHART,
-      salesData: [],
-      harvestData: {},
+      cropsWithChartData: {},
       wasteData: [],
       lossData: [],
       chartData: null,
       selectedCrop: null,
       cropSalesData: [],
       cropHarvestData: [],
+      cropLossData: [],
       showCharOptions: false
     };
   },
 
   mounted() {
     this.fillData();
-    this.renderChart(this.chartdata, this.options);
   },
 
   created() {
@@ -76,24 +120,14 @@ export default {
   },
   methods: {
     getSevenDayData() {
-      fetch(this.apiUrl + "/harvest")
+      fetch(this.apiUrl)
         .then(response => {
           return response.json();
         })
         .then(data => {
-          this.harvestData = data;
-          fetch(this.apiUrl + "/sales")
-            .then(response => {
-              return response.json();
-            })
-
-            .then(data => {
-              this.harvestData = Object.assign(this.harvestData, data);
-              this.showCharOptions = true;
-            })
-            .catch(err => {
-              console.error(err);
-            });
+          this.cropsWithChartData = data;
+          this.showCharOptions = true;
+          console.log(data)
         })
         .catch(err => {
           console.error(err);
@@ -102,7 +136,7 @@ export default {
 
     refreshChart() {
       let selectedId = null;
-      for (let [key, value] of Object.entries(this.harvestData)) {
+      for (let [key, value] of Object.entries(this.cropsWithChartData)) {
         console.log(`${key}: ${value}`);
         if (value === this.selectedCrop) {
           selectedId = key;
@@ -111,7 +145,24 @@ export default {
       if (selectedId) {
         this.getSevenDayHarvestData(selectedId);
         this.getSevenDaySalesData(selectedId);
+        this.getSevenDayLossData(selectedId);
       }
+    },
+
+    getSevenDayLossData(cropId) {
+      fetch(this.apiUrl + "/loss/" + cropId)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          this.cropLossData = data;
+          console.log("check crop");
+          console.log(this.cropLossData);
+          this.fillData();
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
 
     getSevenDayHarvestData(cropId) {
@@ -152,7 +203,9 @@ export default {
       let mv = this;
       //let today = new Date();
       let yesterday = x => {
-       return new Date(new Date().setDate(new Date().getDate() - x)).toString().substring(0, 10);
+        return new Date(new Date().setDate(new Date().getDate() - x))
+          .toString()
+          .substring(0, 10);
       };
       this.chartData = {
         options: {
@@ -160,115 +213,41 @@ export default {
           responsive: true,
           maintainAspectRatio: false
         },
-        labels: [yesterday(6), yesterday(5),yesterday(4),yesterday(3),yesterday(2), yesterday(1), "Today"],
+        labels: [
+          yesterday(6),
+          yesterday(5),
+          yesterday(4),
+          yesterday(3),
+          yesterday(2),
+          yesterday(1),
+          "Today"
+        ],
         datasets: [
           {
-            label: "SALES",
+            label: "Sales ($)",
             borderColor: "#130f40",
             backgroundColor: "RGBA(19,15,64,1)",
             data: mv.cropSalesData
           },
           {
-            label: "Harvest",
+            label: "Harvest (lbs)",
             borderColor: "#f7b254",
             backgroundColor: "RGBA(247,178,84,1)",
             fillOpacity: 0,
             data: mv.cropHarvestData
+          },
+          {
+            label: "Loss (-$)",
+            borderColor: 'red',
+            backgroundColor: 'red',
+            data: mv.cropLossData
+
           }
         ]
       };
-    },
-
-    getRandomInt() {
-      this.cropSalesData[0];
     }
   }
 };
-// let myChart = document.getElementById('myChart').getContext('2d');
 
-//     // Global Options
-//     Chart.defaults.global.defaultFontFamily = 'Lato';
-//     Chart.defaults.global.defaultFontSize = 18;
-//     Chart.defaults.global.defaultFontColor = '#777';
-
-//     new Chart(myChart, {
-//       type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-//       data:{
-//         labels:['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-//         datasets:[{
-//           label:'Population',
-//           data:[
-//             617594,
-//             181045,
-//             153060,
-//             106519,
-//             105162,
-//             95072
-//           ],
-//           //backgroundColor:'green',
-//           backgroundColor:[
-//             'rgba(255, 99, 132, 0.6)',
-//             'rgba(54, 162, 235, 0.6)',
-//             'rgba(255, 206, 86, 0.6)',
-//             'rgba(75, 192, 192, 0.6)',
-//             'rgba(153, 102, 255, 0.6)',
-//             'rgba(255, 159, 64, 0.6)',
-//             'rgba(255, 99, 132, 0.6)'
-//           ],
-//           borderWidth:1,
-//           borderColor:'#777',
-//           hoverBorderWidth:3,
-//           hoverBorderColor:'#000'
-//         }]
-//       },
-//       options:{
-//         title:{
-//           display:true,
-//           text:'Largest Cities In Massachusetts',
-//           fontSize:25
-//         },
-//         legend:{
-//           display:true,
-//           position:'right',
-//           labels:{
-//             fontColor:'#000'
-//           }
-//         },
-//         layout:{
-//           padding:{
-//             left:50,
-//             right:0,
-//             bottom:0,
-//             top:0
-//           }
-//         },
-//         tooltips:{
-//           enabled:true
-//         }
-//       }
-//     });
 </script>
 
-<style>
-.dashboardWrapper {
-  width: 80%;
-  height: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.chartSmall {
-  width: 40%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.dashboardContent {
-  width: 90%;
-  height: 100%;
-  background-color: gainsboro;
-  border: 0.05rem solid #130f40;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>

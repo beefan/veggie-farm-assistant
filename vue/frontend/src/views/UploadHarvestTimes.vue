@@ -1,13 +1,11 @@
 <template>
 <body class="harvestTimesBody">
   <Header></Header>
-  <br>
-    <br>
+  <br />
+  <br />
   <div class="harvestTimesContainer">
     <div class="havestTimesUpload">
-      <div class="sectionHeader">
-          Upload Harvest Times
-          </div>
+      <div class="sectionHeader">Upload Harvest Times</div>
       <div class="csvUpload">
         <upload
           :verifyUploadFormat="uploadVerify"
@@ -15,11 +13,12 @@
           @uploadSuccess="onUploadSuccess($event)"
         ></upload>
       </div>
-      <p class="getStarted">To get started, upload a .csv file above by clicking "Choose File" and select your .csv file with each Crop Name, the direct seed to harvest time, the direct seed to transplant time, and the transplant to harvest time, or you can use the Add New Crop field below to add them each individually.</p>
-      <br>
-      
+      <p
+        class="getStarted"
+      >To get started, upload a .csv file above by clicking "Choose File" and select your .csv file with each Crop Name, the direct seed to harvest time, the direct seed to transplant time, and the transplant to harvest time, or you can use the Add New Crop field below to add them each individually.</p>
+      <br />
+
       <div class="harvestTables">
-        
         <table v-if="seedingTimes" class="addNewCrop">
           <thead>
             <tr>
@@ -50,8 +49,8 @@
             </td>
           </tr>
         </table>
-        <br>
-        <table class ="existingCrops">
+        <br />
+        <table class="existingCrops">
           <thead>
             <tr>
               <th>Crop Name</th>
@@ -61,63 +60,70 @@
               <th>Delete Entry</th>
             </tr>
           </thead>
-          <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
-            <td>
-              <input
-                class="harvestTable colName"
-                type="text"
-                :value="st['cropName']"
-                @change="updateDatabase($event, st)"
-                @click="highLightRow($event)"
-                @blur="unhighlight($event)"
-              />
-            </td>
-            <td>
-              <input
-                class="harvestTable colDSTH"
-                type="text"
-                :value="st['directSeedToHarvestInDays'] "
-                @change="updateDatabase($event, st)"
-                @click="highLightRow($event)"
-                @blur="unhighlight($event)"
-              />
-            </td>
-            <td>
-              <input
-                class="harvestTable colDSTT"
-                type="text"
-                :value="st['directSeedToTransplantInDays']"
-                @change="updateDatabase($event, st)"
-                @click="highLightRow($event)"
-                @blur="unhighlight($event)"
-              />
-            </td>
-            <td>
-              <input
-                class="harvestTable colTTH"
-                type="text"
-                :value="st['transplantToHarvestInDays']"
-                @change="updateDatabase($event, st)"
-                @click="highLightRow($event)"
-                @blur="unhighlight($event)"
-              />
-            </td>
-            <td class="trash">
-              <a href="harvesttimes">
-                <img :src="trashUrl" @click="deleteEntry(st['cropName']);" />
-              </a>
-            </td>
-          </tr>
         </table>
+        <div class="scrollTable">
+          <table class="existingCrops1">
+            <tr v-for="st in seedingTimes" v-bind:key="st['cropName']">
+              <td>
+                <input
+                  class="harvestTable colName"
+                  type="text"
+                  :value="st['cropName']"
+                  @change="updateDatabase($event, st)"
+                  @click="highLightRow($event)"
+                  @blur="unhighlight($event)"
+                />
+              </td>
+              <td>
+                <input
+                  class="harvestTable colDSTH"
+                  type="text"
+                  :value="st['directSeedToHarvestInDays'] "
+                  @change="updateDatabase($event, st)"
+                  @click="highLightRow($event)"
+                  @blur="unhighlight($event)"
+                />
+              </td>
+              <td>
+                <input
+                  class="harvestTable colDSTT"
+                  type="text"
+                  :value="st['directSeedToTransplantInDays']"
+                  @change="updateDatabase($event, st)"
+                  @click="highLightRow($event)"
+                  @blur="unhighlight($event)"
+                />
+              </td>
+              <td>
+                <input
+                  class="harvestTable colTTH"
+                  type="text"
+                  :value="st['transplantToHarvestInDays']"
+                  @change="updateDatabase($event, st)"
+                  @click="highLightRow($event)"
+                  @blur="unhighlight($event)"
+                />
+              </td>
+              <td class="trash">
+                <a href="harvesttimes">
+                  <img :src="trashUrl" @click="deleteEntry(st['cropName']);" />
+                </a>
+              </td>
+            </tr>
+          </table>
+          <br />
+          
+        </div>
       </div>
-      <br><br>
+      <br />
+      <br />
     </div>
-    
-
   </div>
-  <br><br><br>
-<Footer></Footer>
-  </body>
+  <br />
+  <br />
+  <br />
+  <Footer></Footer>
+</body>
 </template>
 
 <script>
@@ -270,5 +276,389 @@ export default {
 </script>
 
 <style>
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > tr
+  > td.submit
+  > a
+  > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 18%;
+  padding: 8px 0 8px 0;
+  cursor: pointer;
+}
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > tr
+  > td.submit
+  > a
+  > img:hover {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 70%;
+  width: 19%;
+  padding: 8px 0 8px 0;
+  cursor: pointer;
+}
+
+div.havestTimesUpload {
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  box-shadow: 20px 20px 50px rgb(180, 180, 180),
+    -30px -30px 60px rgb(255, 255, 255);
+}
+div.harvestTables {
+  width: 99%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.harvestTable {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 100%;
+  color: #130f40;
+  border: none;
+  background-color: transparent;
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.addNewCrop {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 100%;
+  color: #130f40;
+  border: none;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.existingCrops {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 100%;
+  color: #130f40;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.scrollTable {
+  margin: 0;
+  padding: 0;
+  
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(1) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(2) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(3) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(4) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(5) {
+  width: 12%;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > div
+  > table
+  > tr:nth-child(1)
+  > td:nth-child(1) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > div
+  > table
+  > tr:nth-child(1)
+  > td:nth-child(2) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > div
+  > table
+  > tr:nth-child(1)
+  > td:nth-child(3) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > div
+  > table
+  > tr:nth-child(1)
+  > td:nth-child(4) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > div
+  > table
+  > tr:nth-child(1)
+  > td:nth-child(5) {
+  width: 10vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(1) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(2) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(3) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(4) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.existingCrops
+  > thead
+  > tr
+  > th:nth-child(5) {
+  width: 12%;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.addNewCrop
+  > div
+  > table
+  > tr
+  > td:nth-child(1) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.addNewCrop
+  > div
+  > table
+  > tr
+  > td:nth-child(2) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.addNewCrop
+  > div
+  > table
+  > tr
+  > td:nth-child(3) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.addNewCrop
+  > div
+  > table
+  > tr
+  > td:nth-child(4) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.addNewCrop
+  > div
+  > table
+  > tr
+  > td:nth-child(5) {
+  width: 10vw;
+}
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > thead
+  > tr
+  > th:nth-child(1) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > thead
+  > tr
+  > th:nth-child(2) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > thead
+  > tr
+  > th:nth-child(3) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > thead
+  > tr
+  > th:nth-child(4) {
+  width: 20vw;
+}
+
+body
+  > div.harvestTimesContainer
+  > div
+  > div.harvestTables
+  > table.addNewCrop
+  > thead
+  > tr
+  > th:nth-child(5) {
+  width: 10vw;
+}
+
+body > div.harvestTimesContainer .existingCrops1 {
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  width: 100%;
+  color: #130f40;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+  
+}
+tr.newCrop {
+  background-color: #e9e9ed;
+}
+
+.addNewCrop {
+  font-size: 1.1rem;
+  color: #130f40;
+  border: none;
+  background-color: transparent;
+  font-family: "Lato", sans-serif;
+}
 </style>
 
