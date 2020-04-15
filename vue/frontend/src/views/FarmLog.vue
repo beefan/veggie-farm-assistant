@@ -315,5 +315,40 @@ export default {
 .farmLogContent{
   margin-left:auto;
   margin-right:auto;
+  
 }
+#log {
+        display: flex;
+        flex-flow: column;
+        width: 70%;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #log>.logEntry>select {
+        width: 40vw;
+        margin-left: 8%;
+        margin-right: 8%;
+        margin-bottom: 8%;
+    }
+    
+    div.logEntry {
+        border-radius: 30px;
+        display: flex;
+        color: black;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        background: transparent;
+        box-shadow: 20px 20px 50px rgb(180, 180, 180), -30px -30px 60px rgb(255, 255, 255);
+    }
+    
+    div.logEntry>input {
+        width: 70%;
+    }
 </style>

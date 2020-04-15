@@ -114,11 +114,11 @@ export default {
   text-decoration: none;
   font-size: 1.1rem;
   color: white;
-  font-family: "Muli", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 label {
   color: white;
-  font-family: "Muli", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 #login {
@@ -127,7 +127,7 @@ label {
   padding: 0;
   font-size: 1.1rem;
   color: white;
-  font-family: "Baloo Paaji 2", cursive;
+  font-family: 'Lato', sans-serif;
   align-items: center;
 }
 form.form-signin {
@@ -152,7 +152,7 @@ form.form-signin {
 .sr-only {
   margin-left: auto;
   margin-right: auto;
-  font-family: "Muli", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 label {
   color: white;
@@ -160,12 +160,12 @@ label {
 #username {
   width: 14vw;
   height: 1.2vw;
-  font-family: "Baloo Paaji 2", cursive;
+  font-family: 'Lato', sans-serif;
 }
 #password {
   width: 14vw;
   height: 1.2vw;
-  font-family: "Baloo Paaji 2", cursive;
+  font-family: 'Lato', sans-serif;
 }
 loginBtn {
   margin-left: auto;
@@ -179,7 +179,7 @@ loginBtn {
   font-weight: bolder;
   padding: 0;
   cursor: pointer;
-  font-family: "Baloo Paaji 2", cursive;
+  font-family: 'Lato', sans-serif;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");

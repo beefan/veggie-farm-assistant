@@ -134,7 +134,7 @@ export default {
     label {
       color: white;
       margin-left: 15%;
-      font-family: 'Baloo Paaji 2', cursive;
+      font-family: 'Lato', sans-serif;
     }
     h4{
       color: #f7b254;
@@ -156,13 +156,13 @@ export default {
       font-weight: bolder;
       padding: 0;
       cursor: pointer;
-      font-family: 'Baloo Paaji 2', cursive;
+      font-family: 'Lato', sans-serif;
     }
     a.registered{
       display:flex;
       color:white;
       text-decoration: none;
-      font-family: 'Baloo Paaji 2', cursive;
+      font-family: 'Lato', sans-serif;
       justify-self:center;
 
     }

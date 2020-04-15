@@ -51,6 +51,7 @@ export default {
   height: 55vw;
   background-size: cover;
   background-repeat: no-repeat;
+  overflow:scroll;
 }
 body {
   
@@ -109,12 +110,13 @@ ul.sidebar-panel-nav > li > a {
   border: 2px solid #f7b254;
   border-radius: 6px;
   display: flex;
+  font-family: 'Lato', sans-serif;
 }
 .homeText {
   margin-left: 10px;
   margin-right: 10px;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 1.4rem;
 }
 img.sidebarImg {
