@@ -58,6 +58,45 @@ insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) value
 insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 6.4, 'user', '2020-04-16');
 insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 6.5, 'user', '2020-04-17');
 
+-- losses
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 2.0, 'waste', 1.50, '2020-04-12');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 2.0, 'waste', .50, '2020-04-12');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 1.0, 'waste', 1.75, '2020-04-12');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 0.5, 'waste', 12.0, '2020-04-17');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 0.3, 'waste', 1.1, '2020-04-16');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 0.6, 'waste', 3.0, '2020-04-15');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 2.0, 'waste', 0.5, '2020-04-14');
+insert into loss (crop_id, weight_info, loss_type, dollar_amount, loss_date) values (2, 5.0, 'waste', 6.0, '2020-04-13');
+
+-- expirations
+insert into expiration (crop_id, days_until_expire) values (2, 10);
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-04');
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-05');
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-06');
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-07');
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-08');
+insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) values (2, 2, 7.9, 'user', '2020-04-09');
+
+-- seeding transplants
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-04-15','2020-06-16', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-04-16','2020-06-16', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-04-17','2020-06-16', 1);
+
+-- plantings
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-02-17','2020-04-15', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-02-17','2020-04-16', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-02-17','2020-04-17', 1);
+
+-- harvests 
+insert into seeding_times (crop_id, direct_seed_to_transplant, transplant_to_harvest) values (1, 30, 40);
+insert into seeding_times (crop_id, direct_seed_to_transplant, transplant_to_harvest) values (2, 30, 40);
+
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-03-05','2020-01-17', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-03-05', '2020-01-17', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-03-06','2020-01-17', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-03-06', '2020-01-17', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-03-06','2020-01-17', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-03-07','2020-01-17', 1);
 
 COMMIT TRANSACTION;
 
