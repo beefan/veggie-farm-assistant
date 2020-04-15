@@ -31,6 +31,7 @@
           <input type="text" id="harvestCount" placeholder="          (optional)" />
         </div>
         <button v-if="bedSelected" @click="submitHarvest">Log Harvest</button>
+
       </div>
       <br><br>
     </div>
@@ -55,9 +56,41 @@
       </select>
       <div class="farmLogContent" v-if="cropSelected">
         <label for="salesAmount">Sales: $</label>
-        <input type="text" id="salesAmount" placeholder="12.39" />
+        <input type="text" id="salesAmount" placeholder="0.00" />
       </div>
       <button v-if="cropSelected" @click="submitSale">Log Sale</button>
+    </div>
+    <br><br>
+    </div>
+    </div>
+
+    <div class="logEntry">
+      <div class="sectionHeader">Loss Log</div>
+      <div class="farmLogContent">
+        <br><br>
+      <select id="lossCrop" name="lossCrop" @change="showLossInput($event)">
+        <option value>-------- select a crop --------</option>
+        <option v-for="crop in crops" :value="crop" v-bind:key="crop">{{ crop }}</option>
+      </select>
+      <div class="farmLogContent">
+      <select id="lossType" v-if="lossCropSelected">
+        <option value>-------- type of loss --------</option>
+        <option value="waste">Waste</option>
+        <option value="shrink">Shrink</option>
+        <option value="donate">Donate</option>
+        <option value="other">Other</option>
+      </select>
+      <div class="farmLogContent" v-if="lossCropSelected">
+        <label for="lossAmount">Loss: $</label>
+        <input type="text" id="lossAmount" placeholder="0.00" />
+
+      </div>
+       <div class="farmLogContent" v-if="lossCropSelected">
+        <label for="weightAmount">Weight: </label>
+        <input type="text" id="weightAmount" placeholder="Loss weight (lbs)" />
+        
+      </div>
+      <button v-if="lossCropSelected" @click="submitLoss">Log Loss</button>
     </div>
     <br><br>
     </div>
@@ -84,9 +117,11 @@ export default {
       fields: [],
       crops: [],
       selectedBed: {},
+      lossCropSelected: false,
       fieldSelected: false,
       bedSelected: false,
       cropSelected: false,
+      lossApiUrl: process.env.VUE_APP_REMOTE_API_LOSS,
       cropApiUrl: process.env.VUE_APP_REMOTE_API_CROP,
       harvestApiUrl: process.env.VUE_APP_REMOTE_API_HARVEST
     };
@@ -134,6 +169,53 @@ export default {
         .catch(err => {
           console.error(err);
         });
+    },
+    submitLoss(){
+      let loss= {};
+      loss.cropName = document.getElementById("lossCrop").value;
+      loss.weightAmount = document.getElementById("weightAmount").value;
+      loss.lossType = document.getElementById("lossType").value;
+      loss.dollarAmount = document.getElementById("lossAmount").value;
+
+      if (isNaN(loss.dollarAmount) || !loss.dollarAmount) {
+        alert("Please enter a valid sale value.");
+        return;
+      }
+      if (isNaN(loss.weightAmount) || !loss.weightAmount) {
+        alert("Please enter a valid weight.");
+        return;
+      }
+
+      console.log(loss);
+      this.sendLossToJava(loss);
+      this.lossCropSelected = false;
+      document.getElementById("lossCrop").value = "";
+
+    },
+    sendLossToJava(loss){
+      fetch(this.lossApiUrl,  {
+        method: "POST",
+        header:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(loss)
+      })
+      .then(response => {
+        if (response.ok) {
+            
+            alert("Your loss has been recorded.");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+      });
+    },
+    showLossInput(event) {
+      if (event.target.value) {
+        this.lossCropSelected = true;
+      } else {
+        this.lossCropSelected = false;
+      }
     },
     submitSale() {
       let sale = {};
@@ -233,5 +315,40 @@ export default {
 .farmLogContent{
   margin-left:auto;
   margin-right:auto;
+  
 }
+#log {
+        display: flex;
+        flex-flow: column;
+        width: 70%;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #log>.logEntry>select {
+        width: 40vw;
+        margin-left: 8%;
+        margin-right: 8%;
+        margin-bottom: 8%;
+    }
+    
+    div.logEntry {
+        border-radius: 30px;
+        display: flex;
+        color: black;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 30px;
+        background: transparent;
+        box-shadow: 20px 20px 50px rgb(180, 180, 180), -30px -30px 60px rgb(255, 255, 255);
+    }
+    
+    div.logEntry>input {
+        width: 70%;
+    }
 </style>

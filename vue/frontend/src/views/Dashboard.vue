@@ -12,6 +12,7 @@
       <div class="sectionHeader">Harvest and Sales Data</div>
 
       <div class="dailies">
+        <br>
         <div class="chartSmall" v-if="showCharOptions">
           <select
             id="field"

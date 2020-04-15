@@ -51,6 +51,7 @@ export default {
   height: 55vw;
   background-size: cover;
   background-repeat: no-repeat;
+  overflow:scroll;
 }
 body {
   

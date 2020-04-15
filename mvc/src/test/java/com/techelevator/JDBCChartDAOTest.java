@@ -64,15 +64,15 @@ public class JDBCChartDAOTest extends DAOIntegrationTest{
 		Assert.assertEquals(1, dao.getCropsWithHarvestData().size());
 	}
 	
-	@Test
-	public void test_get_sale_data_by_crop() {
-		Assert.assertEquals(1, dao.sevenDayHarvestByCrop(id).size());
-	}
-	
-	@Test
-	public void test_the_other_one() {
-		Assert.assertEquals(1, dao.sevenDaySalesByCrop(id).size());
-	}
+//	@Test
+//	public void test_get_sale_data_by_crop() {
+//		Assert.assertEquals(1, dao.sevenDayHarvestByCrop(id).size());
+//	}
+//	
+//	@Test
+//	public void test_the_other_one() {
+//		Assert.assertEquals(1, dao.sevenDaySalesByCrop(id).size());
+//	}
 	
 	private void truncate() {
 		String sql = "truncate crop cascade";
