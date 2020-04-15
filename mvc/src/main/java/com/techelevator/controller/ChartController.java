@@ -32,6 +32,11 @@ public class ChartController {
 		return chartDao.getCropsWithHarvestData();
 	}
 	
+	@GetMapping
+	public Map<Integer, String> getCropsWithChartInfo() {
+		return chartDao.getCropsWithChartData();
+	}
+	
 	@GetMapping("/sales/{id}")
 	public double[] getSalesById(@PathVariable int id) {
 		return chartDao.sevenDaySalesByCrop(id);
@@ -40,6 +45,11 @@ public class ChartController {
 	@GetMapping("/harvest/{id}")
 	public double[] getHarvestById(@PathVariable int id) {
 		return chartDao.sevenDayHarvestByCrop(id);
+	}
+	
+	@GetMapping("/loss/{id}")
+	public double[] getLossById(@PathVariable int id) {
+		return chartDao.sevenDayLossByCrop(id);
 	}
 	
 	

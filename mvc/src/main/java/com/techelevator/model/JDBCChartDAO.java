@@ -24,6 +24,39 @@ public class JDBCChartDAO implements ChartDAO{
 	}
 	
 	@Override
+	public double[] sevenDayLossByCrop(int cropId) {
+		List<Loss> losses = new ArrayList<Loss>();
+		String sql = "select crop_name, weight_info, loss_type, dollar_amount, loss_date " +
+					"from loss join crop on crop.id = loss.crop_id " + 
+					"where crop_id = ? and (loss_date > current_date - 7)";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cropId);
+		while(results.next()) {
+			Loss loss = new Loss();
+			loss.setCropName(results.getString("crop_name"));
+			loss.setDollarAmount(results.getDouble("dollar_amount"));
+			loss.setLossType(results.getString("loss_type"));
+			loss.setWeightAmount(results.getDouble("weight_info"));
+			loss.setLossDate(results.getDate("loss_date").toLocalDate());
+			losses.add(loss);
+			}
+		
+		double[] result = new double[7];
+		for(int i = 6; i >= 0; i--) {
+			LocalDate day = LocalDate.now().minusDays(i);
+			double counter = 0.0;
+			for (Loss current : losses) {
+				if (current.getLossDate().compareTo(day) == 0) {
+					counter += current.getDollarAmount();
+				}
+			}
+			result[6-i] = counter;
+		}
+		
+		
+		return result;
+	}
+	
+	@Override
 	public double[] sevenDaySalesByCrop(int cropId) {
 		List<Sale> sales = new ArrayList<Sale>();
 		String sql = "select crop_name, dollar_amount, sale_date, sale_type from sales " + 
@@ -104,6 +137,37 @@ public class JDBCChartDAO implements ChartDAO{
 		while(results.next()) {
 			map.put(results.getInt("crop_id"), results.getString("crop_name"));
 		}
+		return map;
+	}
+
+	@Override
+	public Map<Integer, String> getCropsWithChartData() {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		String sql = "select crop_name, crop_id from loss " + 
+					"join crop on crop.id = loss.crop_id " +
+					"where loss_date > loss_date - 7";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while(results.next()) {
+			map.put(results.getInt("crop_id"), results.getString("crop_name"));
+		}
+
+		sql = "select crop_name, crop_id from harvest " + 
+				"join crop on crop.id = harvest.crop_id " + 
+				"where harvest_date > current_date - 7;";
+		results = jdbcTemplate.queryForRowSet(sql);
+		while(results.next()) {
+			map.put(results.getInt("crop_id"), results.getString("crop_name"));
+		}
+		
+		sql = "select crop_name, crop_id from sales " + 
+				"join crop on crop.id = sales.crop_id " + 
+				"where sale_date > current_date - 7;";
+		results = jdbcTemplate.queryForRowSet(sql);
+		while(results.next()) {
+			map.put(results.getInt("crop_id"), results.getString("crop_name"));
+		}
+		
 		return map;
 	}
 

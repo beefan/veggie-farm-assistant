@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.time.LocalDate;
+
 public class Loss {
 
 	private String cropName;
@@ -9,6 +11,16 @@ public class Loss {
 	private double weightAmount;
 	
 	private String lossType;
+	
+	private LocalDate lossDate;
+
+	public LocalDate getLossDate() {
+		return lossDate;
+	}
+
+	public void setLossDate(LocalDate lossDate) {
+		this.lossDate = lossDate;
+	}
 
 	public String getCropName() {
 		return cropName;
