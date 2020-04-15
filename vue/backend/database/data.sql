@@ -1,3 +1,4 @@
+
 BEGIN TRANSACTION;
 
 truncate loss cascade;
@@ -19,8 +20,9 @@ INSERT INTO users ("username", "password", "salt", "role") VALUES
 insert into field (name, username) values ('Pepper Field', 'user');
 insert into crop (crop_name) values ('Peruvian Puff Pepper');
 insert into crop (crop_name) values ('Red Bell Pepper');
-insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-01-07','2019-12-15', 1);
-insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-01-17','2020-01-01', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-04-17','2019-04-15', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Peruvian Puff Pepper','2020-04-18','2019-04-16', 1);
+insert into bed (crop_name, planting_date, transplant_date, field_id) values ('Red Bell Pepper','2020-04-17','2020-04-16', 1);
 insert into sales (crop_id, dollar_amount, sale_type, sale_date) values (1, 40.00, 'Farmers Market', '2020-04-09');
 insert into sales (crop_id, dollar_amount, sale_type, sale_date) values (1, 17.17, 'Farmers Market', '2020-04-10');
 insert into sales (crop_id, dollar_amount, sale_type, sale_date) values (1, 13.24, 'Farmers Market', '2020-04-11');
