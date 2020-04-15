@@ -4,31 +4,27 @@
   <div class = "dashboardWrapper">
   <div class="notificationsContainer">
         <email-notify></email-notify>
-        <br>
+      </div>
+</div>
+      <div class="chartWrapper">
+        <div class="sectionHeader">Harvest and Sales Data</div>
+        <div class="dailies">
+          <br>
+          <div class="chartSmall" v-if="showCharOptions">
+            <select
+              id="field"
+              name="cropChartDropdown"
+              @change="refreshChart($event)"
+              v-model="selectedCrop"
+            >
+              <option value></option>
+              <option v-for="crop in cropsWithChartData" v-bind:key="crop">{{crop}}</option>
+            </select>
+            <line-chart :chart-data="chartData" />
+          </div>
+          <br><br>
         </div>
       </div>
-      
-      <div class="dashboardWrapper">
-      <div class="sectionHeader">Harvest and Sales Data</div>
-
-      <div class="dailies">
-        <br>
-        <div class="chartSmall" v-if="showCharOptions">
-          <select
-            id="field"
-            name="cropChartDropdown"
-            @change="refreshChart($event)"
-            v-model="selectedCrop"
-          >
-            <option value></option>
-            <option v-for="crop in harvestData" v-bind:key="crop">{{crop}}</option>
-          </select>
-          <line-chart :chart-data="chartData" />
-        </div>
-        <br><br>
-        </div>
-        </div>
-      
     
 
   <br />
@@ -48,7 +44,7 @@
         flex-direction: column;
         justify-content: center;
         width: 95%;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         margin-top: 30px;
         margin-left: auto;
         margin-right: auto;
@@ -56,7 +52,19 @@
         box-shadow: 20px 20px 50px rgb(180, 180, 180), -30px -30px 60px rgb(255, 255, 255);
     }
 
-
+.chartWrapper{
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+  box-shadow: 20px 20px 50px rgb(180, 180, 180),
+    -30px -30px 60px rgb(255, 255, 255);
+}
 .chartSmall {
   width: 40%;
   margin-left: auto;
@@ -91,21 +99,20 @@ export default {
     return {
       datacollection: null,
       apiUrl: process.env.VUE_APP_REMOTE_API_CHART,
-      salesData: [],
-      harvestData: {},
+      cropsWithChartData: {},
       wasteData: [],
       lossData: [],
       chartData: null,
       selectedCrop: null,
       cropSalesData: [],
       cropHarvestData: [],
+      cropLossData: [],
       showCharOptions: false
     };
   },
 
   mounted() {
     this.fillData();
-    this.renderChart(this.chartdata, this.options);
   },
 
   created() {
@@ -113,24 +120,14 @@ export default {
   },
   methods: {
     getSevenDayData() {
-      fetch(this.apiUrl + "/harvest")
+      fetch(this.apiUrl)
         .then(response => {
           return response.json();
         })
         .then(data => {
-          this.harvestData = data;
-          fetch(this.apiUrl + "/sales")
-            .then(response => {
-              return response.json();
-            })
-
-            .then(data => {
-              this.harvestData = Object.assign(this.harvestData, data);
-              this.showCharOptions = true;
-            })
-            .catch(err => {
-              console.error(err);
-            });
+          this.cropsWithChartData = data;
+          this.showCharOptions = true;
+          console.log(data)
         })
         .catch(err => {
           console.error(err);
@@ -139,7 +136,7 @@ export default {
 
     refreshChart() {
       let selectedId = null;
-      for (let [key, value] of Object.entries(this.harvestData)) {
+      for (let [key, value] of Object.entries(this.cropsWithChartData)) {
         console.log(`${key}: ${value}`);
         if (value === this.selectedCrop) {
           selectedId = key;
@@ -148,7 +145,24 @@ export default {
       if (selectedId) {
         this.getSevenDayHarvestData(selectedId);
         this.getSevenDaySalesData(selectedId);
+        this.getSevenDayLossData(selectedId);
       }
+    },
+
+    getSevenDayLossData(cropId) {
+      fetch(this.apiUrl + "/loss/" + cropId)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          this.cropLossData = data;
+          console.log("check crop");
+          console.log(this.cropLossData);
+          this.fillData();
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
 
     getSevenDayHarvestData(cropId) {
@@ -189,7 +203,9 @@ export default {
       let mv = this;
       //let today = new Date();
       let yesterday = x => {
-       return new Date(new Date().setDate(new Date().getDate() - x)).toString().substring(0, 10);
+        return new Date(new Date().setDate(new Date().getDate() - x))
+          .toString()
+          .substring(0, 10);
       };
       this.chartData = {
         options: {
@@ -197,27 +213,38 @@ export default {
           responsive: true,
           maintainAspectRatio: false
         },
-        labels: [yesterday(6), yesterday(5),yesterday(4),yesterday(3),yesterday(2), yesterday(1), "Today"],
+        labels: [
+          yesterday(6),
+          yesterday(5),
+          yesterday(4),
+          yesterday(3),
+          yesterday(2),
+          yesterday(1),
+          "Today"
+        ],
         datasets: [
           {
-            label: "SALES",
+            label: "Sales ($)",
             borderColor: "#130f40",
             backgroundColor: "RGBA(19,15,64,1)",
             data: mv.cropSalesData
           },
           {
-            label: "Harvest",
+            label: "Harvest (lbs)",
             borderColor: "#f7b254",
             backgroundColor: "RGBA(247,178,84,1)",
             fillOpacity: 0,
             data: mv.cropHarvestData
+          },
+          {
+            label: "Loss (-$)",
+            borderColor: 'red',
+            backgroundColor: 'red',
+            data: mv.cropLossData
+
           }
         ]
       };
-    },
-
-    getRandomInt() {
-      this.cropSalesData[0];
     }
   }
 };

@@ -153,6 +153,7 @@ export default {
       document.getElementById("field").value = "";
     },
     sendHarvestToJava(harvest) {
+      console.log(harvest)
       fetch(this.harvestApiUrl, {
         method: "POST",
         headers: {
@@ -162,7 +163,6 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            //this.$emit("showReviews");
             alert("Your harvest has been recorded.");
           }
         })
@@ -173,9 +173,10 @@ export default {
     submitLoss(){
       let loss= {};
       loss.cropName = document.getElementById("lossCrop").value;
+      loss.dollarAmount = document.getElementById("lossAmount").value;
       loss.weightAmount = document.getElementById("weightAmount").value;
       loss.lossType = document.getElementById("lossType").value;
-      loss.dollarAmount = document.getElementById("lossAmount").value;
+      
 
       if (isNaN(loss.dollarAmount) || !loss.dollarAmount) {
         alert("Please enter a valid sale value.");
@@ -195,15 +196,14 @@ export default {
     sendLossToJava(loss){
       fetch(this.lossApiUrl,  {
         method: "POST",
-        header:{
+        headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(loss)
       })
       .then(response => {
         if (response.ok) {
-            
-            alert("Your loss has been recorded.");
+            alert("Crop loss has been recorded.");
           }
         })
         .catch(err => {

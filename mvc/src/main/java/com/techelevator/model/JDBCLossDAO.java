@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.time.LocalDate;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ public class JDBCLossDAO  implements LossDAO{
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, cropName);
 		results.next();
 		int cropId = results.getInt("id");
-		sql = "Insert into loss (crop_id,weight_info,loss_type,dollar_amount) values (?,?,?,?);";
-		jdbcTemplate.update(sql, cropId, weightAmount, lossType, dollarAmount);
+		sql = "Insert into loss (crop_id,weight_info,loss_type,dollar_amount, loss_date) values (?,?,?,?, ?);";
+		jdbcTemplate.update(sql, cropId, weightAmount, lossType, dollarAmount, LocalDate.now());
 		
 	}
 

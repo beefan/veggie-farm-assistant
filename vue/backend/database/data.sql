@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-INSERT INTO sales (crop_id, dollar_amount, sale_type, sale_date)  VALUES (6, 6000, 'wholesale', '2020-04-10');
-=======
 BEGIN TRANSACTION;
 
 truncate loss cascade;
@@ -64,5 +61,5 @@ insert into harvest (bed_id, crop_id, crop_weight, username, harvest_date) value
 
 COMMIT TRANSACTION;
 
->>>>>>> 48fa6d324fa2c1f8d9454df1a17016f8936cef89
+
  

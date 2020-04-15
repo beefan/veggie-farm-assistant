@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sectionHeader">Harvest Assist Action Items</div>
+    <div class="sectionHeader">HarvestAssist Action Items</div>
     <div id="dailies">
       <div class="notify" id="planting" v-if="this.dailies.planting.length > 0">
         <h2 class="sectionHeaderNotify">Planting</h2>
@@ -101,7 +101,7 @@
 export default {
   data() {
     return {
-      demoEmail: "noahwalcher@gmail.com",
+      demoEmail: "bfannin13@gmail.com",
       notifyApi: process.env.VUE_APP_REMOTE_API_NOTIFY,
       checked: false,
       dailies: ""
