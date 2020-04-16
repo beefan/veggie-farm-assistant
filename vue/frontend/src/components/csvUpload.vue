@@ -2,10 +2,10 @@
 <div class="csvContainer">
 <input type="file"
        name="file"
-       id="file"
+       :id="'file' + parentData"
        class="inputfile "
        @change="loadCSV($event)" />
-       <label for="file" class="neumorphic"><img class="uploadIcon" :src="upload" /><span class="uploadText">Choose a file... </span></label>
+       <label :for="'file' + parentData" class="neumorphic"><img class="uploadIcon" :src="upload" /><span class="uploadText">Choose a file... </span></label>
 </div>
 </template>
 

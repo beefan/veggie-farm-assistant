@@ -8,9 +8,9 @@
       <div class="links">
         <router-link class="spacing" :to="{name:'dashboard'}">Dashboard</router-link>
         <router-link class="spacing" :to="{name: 'cropplanner'}">Crop Planner</router-link>
-        <router-link class="spacing" :to="{name:'harvesttimes'}">Upload/Edit Harvest Times</router-link>
         <router-link class="spacing" :to="{name: 'farmlog'}">Farm Log</router-link>
-        <router-link class="spacing1" :to="{name: 'expiration'}">Waste Info</router-link>
+        <router-link class="spacing" :to="{name:'harvesttimes'}">Seeding Times</router-link>
+        <router-link class="spacing1" :to="{name: 'expiration'}">Expiration Times</router-link>
       </div>
 
       <div class="logout" @click="loggedOut">
