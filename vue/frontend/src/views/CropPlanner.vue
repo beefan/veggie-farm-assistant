@@ -102,7 +102,7 @@
         </table>
         <br />
         <div class="csvUploadFields">
-          <p>Upload Fields from CSV:</p>
+          <p>Upload Beds from CSV:</p>
           <upload
             :parentData="field['id']"
             :verifyUploadFormat="uploadVerify"
