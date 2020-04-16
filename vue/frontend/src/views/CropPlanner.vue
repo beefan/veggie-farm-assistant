@@ -10,7 +10,7 @@
       </div>
     </section>
 
-    <div class="fieldsWrapper">
+    <div class="fieldsWrapper" v-if="fieldsLoaded">
       <div class="fieldLoaded" v-for="field in fields" v-bind:key="field['id']">
         <div class="fieldName">
           <input
@@ -523,6 +523,7 @@ export default {
       e.target.parentNode.classList.remove("highlight");
     },
     getFields() {
+      this.fieldsLoaded = false;
       fetch(this.apiUrl + "/user")
         .then(response => {
           return response.json();
