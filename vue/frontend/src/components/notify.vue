@@ -19,14 +19,14 @@
       <div class="notify" id="harvest" v-if="this.dailies.harvest.length > 0">
         <h2 class="sectionHeaderNotify">Harvests</h2>
         <ul>
-          <li v-for="item in this.dailies.harvest" v-bind:key="item">{{item}}</li>
+          <li v-for="item in this.dailies.harvest" v-bind:key="item">{{item}} is ready for harvest.</li>
         </ul>
         
       </div>
       <div class="notify" id="expiration" v-if="this.dailies.expiration.length > 0">
         <h2 class="sectionHeaderNotify">Expirations</h2>
         <ul>
-          <li v-for="item in this.dailies.expiration" v-bind:key="item">{{item}}</li>
+          <li v-for="item in this.dailies.expiration" v-bind:key="item">{{item}} will expire tomorrow.</li>
         </ul>
         <br>
       </div>
@@ -56,6 +56,7 @@
   font-size: 1rem;
   font-family: 'Lato', sans-serif;
   margin-bottom: 5px;
+  margin-left:0;
   
 }
 .notify {
@@ -76,7 +77,6 @@
   
         background-color: #f7b254;
         width: 100%;
-        
         color: #130f40;
         text-align: center;
         font-size: 2rem;
@@ -93,6 +93,7 @@
   text-align: right;
   color:#130f40;
   margin-right: 10%;
+  margin-bottom: 2vw;
 
 }
 </style>
@@ -101,7 +102,7 @@
 export default {
   data() {
     return {
-      demoEmail: "bfannin13@gmail.com",
+      demoEmail: "noahwalcher@gmail.com",
       notifyApi: process.env.VUE_APP_REMOTE_API_NOTIFY,
       checked: false,
       dailies: ""

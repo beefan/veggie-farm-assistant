@@ -28,7 +28,7 @@
         </div>
         <div class="farmLogContent" v-if="bedSelected">
           <label for="harvestCount">Count:</label>
-          <input type="text" id="harvestCount" placeholder="          (optional)" />
+          <input type="text" id="harvestCount" placeholder="(optional)" />
         </div>
         <button v-if="bedSelected" @click="submitHarvest">Log Harvest</button>
 
@@ -179,7 +179,7 @@ export default {
       
 
       if (isNaN(loss.dollarAmount) || !loss.dollarAmount) {
-        alert("Please enter a valid sale value.");
+        alert("Please enter a valid loss value.");
         return;
       }
       if (isNaN(loss.weightAmount) || !loss.weightAmount) {
@@ -349,6 +349,143 @@ export default {
     }
     
     div.logEntry>input {
-        width: 70%;
+        width: 80%;
     }
+    #field {
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #crop {
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #log > div:nth-child(1) > div.farmLogContent > div > div > div:nth-child(1) > label {
+      color:  #130f40;
+      margin-right: 5px;
+      margin-left:0;
+      font-family: "Lato", sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      
+    }
+    #harvestWeight{
+      width: 14.2vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .7rem;
+    }
+    
+    #log > div:nth-child(1) > div.farmLogContent > div > div > div:nth-child(2) > label {
+      color:  #130f40;
+      margin-right: 13px;
+      margin-left:0;
+      font-family: "Lato", sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    #harvestCount {
+      width: 14.2vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .7rem;
+    }
+    #log > div:nth-child(1) > div.farmLogContent > div > div > button {
+      margin-left: 10%;
+      margin-right: auto;
+      width: 14vw;
+      color:  #130f40;
+      background-color: #f7b254;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+
+    #log > div:nth-child(1) > div.farmLogContent > div > div > button:hover{
+      color:white;
+    }
+    #salesCrop {
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #salesType{
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #log > div> div.farmLogContent > div > div > label {
+      color:  #130f40;
+      margin-right: 8px;
+      margin-left:0;
+      font-family: "Lato", sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    #salesAmount {
+      width: 14.3vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .7rem;
+    }
+    #log > div:nth-child(2) > div.farmLogContent > div > button{
+      margin-left: 10%;
+      margin-right: auto;
+      width: 14vw;
+      color:  #130f40;
+      background-color: #f7b254;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+    #log > div:nth-child(2) > div.farmLogContent > div > button:hover{
+      color:white;
+    }
+    #lossCrop {
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #lossType {
+      width:20vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .8rem;
+    }
+    #lossAmount {
+      width: 14.8vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .7rem;
+
+    }
+    #weightAmount {
+      width: 13.7vw;
+      margin-bottom: 15px;
+      font-family: "Lato", sans-serif;
+      font-size: .7rem;
+    }
+    #log > div:nth-child(3) > div.farmLogContent > div > button{
+      margin-left: 10%;
+      margin-right: auto;
+      width: 14vw;
+      color:  #130f40;
+      background-color: #f7b254;
+      font-family: "Lato", sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+    #log > div:nth-child(3) > div.farmLogContent > div > button:hover{
+      color:white;
+    }
+    
 </style>
