@@ -4,30 +4,30 @@
     <div id="dailies">
       <div class="notify" id="planting" v-if="this.dailies.planting.length > 0">
         <h2 class="sectionHeaderNotify">Planting</h2>
-        <ul>
-          <li v-for="item in this.dailies.planting" v-bind:key="item">{{item}}</li>
-        </ul>
+        
+          <p class="dailiesP" v-for="item in this.dailies.planting" v-bind:key="item">{{item}}</p>
+        
         <br>
       </div>
       <div class="notify" id="transplant" v-if="this.dailies.transplant.length > 0">
         <h2 class="sectionHeaderNotify">Transplants</h2>
-        <ul>
-          <li v-for="item in this.dailies.transplant" v-bind:key="item">{{item}}</li>
-        </ul>
+        
+          <p class="dailiesP" v-for="item in this.dailies.transplant" v-bind:key="item">{{item}}</p>
+        
         <br>
       </div>
       <div class="notify" id="harvest" v-if="this.dailies.harvest.length > 0">
         <h2 class="sectionHeaderNotify">Harvests</h2>
-        <ul>
-          <li v-for="item in this.dailies.harvest" v-bind:key="item">{{item}} is ready for harvest.</li>
-        </ul>
+        
+          <p class="dailiesP" v-for="item in this.dailies.harvest" v-bind:key="item">{{item}} </p>
+        
         
       </div>
       <div class="notify" id="expiration" v-if="this.dailies.expiration.length > 0">
         <h2 class="sectionHeaderNotify">Expirations</h2>
-        <ul>
-          <li v-for="item in this.dailies.expiration" v-bind:key="item">{{item}} will expire tomorrow.</li>
-        </ul>
+        
+          <p class="dailiesP" v-for="item in this.dailies.expiration" v-bind:key="item">{{item}}</p>
+        
         <br>
       </div>
     </div>
@@ -94,6 +94,13 @@
   color:#130f40;
   margin-right: 10%;
   margin-bottom: 2vw;
+  margin-top: 2vw;
+  font-size:1.3vw;
+
+}
+.dailiesP {
+  margin:15px;
+  font-size:1.3vw;
 
 }
 </style>

@@ -85,16 +85,14 @@ private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public String getTomorrowsExpirations() {
-		String sql = "select crop.crop_name, field.name, harvest_date from harvest  " + 
+		String sql = "select crop.crop_name, harvest_date from harvest  " + 
 				"join crop on crop.id = harvest.crop_id   " + 
-				"join expiration on crop.id = expiration.crop_id   " + 
-				"join bed on harvest.bed_id = bed.id  " + 
-				"join field on bed.field_id = field.id  " + 
-				"where age(harvest_date + days_until_expire, current_date - interval '1 days') = '00:00:00';";
+				"join expiration on crop.id = expiration.crop_id   " +  
+				"where age(harvest_date + days_until_expire, current_date + interval '1 days') = '00:00:00';";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		String x = "Here are the crops that expire tomorrow if you haven't sold them: \n";
 		while (results.next()) {
-				x += "-> The " + results.getString("crop_name") + " harvested from " + results.getString("name") + " on " + results.getDate("harvest_date").toString() + " is expiring. \n";	
+				x += "-> The " + results.getString("crop_name") + " harvested on " + results.getDate("harvest_date").toString() + " is expiring. \n";	
 		}
 		x += "\n";
 		return x;

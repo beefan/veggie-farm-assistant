@@ -8,9 +8,9 @@
 </div>
       <div class="chartWrapper">
         <div class="sectionHeader">Harvest and Sales Data</div>
-        <div class="dailies">
+        <div class="reports">
           <br>
-          <div class="chartSmall" v-if="showCharOptions">
+          <div class="chartSmall" >
             <select
               id="field"
               name="cropChartDropdown"
@@ -22,7 +22,18 @@
             </select>
             <line-chart :chart-data="chartData" />
           </div>
+          <div class="weeklyTotals" v-if="showCharOptions">
+            <div class="weeklyTotalsHeader"><h3 class="wTHeader">Weekly Totals</h3></div>
+            <ul>
+              <li>Sales: ${{Math.round(this.cropSalesData.reduce(sum))}} </li>
+              <li>Loss: ${{Math.round(this.cropLossData.reduce(sum))}}</li>
+              <li>Harvest: {{Math.round(this.cropHarvestData.reduce(sum))}} lbs </li>
+              
+            </ul>
+            
+           </div> 
           <br><br>
+        
         </div>
       </div>
     
@@ -34,6 +45,57 @@
 </template>
 
 <style>
+.weeklyTotals{
+  margin-top: 6.5%;
+  margin-right: auto;
+  margin-left:0;
+  width:20%;
+  height:100%;
+  font-family: 'Lato', sans-serif;
+        font-size: 1.5vw;
+        background: transparent;
+        border-radius:30px;
+        box-shadow: 1px 1px 3px rgb(180, 180, 180), -1px -1px 5px rgb(255, 255, 255);
+        color: #130f40;
+        align-self: left;
+
+}
+.weeklyTotalsHeader {
+  background-color: #f7b254;
+  text-align:center;
+  padding: 10px 0 10px 0;
+  width:100%;
+  height:auto;
+  
+  margin:0;
+  
+  border-radius: 30px 30px 0 0;
+}
+.weeklyTotalsHeader h3{
+  margin: 0;
+  padding:0;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+}
+
+/* background-color: #130f40;
+        width: 100%;
+        color: white;
+        text-align: center;
+        font-size: 2.5rem;
+        font-family: 'Lato', sans-serif;
+        margin: 0;
+        padding: 10px 0 10px 0;
+        height: 10%;
+        border-radius: 30px 30px 0px 0px; */
+.chartSmall #field{
+  width:60%;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:1rem;
+}
+
 .notificationsContainer{
   margin:0;
   padding:0;
@@ -53,9 +115,11 @@
     }
 
 .chartWrapper{
+  
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  flex-wrap:nowrap;
   justify-content: center;
   width: 95%;
   height: auto;
@@ -66,11 +130,18 @@
     -30px -30px 60px rgb(255, 255, 255);
 }
 .chartSmall {
+  padding:20px;
+  display:flex;
+  flex-direction:column;
   width: 40%;
-  margin-left: auto;
-  margin-right: auto;
+  height:auto;
+  margin-left: 20%;
+  margin-right: 10px;
 }
-
+#bar-chart{
+  width:60%;
+  height:60%;
+}
 .dashboardContent {
   width: 90%;
   height: 100%;
@@ -79,6 +150,28 @@
   margin-left: auto;
   margin-right: auto;
 }
+.reports {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+  align-content:center;
+  margin-left:auto;
+  margin-right:auto;
+  padding:0;
+  width:100%;
+  
+}
+.reports h3 {
+  text-align:center;
+}
+.reports li{
+  list-style:none;
+  margin-bottom:10px;
+  font-weight: bold;
+  font-size: 1.3vw;
+}
+
+
 </style>
 
 <script>
@@ -104,9 +197,9 @@ export default {
       lossData: [],
       chartData: null,
       selectedCrop: null,
-      cropSalesData: [],
-      cropHarvestData: [],
-      cropLossData: [],
+      cropSalesData: [0],
+      cropHarvestData: [0],
+      cropLossData: [0],
       showCharOptions: false
     };
   },
@@ -133,7 +226,10 @@ export default {
           console.error(err);
         });
     },
-
+    sum(acc, current) {
+        return acc+current;
+      
+    },
     refreshChart() {
       let selectedId = null;
       for (let [key, value] of Object.entries(this.cropsWithChartData)) {
